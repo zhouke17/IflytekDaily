@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "nASLURaHekTgbu0UB96qc1PSMFZ+MeXpMbHRsi17Kb4llpUO05Sr9vTExAksLcIVFu4ophucvlHFxQQE/Nx8Wg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\kezhou3\\source\\repos\\WpfApp\\WpfApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kezhou3\\.nuget\\packages\\handycontrol\\3.3.0\\handycontrol.3.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

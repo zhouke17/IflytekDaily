@@ -1,0 +1,17 @@
+C:\Users\kezhou3\source\repos\ModuleB\bin\Debug\net5.0-windows\ModuleB.deps.json
+C:\Users\kezhou3\source\repos\ModuleB\bin\Debug\net5.0-windows\ModuleB.dll
+C:\Users\kezhou3\source\repos\ModuleB\bin\Debug\net5.0-windows\ModuleB.pdb
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\Views\ViewB.g.cs
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB_MarkupCompile.cache
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB_MarkupCompile.lref
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\Views\ViewB.baml
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB.g.resources
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB.AssemblyInfoInputs.cache
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB.AssemblyInfo.cs
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB.csproj.CoreCompileInputs.cache
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB.dll
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ref\ModuleB.dll
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB.pdb
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\ModuleB.csproj.AssemblyReference.cache
+C:\Users\kezhou3\source\repos\ModuleB\obj\Debug\net5.0-windows\refint\ModuleB.dll
