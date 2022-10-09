@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kezhou3\\source\\repos\\WinFormsApp\\WinFormsApp1.csproj": {}
+    "C:\\Users\\kezhou3\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kezhou3\\source\\repos\\WinFormsApp\\WinFormsApp1.csproj": {
+    "C:\\Users\\kezhou3\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kezhou3\\source\\repos\\WinFormsApp\\WinFormsApp1.csproj",
+        "projectUniqueName": "C:\\Users\\kezhou3\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp1.csproj",
         "projectName": "WinFormsApp1",
-        "projectPath": "C:\\Users\\kezhou3\\source\\repos\\WinFormsApp\\WinFormsApp1.csproj",
+        "projectPath": "C:\\Users\\kezhou3\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp1.csproj",
         "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kezhou3\\source\\repos\\WinFormsApp\\obj\\",
+        "outputPath": "C:\\Users\\kezhou3\\source\\repos\\IflytekDaily\\WinFormsApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",

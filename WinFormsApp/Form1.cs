@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace WinFormsApp1
@@ -279,6 +278,10 @@ namespace WinFormsApp1
         #endregion
 
         #region 打开Notepad.exe 并且输入文本
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenNotepad(this.textBox1.Text.Trim());
+        }
         /// <summary>
         /// 打开Notepad.exe 并且输入文本
         /// </summary>
@@ -322,98 +325,6 @@ namespace WinFormsApp1
 
         [DllImport("User32.DLL")]
         public static extern int SendMessage(IntPtr hWnd, uint Msg, int wParam, string lParam);
-        #endregion
-
-
-        #region 保存、删除文件
-
-        private string imagePath1 = @"D:/文件夹1/1.png";
-        private string imagePath2 = @"D:/文件夹2/1.png";
-        public void Do(Action action)
-        {
-            try
-            {
-                action?.Invoke();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 加载图片
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.button1.Enabled = false;
-            Do(() =>
-            {
-                pictureBox1.Image = GetImageByFileName(imagePath1);
-                EncoderParameters encoderParameters = new EncoderParameters(1);
-                //设置质量
-                EncoderParameter encoderParameter = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 70L);
-                encoderParameters.Param[0] = encoderParameter;
-                var stream = new MemoryStream();
-                new Bitmap(pictureBox1.Image).Save(stream, GetImageCodecInfo(ImageFormat.Png), encoderParameters);
-                using (var fileStream = File.Create(imagePath2))
-                {
-                    stream.Seek(0, SeekOrigin.Begin);
-                    stream.CopyTo(fileStream);
-                    fileStream.Flush(true);
-                }
-            });
-
-            Thread.Sleep(100);
-            this.button1.Enabled = true;
-        }
-
-        /// <summary>
-        /// 删除图片
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Do(() =>
-            {
-                DirectoryInfo directory = new DirectoryInfo(@"D:/文件夹2");
-                foreach (FileInfo file in directory.GetFiles())
-                {
-                    if (file.Name == "1.png")
-                    {
-                        file.Delete();
-                    }
-                }
-            });
-        }
-        private static Image GetImageByFileName(string fileName)
-        {
-            using (FileStream s = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-            using (BinaryReader r = new BinaryReader(s))
-            {
-                r.BaseStream.Seek(0, SeekOrigin.Begin);
-                byte[] bytes = r.ReadBytes((int)r.BaseStream.Length);
-                using (MemoryStream memoryStream = new MemoryStream(bytes))
-                {
-                    Image img = Image.FromStream(memoryStream);
-                    return img;
-                }
-            }
-        }
-        private static ImageCodecInfo GetImageCodecInfo(ImageFormat imageFormat)
-        {
-            ImageCodecInfo[] imageCodecInfoArr = ImageCodecInfo.GetImageDecoders();
-            foreach (ImageCodecInfo imageCodecInfo in imageCodecInfoArr)
-            {
-                if (imageCodecInfo.FormatID == imageFormat.Guid)
-                {
-                    return imageCodecInfo;
-                }
-            }
-            return null;
-        }
         #endregion
     }
 }

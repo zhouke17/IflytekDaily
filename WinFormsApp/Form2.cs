@@ -11,7 +11,7 @@ namespace WinFormsApp1
             InitializeComponent();
         }
 
-        #region 禁止方法缩小
+        #region 屏蔽窗体双击方法缩小功能
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == 0x112)
@@ -25,26 +25,6 @@ namespace WinFormsApp1
         }
         #endregion
 
-        private void Form2_MouseClick(object sender, MouseEventArgs e)
-        {
-            MessageBox.Show("Form2_MouseClick");
-        }
-
-        private void Form2_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            MessageBox.Show("Form2_MouseDoubleClick");
-        }
-
-        private void Form2_MaximumSizeChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("Form2_MaximumSizeChanged");
-        }
-
-        private void Form2_DoubleClick(object sender, EventArgs e)
-        {
-            MessageBox.Show("Form2_DoubleClick");
-        }
-
         /// <summary>
         /// 查找所有窗口(只要是在进程里面的)
         /// 如果不限制类名或者标题使用null代替
@@ -55,7 +35,6 @@ namespace WinFormsApp1
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
-        // 获取窗口的类名
         /// <summary>
         /// 获取目标句柄的类名
         /// </summary>
@@ -66,7 +45,6 @@ namespace WinFormsApp1
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
-        // 判断窗口是否可见
         /// <summary>
         /// 判断目标窗口是否可见
         /// </summary>
@@ -75,7 +53,6 @@ namespace WinFormsApp1
         [DllImport("user32.dll")]
         public static extern bool IsWindowVisible(IntPtr hWnd);
 
-        // 给窗口发送消息
         /// <summary>
         /// 给目标句柄发送消息
         /// </summary>

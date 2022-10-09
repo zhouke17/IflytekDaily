@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -104,11 +105,13 @@ namespace ConsoleApp1
 
             #region AutoResetEvent
             AutoResetEvent autoReset = new AutoResetEvent(true);
+
+            object monitorObj = new object();
             Task.Run(() =>
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    autoReset.WaitOne();//等待信号时长，约等于初始化时设置为True非终止状态；
+                    autoReset.WaitOne(2000);//等待指定的时间，超时直接进入。
                     RegularExe(() =>
                     {
                         Console.WriteLine(i);
@@ -116,6 +119,15 @@ namespace ConsoleApp1
                     ref audioTime);//委托中传值易忽略变量值不变的问题
                     Console.WriteLine(audioTime.ToString());
                     autoReset.Set();
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    if (Monitor.TryEnter(monitorObj, 1000))//尝试在指定的时间内获取锁，超时后不再等待直接离开。
+                    {
+                        Console.WriteLine("1获得对象的排它锁");
+                        Monitor.Exit(monitorObj);
+                        Console.WriteLine("1释放对象的排它锁");
+                    }
                 }
             });
             Task.Run(() =>
@@ -130,7 +142,18 @@ namespace ConsoleApp1
                     Console.WriteLine(audioTime.ToString());
                     autoReset.Set();
                 }
+                for (int i = 0; i < 3; i++)
+                {
+                    if (Monitor.TryEnter(monitorObj))
+                    {
+                        Console.WriteLine("2获得对象的排它锁");
+                        Thread.Sleep(3000);
+                        Monitor.Exit(monitorObj);
+                        Console.WriteLine("2释放对象的排它锁");
+                    }
+                }
             });
+
             #endregion
 
 
@@ -244,7 +267,39 @@ namespace ConsoleApp1
             });
             #endregion 总结：StartNew类型的延续任务在遇到await关键字时直接执行。
 
+
+            #region TaskCompletionSource实现IO操作
+            Task.Run(async () =>
+            {
+                var taskCompleteRresult = await DownloadStringAsync(new Uri("https://www.baidu.com"));
+                Console.WriteLine(taskCompleteRresult);
+            });
+            #endregion
+
             Console.Read();
+        }
+
+        public static Task<string> DownloadStringAsync(Uri url)
+        {
+            var tcs = new TaskCompletionSource<string>();
+            var webClient = new WebClient();
+            webClient.DownloadStringCompleted += (s, e) =>
+            {
+                if (e.Error != null)
+                {
+                    tcs.TrySetException(e.Error);
+                }
+                else if (e.Cancelled)
+                {
+                    tcs.TrySetCanceled();
+                }
+                else
+                {
+                    tcs.TrySetResult(e.Result);
+                }
+            };
+            webClient.DownloadStringAsync(url);
+            return tcs.Task;
         }
 
         private static void Callback(object state)

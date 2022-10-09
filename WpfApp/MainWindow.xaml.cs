@@ -1,139 +1,120 @@
-﻿using System;
-using System.ComponentModel;
-using System.Reflection;
+﻿using Microsoft.Office.Interop.Word;
+using System;
+using System.IO;
 using System.Windows;
-using System.Windows.Media;
+using System.Windows.Forms;
+using System.Windows.Xps.Packaging;
+using WpfApp.WordContorl;
 
-namespace WpfApp
+namespace WPFApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
-        BackgroundWorker worker = new BackgroundWorker();
-
-        private INotifyPropertyChangedExetension<Student> studentList;
-        public INotifyPropertyChangedExetension<Student> StudentList
-        {
-            get
-            {
-                return studentList;
-            }
-            set
-            {
-                studentList = value;
-            }
-        }
+        private IWord word;
+        private WordMainView WordMain;
+        private string fileName;
         public MainWindow()
         {
             InitializeComponent();
-            StudentList = new INotifyPropertyChangedExetension<Student>();
-            StudentList.Add(new Student { Name = "张三" });
-            StudentList.CollectionChanged += StudentList_CollectionChanged;
-            this.DataContext = this.StudentList;
-
-            this.cmbColors.ItemsSource = typeof(System.Drawing.Color).GetProperties();
+            WordMain = new WordMainView();
+            WordHost.Child = WordMain;
+            //ConvertWordToXPS(@"D:\wordTest.doc");//利用DocumentViewer加载word：无法编辑
         }
 
-        private void StudentList_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private XpsDocument ConvertWordToXps1(string wordDocName, string xpsFilename)
         {
-            MessageBox.Show(e.Action.ToString());
-        }
+            XpsDocument xpsDocument = null;
 
-
-        private void btnPrevious_Click(object sender, RoutedEventArgs e)
-        {
-            if (cmbColors.SelectedIndex > 0)
-                cmbColors.SelectedIndex = cmbColors.SelectedIndex - 1;
-        }
-
-        private void btnNext_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.cmbColors.SelectedIndex < this.cmbColors.Items.Count - 1)
-                this.cmbColors.SelectedIndex = this.cmbColors.SelectedIndex + 1;
-        }
-
-        private void btnBlue_Click(object sender, RoutedEventArgs e)
-        {
-            this.cmbColors.SelectedItem = typeof(System.Drawing.Color).GetProperty("Blue");
-        }
-
-        private void cmbColors_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            System.Drawing.Color color = (System.Drawing.Color)(cmbColors.SelectedItem as PropertyInfo).GetValue(null);
-            this.stackColor.Background = new SolidColorBrush(Color.FromRgb(color.R, color.G, color.B));
-        }
-
-        private void btnDoSynchronousCalculation_Click(object sender, RoutedEventArgs e)
-        {
-            int max = 10000;
-            pbCalculationProgress.Value = 0;
-            lbResults.Items.Clear();
-            int result = 0;
-            for (int i = 0; i < max; i++)
+            // Create a WordApplication and host word document
+            ApplicationClass wordApp = new ApplicationClass();
+            try
             {
-                if (i % 42 == 0)
-                {
-                    lbResults.Items.Add(i);
-                    result++;
-                }
-                System.Threading.Thread.Sleep(1);
-                pbCalculationProgress.Value = Convert.ToInt32(((double)i / max) * 100);
+                wordApp.Documents.Add(wordDocName);
+
+                // To Invisible the word document
+                wordApp.Application.Visible = false;
+
+                // Minimize the opened word document
+                wordApp.WindowState = WdWindowState.wdWindowStateMinimize;
+
+                Microsoft.Office.Interop.Word.Document doc = wordApp.ActiveDocument;
+
+                doc.SaveAs(xpsFilename, WdSaveFormat.wdFormatXPS);
+
+                xpsDocument = new XpsDocument(xpsFilename, FileAccess.ReadWrite);
+
             }
-            MessageBox.Show("Numbers between 0 and 10000 divisible by 7: " + result);
-        }
-
-        private void btnDoAsynchronousCalculation_Click(object sender, RoutedEventArgs e)
-        {
-            pbCalculationProgress.Value = 0;
-            lbResults.Items.Clear();
-
-            worker.WorkerReportsProgress = true;
-            worker.DoWork += Worker_DoWork;
-            worker.ProgressChanged += Worker_ProgressChanged;
-            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-            worker.RunWorkerAsync(10000);
-        }
-
-        private void Worker_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
-        {
-            MessageBox.Show($"Numbers between 0 and 10000 divisible by 7: {e.Result}");
-        }
-
-        private void Worker_ProgressChanged(object? sender, ProgressChangedEventArgs e)
-        {
-            pbCalculationProgress.Value = e.ProgressPercentage;
-            if (e.UserState != null)
+            catch (Exception ex)
             {
-                lbResults.Items.Add(e.UserState);
+                System.Windows.MessageBox.Show("发生错误，该错误消息  " + ex.ToString());
             }
-        }
-
-        private void Worker_DoWork(object? sender, DoWorkEventArgs e)
-        {
-            int max = (int)e.Argument;
-            int result = 0;
-            for (int i = 1; i < max; i++)
+            finally
             {
-                var progress = Convert.ToInt32(((double)i / max) * 100);
-                if (i % 42 == 0)
-                {
-                    result++;
-                    (sender as BackgroundWorker).ReportProgress(progress, i);
-                }
-                else
-                {
-                    (sender as BackgroundWorker).ReportProgress(progress);
-                }
-                System.Threading.Thread.Sleep(1);
+                wordApp.Documents.Close();
+                ((_Application)wordApp).Quit(WdSaveOptions.wdDoNotSaveChanges);
             }
-            e.Result = result;
+            return xpsDocument;
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private XpsDocument ConvertWordToXps2(string wordDocName, string xpsFilename)
         {
+            Spire.Doc.Document document = new Spire.Doc.Document(wordDocName);
+            document.SaveToFile(xpsFilename, Spire.Doc.FileFormat.XPS);
+            document.Close();
 
+            return new XpsDocument(xpsFilename, FileAccess.Read);
+        }
+        /// <summary>
+        /// 将word转换为XPS文件
+        /// </summary>
+        /// <param name="wordDocName"></param>
+        public void ConvertWordToXPS(string wordDocName)
+        {
+            string convertedXpsDoc = string.Concat(AppDomain.CurrentDomain.BaseDirectory, Guid.NewGuid().ToString(), ".xps");
+            XpsDocument xpsDocument = ConvertWordToXps2(wordDocName, convertedXpsDoc);
+            if (xpsDocument == null)
+            {
+                return;
+            }
+
+            documentviewWord.Document = xpsDocument.GetFixedDocumentSequence();
+
+        }
+        /// <summary>
+        /// 打开
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine($"{DateTime.Now:HH:mm:ss.ffff}初始化");
+            word = new Word();
+            word.Init();
+            Console.WriteLine($"{DateTime.Now:HH:mm:ss.ffff}初始化End");
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Word文档(*.doc;*.docx)|*.doc;*.docx";
+            ofd.Title = "导入文档";
+            ofd.ValidateNames = true; // 验证用户输入是否是一个有效的Windows文件名
+            ofd.CheckFileExists = true; //验证路径的有效性
+            ofd.CheckPathExists = true;//验证路径的有效性
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK) //用户点击确认按钮，发送确认消息
+            {
+                fileName = ofd.FileName;
+                WordMain.OpenWord(word, ofd.FileName);
+            }
+        }
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            word?.CloseFile(fileName);
         }
     }
 }
