@@ -6,14 +6,17 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace iflytek.Court.Office.Core
 {
     public class Word : IWord, IWordTest
     {
         WordSt wordApp { set; get; } = new WordSt();
+        private object missing = Missing.Value;
 
         /// <summary>
         /// 设置父容器
@@ -238,7 +241,7 @@ namespace iflytek.Court.Office.Core
         {
             try
             {
-                var hfIndex = Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary;
+                var hfIndex = Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterFirstPage;
                 Microsoft.Office.Interop.Word.HeaderFooter headerFooter = null;
                 for (int i = 1; i < wordApp.Document.Sections.Count + 1; i++)
                 {
@@ -249,17 +252,13 @@ namespace iflytek.Court.Office.Core
 
                     if (headerFooter != null)
                     {
-                        headerFooter.Range.Delete();
-                        //imagesTotalWidth = 0;
-                        //imagesTotalHeight = 0;
-                        //imagesCount = 0;
-                        //maxHeight = 0;
+                        headerFooter.Range?.Delete();
                     }
                 }
             }
             catch (COMException ex)
             {
-                //OnComExceptionOccur(ex);
+                MessageBox.Show(ex.Message);
             }
             //Microsoft.Office.Interop.Word.Range ftrRng =
             //wordApp.Document.Sections[1].Footers[WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
@@ -273,6 +272,77 @@ namespace iflytek.Court.Office.Core
             //wordApp.Document.ActiveWindow.ActivePane.View.SeekView = WdSeekView.wdSeekPrimaryFooter;
             //wordApp.Document.Application.Selection.MoveRight(WdUnits.wdCharacter, 1);
             //wordApp.Document.Application.Selection.Delete(WdUnits.wdCharacter, 9);
+        }
+        /// <summary>
+        /// 按页码添加签名
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="pages"></param>
+        public void InsertSignPages(string path, List<int> pages)
+        {
+            try
+            {
+                if (wordApp.Document == null) return;
+                int pageCount = (int)(wordApp.Document.Range().Information[WdInformation.wdNumberOfPagesInDocument]);
+                //We'll hold the start position of each page here
+                int pageStart = 0;
+                for (int currentPageIndex = 1; currentPageIndex <= pageCount; currentPageIndex++)
+                {
+                    //This Range object will contain each page.
+                    var page = wordApp.Document.Range(pageStart);
+                    //Generally, the end of the current page is 1 character before the start of the next.
+                    //However, we need to handle the last page -- since there is no next page, the 
+                    //GoTo method will move to the *start* of the last page.
+                    if (currentPageIndex < pageCount)
+                    {
+                        //page.GoTo returns a new Range object, leaving the page object unaffected
+                        page.End = page.GoTo(
+                            What: WdGoToItem.wdGoToPage,
+                            Which: WdGoToDirection.wdGoToAbsolute,
+                            Count: currentPageIndex + 1
+                        ).Start - 1;//本页的最后一个字符的位置
+                    }
+                    else
+                    {
+                        page.End = wordApp.Document.Range().End;
+                    }
+                    pageStart = page.End + 1;//下一页的开始位置
+                    if (pages.Contains(currentPageIndex))
+                    {
+                        try
+                        {
+                            var local = page.End - 35;
+                            var e = page.End - 1;
+                            var s = local > 0 && local > page.Start ? local : e > 0 ? e : 0;
+                            object range = wordApp.Document.Range(s, s);
+                            //object range = wordApp.Document.Range(page.End, page.End);
+                            var shapes = wordApp.Document.InlineShapes.AddPicture(path, ref missing, ref missing, ref range);
+                            //shapes.AlternativeText = "sign";
+
+                            //以下方式将导致无法获取嵌入型的图片对象
+                            //shapes.Select();
+                            //var shape = shapes.ConvertToShape();
+                            //shape.WrapFormat.Type = WdWrapType.wdWrapInline;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void RemovePictures()
+        {
+            foreach (InlineShape shape in wordApp.Document.InlineShapes)
+            {
+                shape.Delete();
+            }
         }
         /// <summary>
         /// 检查批注是否发生变化

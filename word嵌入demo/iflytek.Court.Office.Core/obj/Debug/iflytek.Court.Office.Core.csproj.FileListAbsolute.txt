@@ -37,3 +37,4 @@ C:\Users\kezhou3\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.C
 C:\Users\kezhou3\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.csproj.CopyComplete
 C:\Users\kezhou3\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.dll
 C:\Users\kezhou3\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.pdb
+C:\Users\kezhou3\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.csproj.AssemblyReference.cache

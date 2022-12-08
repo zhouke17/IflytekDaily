@@ -1,14 +1,8 @@
-﻿using iflytek.Court.Client.Core;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using WebSocketSharp;
 using ErrorEventArgs = WebSocketSharp.ErrorEventArgs;
 
@@ -88,7 +82,7 @@ namespace iflytek.Court.Client.Views.Sign_JieYuHelper
             }
             else
             {
-                LogManager.SystemLogger.Debug("SendAsync方法超时");
+                //LogManager.SystemLogger.Debug("SendAsync方法超时");
             }
         }
         #region listen binding
@@ -107,7 +101,7 @@ namespace iflytek.Court.Client.Views.Sign_JieYuHelper
             Process[] ps = Process.GetProcessesByName("ZNXXJHZDService");
             foreach (Process p in ps)
             {
-                ZNXXJHZDServicePath = p.MainModule.FileName.ToString();
+                ZNXXJHZDServicePath = p.MainModule?.FileName?.ToString();
             }
             if (!string.IsNullOrEmpty(ZNXXJHZDServicePath))
             {
@@ -119,18 +113,18 @@ namespace iflytek.Court.Client.Views.Sign_JieYuHelper
         {
             var receiveMsg = (JObject)JsonConvert.DeserializeObject(e.Data);
             OnReceiveMessage?.Invoke(sender, receiveMsg);
-            LogManager.SystemLogger.Debug(e.Data, $"HWUGSocket接收消息：{e.Data}");
+            //LogManager.SystemLogger.Debug(e.Data, $"HWUGSocket接收消息：{e.Data}");
         }
 
         private void _webSocket_OnClose(object sender, CloseEventArgs e)
         {
             OnClose?.Invoke(sender, e);
-            LogManager.SystemLogger.Error(e.Reason, "HWUGSocket关闭原因！");
+            //LogManager.SystemLogger.Error(e.Reason, "HWUGSocket关闭原因！");
         }
 
         private void _webSocket_OnError(object sender, ErrorEventArgs e)
         {
-            LogManager.SystemLogger.Error(e.Message, "HWUGSocket连接出错！");
+            //LogManager.SystemLogger.Error(e.Message, "HWUGSocket连接出错！");
             OnError?.Invoke(sender, e);
         }
 

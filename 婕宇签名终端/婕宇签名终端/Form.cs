@@ -20,13 +20,28 @@ namespace 婕宇签名终端
                 },
                 (msg, ex) =>
                 {
-                    MessageBox.Show($"{ex.Message}");
+                    MessageBox.Show($"{msg}");
                 });
         }
 
         public void GetImage(Image image)
         {
             this.pictureBox1.Image = image;
+        }
+
+        private void btn_Sign_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void btn_Finger_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void btn_SignFinger_Click(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

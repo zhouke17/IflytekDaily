@@ -228,5 +228,16 @@ namespace WordDemo
         {
             word.RemoveFooter();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory + "6.jpeg";
+            word.InsertSignPages(path, new List<int> { 1, 3 });
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            word.RemovePictures();
+        }
     }
 }

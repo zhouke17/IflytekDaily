@@ -56,6 +56,7 @@
             this.btn_Sign.TabIndex = 1;
             this.btn_Sign.Text = "签字";
             this.btn_Sign.UseVisualStyleBackColor = true;
+            this.btn_Sign.Click += new System.EventHandler(this.btn_Sign_Click);
             // 
             // btn_Finger
             // 
@@ -65,6 +66,7 @@
             this.btn_Finger.TabIndex = 2;
             this.btn_Finger.Text = "指纹";
             this.btn_Finger.UseVisualStyleBackColor = true;
+            this.btn_Finger.Click += new System.EventHandler(this.btn_Finger_Click);
             // 
             // btn_SignFinger
             // 
@@ -74,6 +76,7 @@
             this.btn_SignFinger.TabIndex = 3;
             this.btn_SignFinger.Text = "签名按捺";
             this.btn_SignFinger.UseVisualStyleBackColor = true;
+            this.btn_SignFinger.Click += new System.EventHandler(this.btn_SignFinger_Click);
             // 
             // btn_ReadIDCard
             // 

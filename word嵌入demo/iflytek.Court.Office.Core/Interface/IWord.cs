@@ -1,6 +1,7 @@
 ﻿using iflytek.Court.Office.Core.Models;
 using Microsoft.Office.Interop.Word;
 using System;
+using System.Collections.Generic;
 
 namespace iflytek.Court.Office.Core.Interface
 {
@@ -69,6 +70,16 @@ namespace iflytek.Court.Office.Core.Interface
         /// 删除页脚
         /// </summary>
         void RemoveFooter();
+        /// <summary>
+        /// 插入图片
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="pages"></param>
+        void InsertSignPages(string path, List<int> pages);
+        /// <summary>
+        /// 清楚文档中的图片
+        /// </summary>
+        void RemovePictures();
         /// <summary>
         /// 检查批注是否发生变化
         /// </summary>

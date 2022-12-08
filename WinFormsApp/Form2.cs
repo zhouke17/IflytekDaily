@@ -25,6 +25,8 @@ namespace WinFormsApp1
         }
         #endregion
 
+
+        #region 屏蔽WPS快捷键
         /// <summary>
         /// 查找所有窗口(只要是在进程里面的)
         /// 如果不限制类名或者标题使用null代替
@@ -131,6 +133,13 @@ namespace WinFormsApp1
                     }
                 }
             }
+        }
+
+        #endregion
+
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MessageBox.Show($"窗体关闭后DialogResult值为：{DialogResult.ToString()}");
         }
     }
 }

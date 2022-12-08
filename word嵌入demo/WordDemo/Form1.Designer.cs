@@ -49,6 +49,8 @@ namespace WordDemo
             this.btn_listenText = new System.Windows.Forms.Button();
             this.btn_testBookMark = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,13 +62,13 @@ namespace WordDemo
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1091, 414);
+            this.panel1.Size = new System.Drawing.Size(1082, 339);
             this.panel1.TabIndex = 0;
             // 
             // btn_stopTransform
             // 
             this.btn_stopTransform.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_stopTransform.Location = new System.Drawing.Point(107, 460);
+            this.btn_stopTransform.Location = new System.Drawing.Point(98, 371);
             this.btn_stopTransform.Name = "btn_stopTransform";
             this.btn_stopTransform.Size = new System.Drawing.Size(68, 23);
             this.btn_stopTransform.TabIndex = 23;
@@ -77,7 +79,7 @@ namespace WordDemo
             // btn_checkcomment
             // 
             this.btn_checkcomment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_checkcomment.Location = new System.Drawing.Point(539, 460);
+            this.btn_checkcomment.Location = new System.Drawing.Point(530, 371);
             this.btn_checkcomment.Name = "btn_checkcomment";
             this.btn_checkcomment.Size = new System.Drawing.Size(75, 23);
             this.btn_checkcomment.TabIndex = 22;
@@ -88,7 +90,7 @@ namespace WordDemo
             // btn_removeComment
             // 
             this.btn_removeComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_removeComment.Location = new System.Drawing.Point(458, 460);
+            this.btn_removeComment.Location = new System.Drawing.Point(449, 371);
             this.btn_removeComment.Name = "btn_removeComment";
             this.btn_removeComment.Size = new System.Drawing.Size(75, 23);
             this.btn_removeComment.TabIndex = 21;
@@ -99,7 +101,7 @@ namespace WordDemo
             // btn_addComment
             // 
             this.btn_addComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_addComment.Location = new System.Drawing.Point(377, 460);
+            this.btn_addComment.Location = new System.Drawing.Point(368, 371);
             this.btn_addComment.Name = "btn_addComment";
             this.btn_addComment.Size = new System.Drawing.Size(75, 23);
             this.btn_addComment.TabIndex = 20;
@@ -110,7 +112,7 @@ namespace WordDemo
             // btn_stop
             // 
             this.btn_stop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_stop.Location = new System.Drawing.Point(296, 460);
+            this.btn_stop.Location = new System.Drawing.Point(287, 371);
             this.btn_stop.Name = "btn_stop";
             this.btn_stop.Size = new System.Drawing.Size(75, 23);
             this.btn_stop.TabIndex = 19;
@@ -126,13 +128,13 @@ namespace WordDemo
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Location = new System.Drawing.Point(33, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1091, 414);
+            this.panel2.Size = new System.Drawing.Size(1082, 339);
             this.panel2.TabIndex = 12;
             // 
             // btn_insert
             // 
             this.btn_insert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_insert.Location = new System.Drawing.Point(215, 460);
+            this.btn_insert.Location = new System.Drawing.Point(206, 371);
             this.btn_insert.Name = "btn_insert";
             this.btn_insert.Size = new System.Drawing.Size(75, 23);
             this.btn_insert.TabIndex = 18;
@@ -143,7 +145,7 @@ namespace WordDemo
             // btn_startTransform
             // 
             this.btn_startTransform.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_startTransform.Location = new System.Drawing.Point(33, 460);
+            this.btn_startTransform.Location = new System.Drawing.Point(24, 371);
             this.btn_startTransform.Name = "btn_startTransform";
             this.btn_startTransform.Size = new System.Drawing.Size(68, 23);
             this.btn_startTransform.TabIndex = 17;
@@ -154,7 +156,7 @@ namespace WordDemo
             // btn_resize
             // 
             this.btn_resize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_resize.Location = new System.Drawing.Point(968, 460);
+            this.btn_resize.Location = new System.Drawing.Point(870, 371);
             this.btn_resize.Name = "btn_resize";
             this.btn_resize.Size = new System.Drawing.Size(75, 23);
             this.btn_resize.TabIndex = 16;
@@ -165,7 +167,7 @@ namespace WordDemo
             // btn_initWord
             // 
             this.btn_initWord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_initWord.Location = new System.Drawing.Point(806, 460);
+            this.btn_initWord.Location = new System.Drawing.Point(676, 371);
             this.btn_initWord.Name = "btn_initWord";
             this.btn_initWord.Size = new System.Drawing.Size(75, 23);
             this.btn_initWord.TabIndex = 15;
@@ -176,7 +178,7 @@ namespace WordDemo
             // btn_killWord
             // 
             this.btn_killWord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_killWord.Location = new System.Drawing.Point(1049, 460);
+            this.btn_killWord.Location = new System.Drawing.Point(965, 371);
             this.btn_killWord.Name = "btn_killWord";
             this.btn_killWord.Size = new System.Drawing.Size(75, 23);
             this.btn_killWord.TabIndex = 14;
@@ -187,7 +189,7 @@ namespace WordDemo
             // btn_Embed
             // 
             this.btn_Embed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Embed.Location = new System.Drawing.Point(887, 460);
+            this.btn_Embed.Location = new System.Drawing.Point(771, 371);
             this.btn_Embed.Name = "btn_Embed";
             this.btn_Embed.Size = new System.Drawing.Size(75, 23);
             this.btn_Embed.TabIndex = 13;
@@ -198,7 +200,7 @@ namespace WordDemo
             // btn_checkSpeaker
             // 
             this.btn_checkSpeaker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_checkSpeaker.Location = new System.Drawing.Point(1049, 502);
+            this.btn_checkSpeaker.Location = new System.Drawing.Point(1055, 371);
             this.btn_checkSpeaker.Name = "btn_checkSpeaker";
             this.btn_checkSpeaker.Size = new System.Drawing.Size(75, 23);
             this.btn_checkSpeaker.TabIndex = 24;
@@ -209,7 +211,7 @@ namespace WordDemo
             // btn_startHook
             // 
             this.btn_startHook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_startHook.Location = new System.Drawing.Point(33, 502);
+            this.btn_startHook.Location = new System.Drawing.Point(24, 421);
             this.btn_startHook.Name = "btn_startHook";
             this.btn_startHook.Size = new System.Drawing.Size(68, 23);
             this.btn_startHook.TabIndex = 25;
@@ -220,7 +222,7 @@ namespace WordDemo
             // btn_getRange
             // 
             this.btn_getRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_getRange.Location = new System.Drawing.Point(296, 502);
+            this.btn_getRange.Location = new System.Drawing.Point(287, 421);
             this.btn_getRange.Name = "btn_getRange";
             this.btn_getRange.Size = new System.Drawing.Size(75, 23);
             this.btn_getRange.TabIndex = 26;
@@ -231,7 +233,7 @@ namespace WordDemo
             // btn_createRange
             // 
             this.btn_createRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_createRange.Location = new System.Drawing.Point(215, 502);
+            this.btn_createRange.Location = new System.Drawing.Point(206, 421);
             this.btn_createRange.Name = "btn_createRange";
             this.btn_createRange.Size = new System.Drawing.Size(75, 23);
             this.btn_createRange.TabIndex = 27;
@@ -242,7 +244,7 @@ namespace WordDemo
             // btn_listenText
             // 
             this.btn_listenText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_listenText.Location = new System.Drawing.Point(377, 502);
+            this.btn_listenText.Location = new System.Drawing.Point(368, 421);
             this.btn_listenText.Name = "btn_listenText";
             this.btn_listenText.Size = new System.Drawing.Size(75, 23);
             this.btn_listenText.TabIndex = 28;
@@ -253,7 +255,7 @@ namespace WordDemo
             // btn_testBookMark
             // 
             this.btn_testBookMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_testBookMark.Location = new System.Drawing.Point(539, 502);
+            this.btn_testBookMark.Location = new System.Drawing.Point(449, 421);
             this.btn_testBookMark.Name = "btn_testBookMark";
             this.btn_testBookMark.Size = new System.Drawing.Size(75, 23);
             this.btn_testBookMark.TabIndex = 29;
@@ -264,19 +266,43 @@ namespace WordDemo
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(806, 501);
+            this.button1.Location = new System.Drawing.Point(771, 421);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(93, 23);
             this.button1.TabIndex = 30;
-            this.button1.Text = "删除页脚";
+            this.button1.Text = "删除所有页脚";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(676, 421);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 31;
+            this.button2.Text = "添加图片 ";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Location = new System.Drawing.Point(870, 421);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 32;
+            this.button3.Text = "删除图片 ";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1167, 550);
+            this.ClientSize = new System.Drawing.Size(1158, 501);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_testBookMark);
             this.Controls.Add(this.btn_listenText);
@@ -326,6 +352,8 @@ namespace WordDemo
         private System.Windows.Forms.Button btn_listenText;
         private System.Windows.Forms.Button btn_testBookMark;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

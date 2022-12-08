@@ -1,41 +1,40 @@
-﻿using System.Diagnostics;
+﻿using AutoUpdaterDotNET;
+using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using System.Net;
 using System.Runtime.InteropServices;
-
+using static WinFormsApp.Extension;
 namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
         public Form1()
         {
-            Initialize();
+            //Initialize();
             InitializeComponent();
         }
 
-        #region 禁止方法缩小
+        #region 屏蔽消息
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == 0x112)
-            {
-                switch ((int)m.WParam)
-                {
-                    //禁止双击标题栏关闭窗体
-                    case 0xF063:
-                    case 0xF093:
-                    case 0xA3:
-                        m.WParam = IntPtr.Zero;
-                        break;
-                    //禁止双击标题栏
-                    case 0xf122:
-                    case 0xf012:
-                        m.WParam = IntPtr.Zero;
-                        break;
-
-                        //default:
-                        //    m.WParam = IntPtr.Zero;
-                        //    break;
-                }
-            }
+            //if (m.Msg == 0x112)
+            //{
+            //    switch ((int)m.WParam)
+            //    {
+            //        //禁止双击标题栏关闭窗体
+            //        case 0xF063:
+            //        case 0xF093:
+            //        case 0xA3:
+            //            m.WParam = IntPtr.Zero;
+            //            break;
+            //        //禁止双击标题栏
+            //        case 0xf122:
+            //        case 0xf012:
+            //            m.WParam = IntPtr.Zero;
+            //            break;
+            //    }
+            //}
             base.WndProc(ref m);
         }
         #endregion
@@ -326,5 +325,250 @@ namespace WinFormsApp1
         [DllImport("User32.DLL")]
         public static extern int SendMessage(IntPtr hWnd, uint Msg, int wParam, string lParam);
         #endregion
+
+
+        #region 异步委托
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Action action = () => { Thread.Sleep(5000); };
+        }
+        #endregion
+
+        #region 弹窗
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
+            Thread.Sleep(2000);
+            form2.Close();
+            MessageBox.Show($"Show弹窗的关闭返回值为：{form2.DialogResult.ToString()}");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.ShowDialog();
+            MessageBox.Show($"ShowDialog弹窗的关闭返回值为：{form2.DialogResult.ToString()}");
+        }
+
+        //委托中异步使用弹窗
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Action action = async () =>
+            {
+                await Task.Delay(2000);
+                Form2 form2 = new Form2();
+                DialogResult dialog = form2.ShowDialog();
+                MessageBox.Show($"异步委托中弹窗被关闭时的返回值为：{form2.DialogResult.ToString()}");
+            };
+
+            //Task.Run(() =>
+            //this.BeginInvoke(new Action(() => { action.Invoke(); }))
+            //);
+            action.Invoke();
+        }
+
+        #endregion
+
+        #region 关闭进程
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process[] iflyCourtList = Process.GetProcessesByName("iflyCourt");//iflyCourt.exe
+                foreach (Process process in iflyCourtList)
+                {
+                    process.Kill();
+                }
+                Process[] ScreenshotsList = Process.GetProcessesByName("iflyCourt_Screenshots");//iflyCourt_Screenshots.exe
+                foreach (Process process in ScreenshotsList)
+                {
+                    process.Kill();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region 超时
+        private async void button7_Click(object sender, EventArgs e)
+        {
+            var task = await TestTask().Timeout(3000);
+
+            if (task == 0)
+            {
+                MessageBox.Show("Task超时");
+                return;
+            }
+            MessageBox.Show($"Task结果为：{task}");
+        }
+
+        public async Task<int> TestTask()
+        {
+            return await Task.Run(async () =>
+            {
+                await Task.Delay(4000);
+                return 3;
+            });
+        }
+        #endregion
+
+
+        #region 更新
+
+        #region NAppUpdate更新
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region AutoUpdaterDotNET更新
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
+
+            //AutoUpdater.ClearAppDirectory = true;//清楚之前的更新包
+
+            AutoUpdater.DownloadPath = AppDomain.CurrentDomain.BaseDirectory + @"AutoUpdaterDotNETDownLoad/";//设置更新包下载路径
+
+            var currentDirectory = new DirectoryInfo(AutoUpdater.DownloadPath);
+            if (currentDirectory.Parent != null)
+            {
+                AutoUpdater.InstallationPath = currentDirectory.Parent.FullName;
+            }
+
+            AutoUpdater.UpdateFormSize = new System.Drawing.Size(800, 600);//调整更新弹窗的大小
+
+            //不让用户选择延迟更新的具体时间点,默认一个时间段，分，小时，天
+            //AutoUpdater.LetUserSelectRemindLater = false;
+            //AutoUpdater.RemindLaterTimeSpan = RemindLaterFormat.Minutes;
+            //AutoUpdater.RemindLaterAt = 10;
+
+            //采用json文件格式的更新文件
+            AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
+            AutoUpdater.Start(AppDomain.CurrentDomain.BaseDirectory + "updateJson.json");
+
+            //AutoUpdater.Start("http://localhost:8080/updateXml.xml");//网路路径
+
+            //AutoUpdater.Start(AppDomain.CurrentDomain.BaseDirectory + "updateXml.xml");//本地路径
+
+            AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;//更新程序完成后事件
+        }
+        private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
+        {
+            if (args.Error == null)
+            {
+                if (args.IsUpdateAvailable)
+                {
+                    DialogResult dialogResult;
+                    if (args.Mandatory.Value)
+                    {
+                        dialogResult =
+                            MessageBox.Show(
+                                $@"There is new version {args.CurrentVersion} available. You are using version {args.InstalledVersion}. This is required update. Press Ok to begin updating the application.", @"Update Available",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        dialogResult =
+                            MessageBox.Show(
+                                $@"There is new version {args.CurrentVersion} available. You are using version {args.InstalledVersion}. Do you want to update the application now?", @"Update Available",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Information);
+                    }
+
+                    // Uncomment the following line if you want to show standard update dialog instead.
+                    // AutoUpdater.ShowUpdateForm(args);
+
+                    if (dialogResult.Equals(DialogResult.Yes) || dialogResult.Equals(DialogResult.OK))
+                    {
+                        try
+                        {
+                            if (AutoUpdater.DownloadUpdate(args))
+                            {
+                                Application.Exit();
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(@"There is no update available please try again later.", @"No update available",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                if (args.Error is WebException)
+                {
+                    MessageBox.Show(
+                        @"There is a problem reaching update server. Please check your internet connection and try again later.",
+                        @"Update Check Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(args.Error.Message,
+                        args.Error.GetType().ToString(), MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
+        {
+            dynamic json = JsonConvert.DeserializeObject(args.RemoteData);
+            args.UpdateInfo = new UpdateInfoEventArgs
+            {
+                CurrentVersion = json.version,
+                ChangelogURL = json.changelog,
+                DownloadURL = json.url,
+                Mandatory = new Mandatory
+                {
+                    Value = json.mandatory.value,
+                    UpdateMode = json.mandatory.mode,
+                    MinimumVersion = json.mandatory.minVersion
+                },
+                CheckSum = new CheckSum
+                {
+                    Value = json.checksum.value,
+                    HashingAlgorithm = json.checksum.hashingAlgorithm
+                }
+            };
+        }
+
+
+        private void AutoUpdater_ApplicationExitEvent()
+        {
+            Text = @"关闭更新程序...";
+            Process.GetCurrentProcess().Kill();
+        }
+        #endregion
+
+        #region 原有更新
+        private void button13_Click(object sender, EventArgs e)
+        {
+            Process p = new Process();
+            string args = string.Format("{0} {1}", @"http://172.31.97.233:88/group1/M00/07/6F/rB9h6WNqAxCAOEBqAAKXfcPpKW4816.zip", "948d958fea5ba27356dca6ee5752114e");
+            ProcessStartInfo stateInfo = new ProcessStartInfo(AppDomain.CurrentDomain.BaseDirectory + "updater_launch.exe", args);
+            p.StartInfo = stateInfo;
+            p.StartInfo.Verb = "runas";
+            p.StartInfo.UseShellExecute = false;
+            p.Start();
+        }
+        #endregion
+
+        #endregion
+
+
     }
 }

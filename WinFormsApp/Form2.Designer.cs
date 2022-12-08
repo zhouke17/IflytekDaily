@@ -68,6 +68,7 @@ namespace WinFormsApp1
             this.button2.TabIndex = 5;
             this.button2.Text = "关闭F7";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button4
             // 
@@ -77,6 +78,7 @@ namespace WinFormsApp1
             this.button4.TabIndex = 6;
             this.button4.Text = "关闭F12";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // btn_F1
             // 
@@ -86,6 +88,7 @@ namespace WinFormsApp1
             this.btn_F1.TabIndex = 4;
             this.btn_F1.Text = "关闭F1";
             this.btn_F1.UseVisualStyleBackColor = true;
+            this.btn_F1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form2
             // 
@@ -96,6 +99,7 @@ namespace WinFormsApp1
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
