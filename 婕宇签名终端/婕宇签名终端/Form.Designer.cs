@@ -95,6 +95,7 @@
             this.btn_FaceComparison.TabIndex = 5;
             this.btn_FaceComparison.Text = "人脸比对";
             this.btn_FaceComparison.UseVisualStyleBackColor = true;
+            this.btn_FaceComparison.Click += new System.EventHandler(this.btn_FaceComparison_Click);
             // 
             // pictureBox1
             // 

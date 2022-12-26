@@ -43,5 +43,23 @@ namespace 婕宇签名终端
         {
 
         }
+
+        private void btn_FaceComparison_Click(object sender, System.EventArgs e)
+        {
+            SignBoard_JieYu.Instance.SignType = SignType.Face;
+            SignBoard_JieYu.Instance.OpenDevice(null, () =>
+            {
+                SignBoard_JieYu.Instance.GetIdCardInfo(GetUserInfo);
+            }, (msg, ex) =>
+            {
+                MessageBox.Show(msg);
+            });
+
+        }
+
+        private void GetUserInfo(UserInfo obj)
+        {
+            MessageBox.Show($"验证通过：{obj.PassFlag}\t\n姓名：{obj.Name}\t\n身份证号：{obj.Id}");
+        }
     }
 }

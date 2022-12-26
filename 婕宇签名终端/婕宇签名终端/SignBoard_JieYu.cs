@@ -24,6 +24,7 @@ namespace 捷宇科技签字版
         public Action<string, Exception> ErrorEventCallback { set; get; }
         public Action SuccessFunc { get; set; }
         public Action<Image> SignImageCallBack { get; set; }
+        public Action<UserInfo> Action { get; set; }
 
         private static readonly Object locker = new object();
         private static SignBoard_JieYu _instance = null;
@@ -166,9 +167,30 @@ namespace 捷宇科技签字版
                     if (obj["ret"].ToString() == "0")
                     {
                         SuccessFunc?.Invoke();
-                        //发送签名命令
-                        var order = new { type = (int)OrderType.Signature, SignWidth = 300, LineWidth = 10 };
-                        jieyuSocketService.Send(JsonConvert.SerializeObject(order));
+                        if (SignType == SignType.Face)
+                        {
+                            //发送人脸核对命令
+                            var order = new { type = (int)OrderType.Face };
+                            jieyuSocketService.Send(JsonConvert.SerializeObject(order));
+                        }
+                        else
+                        {
+                            //发送签名命令
+                            var order = new { type = (int)OrderType.Signature, SignWidth = 300, LineWidth = 10 };
+                            jieyuSocketService.Send(JsonConvert.SerializeObject(order));
+                        }
+                    }
+                    else
+                    {
+                        ShowErrorMessage(obj["ret"].ToString());
+                    }
+                }
+                else if (obj["type"].ToString() == Convert.ToString((int)OrderType.Face))//人脸核对
+                {
+                    if (obj["ret"].ToString() == "0")
+                    {
+                        SuccessFunc?.Invoke();
+                        Action?.Invoke(new UserInfo { Name = obj["name"].ToString(), Id = obj["id_num"].ToString(), PassFlag = (bool)obj["passFlag"] });
                     }
                     else
                     {
@@ -234,6 +256,10 @@ namespace 捷宇科技签字版
             SignImageCallBack = callBack;
         }
 
+        public void GetIdCardInfo(Action<UserInfo> action)
+        {
+            Action = action;
+        }
 
         /// <summary>  
         /// 合并图片，默认是垂直合并，图1在下，图2在上。
@@ -309,7 +335,11 @@ namespace 捷宇科技签字版
         /// <summary>
         /// 签名+指纹
         /// </summary>
-        SignFinger
+        SignFinger,
+        /// <summary>
+        /// 人脸
+        /// </summary>
+        Face
     }
     /// <summary>
     /// 命令类型
@@ -331,6 +361,19 @@ namespace 捷宇科技签字版
         /// <summary>
         /// 授权初始化
         /// </summary>
-        Init = 181
+        Init = 181,
+        /// <summary>
+        /// 人脸核对
+        /// </summary>
+        Face = 122
+    }
+    public class UserInfo
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        /// <summary>
+        /// 是否通过
+        /// </summary>
+        public bool PassFlag { get; set; }
     }
 }
