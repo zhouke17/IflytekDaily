@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace DevMvvmWinformDemo
 {
@@ -30,16 +23,16 @@ namespace DevMvvmWinformDemo
             {
                 if (string.IsNullOrWhiteSpace(x))
                 {
-                    this.btn_submit.Enabled = false;
+                    //this.btn_submit.Enabled = false;
                 }
                 else
                 {
-                    this.btn_submit.Enabled = true;
+                    //this.btn_submit.Enabled = true;
                 }
             });
 
             fluent.SetBinding(txt_input, x => x.Text, x => x.InputText);
-            fluent.SetBinding(richtxt_show,x=>x.Text,x=>x.RichText);
+            fluent.SetBinding(richtxt_show, x => x.Text, x => x.RichText);
 
 
         }

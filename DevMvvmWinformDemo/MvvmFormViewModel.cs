@@ -1,9 +1,5 @@
 ﻿using DevExpress.Mvvm;
 using DevExpress.Mvvm.DataAnnotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 
 namespace DevMvvmWinformDemo
@@ -22,6 +18,7 @@ namespace DevMvvmWinformDemo
             {
                 _inputText = value;
                 RaisePropertyChanged("InputText");
+                OnRichTextChanged();
             }
         }
         private string _richText;
@@ -29,7 +26,7 @@ namespace DevMvvmWinformDemo
         public string RichText
         {
             get { return _richText; }
-            set 
+            set
             {
                 _richText = value;
                 RaisePropertiesChanged("RichText");

@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
+using DevExpress.XtraLayout.Utils;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -11,11 +12,11 @@ namespace DevFormDemo
         public MainForm()
         {
             InitializeComponent();
-            this.tip_layer.Visible = true;
-            label.Parent = pictureBox1;
-            label.Text = "图片显示文字";
-            label.BackColor = Color.Black;
-            label.ForeColor = Color.White;
+            //this.tip_layer.Visible = true;
+            //label.Parent = pictureBox1;
+            //label.Text = "图片显示文字";
+            //label.BackColor = Color.Black;
+            //label.ForeColor = Color.White;
         }
 
 
@@ -40,31 +41,31 @@ namespace DevFormDemo
         private void simpleButton_Click(object sender, System.EventArgs e)
         {
             ++clickTimes;
-            if (clickTimes == 1 || clickTimes == 2)
-            {
-                this.toolTip1.SetToolTip(this.simpleButton1, $"点击{clickTimes}次");
-            }
-            else if (clickTimes == 3 || clickTimes == 4)
-            {
-                this.toolTip1.SetToolTip(this.simpleButton1, $"点击{clickTimes}次");
-            }
-            else
-            {
-                this.toolTip1.RemoveAll();
-                clickTimes = 0;
-            }
+            //if (clickTimes == 1 || clickTimes == 2)
+            //{
+            //    this.toolTip1.SetToolTip(this.simpleButton1, $"点击{clickTimes}次");
+            //}
+            //else if (clickTimes == 3 || clickTimes == 4)
+            //{
+            //    this.toolTip1.SetToolTip(this.simpleButton1, $"点击{clickTimes}次");
+            //}
+            //else
+            //{
+            //    this.toolTip1.RemoveAll();
+            //    clickTimes = 0;
+            //}
         }
 
         private void pictureBox1_Click(object sender, System.EventArgs e)
         {
             this.pictureBox1.Visible = false;
-            this.tip_layer.Visible = true;
+            //this.tip_layer.Visible = true;
         }
 
         private void tip_layer_Click(object sender, System.EventArgs e)
         {
             this.pictureBox1.Visible = true;
-            this.tip_layer.Visible = false;
+            //this.tip_layer.Visible = false;
         }
 
         public void Remove(LayoutControlGroup group)
@@ -73,14 +74,14 @@ namespace DevFormDemo
             List<Control> controls = new List<Control>();
             AddControls(group, controls);
             var owner = group.Owner;
-            owner.BeginUpdate();
-            group.Dispose();
+            //owner.BeginUpdate();
             foreach (var c in controls)
             {
                 c.Dispose();
             }
-            owner.EndUpdate();
-            group = null;
+            //owner.EndUpdate();
+            //group.Dispose();
+            //group = null;
         }
         private static void AddControls(BaseLayoutItem layoutItem, List<Control> controls)
         {
@@ -106,9 +107,56 @@ namespace DevFormDemo
             }
         }
 
+        /// <summary>
+        /// 删除控件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void simpleButton2_Click(object sender, System.EventArgs e)
         {
-            Remove(layoutControlGroup2);
+            //Remove(bottom_layoutControlGroup);
+        }
+        /// <summary>
+        /// 添加控件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void simpleButton1_Click(object sender, System.EventArgs e)
+        {
+            LayoutControlItem item = null;
+            if (layoutControlGroup1.Items.Count <= 0)
+            {
+                item = layoutControlGroup1.AddItem();
+            }
+            else
+            {
+                item = layoutControlGroup1.AddItem(layoutControlGroup1.Items[layoutControlGroup1.Items.Count - 1], DevExpress.XtraLayout.Utils.InsertType.Top);
+            }
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Image = DevFormDemo.Properties.Resources.Logo;
+            item.Control = pictureBox;
+            item.MinSize = new Size(400, 200);
+            item.MaxSize = new Size(400, 200);
+            item.Size = new Size(400, 200);
+            item.TextVisible = false;
+        }
+
+        private void simpleButton3_Click(object sender, System.EventArgs e)
+        {
+            TabbedControlGroup tcg = layoutControl3.Root.AddTabbedGroup();
+
+            LayoutControlGroup lcg1 = tcg.AddTabPage("one");
+            LayoutControlItem lci11 = lcg1.AddItem();
+            lci11.Control = new TextEdit();
+            lci11.Text = "First:";
+            lci11.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            LayoutControlItem lci12 = lcg1.AddItem();
+            lci12.Control = new TextEdit();
+            lci12.Text = "Second:";
+            LayoutControlItem lci13 = lcg1.AddItem();
+            lci13.Control = new TextEdit();
+            lci13.Text = "Three:";
+            lci13.Move(lci12, InsertType.Right);
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +24,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             #region JObject遍历
-            string res = "{  \"error_code\": 0,  \"error_msg\": \"SUCCESS\",  \"log_id\": 3014595066,  \"timestamp\": 1527234617,  \"cached\": 0,  \"result\": {    \"face_token\": \"49d58eacd7811e463429a1ae10b42173\",    \"user_list\": [      {        \"group_id\": \"NR\",        \"user_id\": \"1028867728\",        \"user_info\": \"cactus0117\",        \"score\": 97.499450683594      },      {        \"group_id\": \"BR\",        \"user_id\": \"3456378901\",        \"user_info\": \"cactus0117\",        \"score\":89.499450683594      }    ]  }}";
+            //string res = "{  \"error_code\": 0,  \"error_msg\": \"SUCCESS\",  \"log_id\": 3014595066,  \"timestamp\": 1527234617,  \"cached\": 0,  \"result\": {    \"face_token\": \"49d58eacd7811e463429a1ae10b42173\",    \"user_list\": [      {        \"group_id\": \"NR\",        \"user_id\": \"1028867728\",        \"user_info\": \"cactus0117\",        \"score\": 97.499450683594      },      {        \"group_id\": \"BR\",        \"user_id\": \"3456378901\",        \"user_info\": \"cactus0117\",        \"score\":89.499450683594      }    ]  }}";
 
             //JObject obj = JObject.Parse(res);
 
@@ -71,13 +74,13 @@ namespace ConsoleApp1
 
 
             #region 定时器 Timers.Timer执行时间不精准
-            timer1 = new System.Timers.Timer(1); //设置时间间隔第一次1毫秒，之后更新间隔
-            timer1.Elapsed += Timer_Elapsed;
-            timer1.AutoReset = true; //每到指定时间Elapsed事件是触发一次（false），还是一直触发（true）
-            timer1.Enabled = true; //是否触发Elapsed事件
-            timer1.Start();
+            //timer1 = new System.Timers.Timer(1); //设置时间间隔第一次1毫秒，之后更新间隔
+            //timer1.Elapsed += Timer_Elapsed;
+            //timer1.AutoReset = true; //每到指定时间Elapsed事件是触发一次（false），还是一直触发（true）
+            //timer1.Enabled = true; //是否触发Elapsed事件
+            //timer1.Start();
 
-            timer2 = new System.Threading.Timer(new TimerCallback(Callback), new { arg = 1 }, 1 * 1000, 2 * 1000);
+            //timer2 = new System.Threading.Timer(new TimerCallback(Callback), new { arg = 1 }, 1 * 1000, 2 * 1000);
             #endregion
 
 
@@ -103,7 +106,8 @@ namespace ConsoleApp1
             #endregion
 
 
-            #region AutoResetEvent
+
+            #region AutoResetEvent Monitor
             //AutoResetEvent autoReset = new AutoResetEvent(true);
 
             //object monitorObj = new object();
@@ -157,6 +161,7 @@ namespace ConsoleApp1
             #endregion
 
 
+
             #region SemaphoreSlim（控制并发数量）
             //SemaphoreSlim semaphore = new SemaphoreSlim(4);
 
@@ -174,6 +179,7 @@ namespace ConsoleApp1
             //    UpdateValueAsync(mutex, $"Task{i}");
             //}
             #endregion
+
 
 
             #region CancellationTokenSource
@@ -204,6 +210,7 @@ namespace ConsoleApp1
             //Console.WriteLine("Task已停止");
 
             #endregion
+
 
 
             #region task异常捕获
@@ -255,9 +262,11 @@ namespace ConsoleApp1
             #endregion
 
 
+
             #region params
             //ParamsMethod(1, 2, 3);
             #endregion
+
 
 
             #region Reflect
@@ -267,9 +276,11 @@ namespace ConsoleApp1
             #endregion
 
 
+
             #region UTC
             //Console.WriteLine($"localTime:{DateTime.Now},ToUniversalTime:{DateTime.Now.ToUniversalTime()},ToLocalTime:{DateTime.Now.ToUniversalTime().ToLocalTime()}");
             #endregion
+
 
 
             #region ContinueWith问题
@@ -287,6 +298,7 @@ namespace ConsoleApp1
             #endregion 总结：StartNew类型的延续任务ContinueWith在遇到await关键字时直接执行。
 
 
+
             #region TaskCompletionSource 实现IO操作
             //Task.Run(async () =>
             //{
@@ -294,6 +306,7 @@ namespace ConsoleApp1
             //    Console.WriteLine($"TaskCompletionSource包装的Task执行结果长度：{taskCompleteRresult.Length}");
             //});
             #endregion
+
 
 
             #region 捕获异常
@@ -319,10 +332,70 @@ namespace ConsoleApp1
             //}
             #endregion
 
+
+
             #region ConfigureAwait(false) 1，防止死锁2，提高性能
             //DelayAsync();
             #endregion
 
+
+
+            #region 通过wps注册表路径打开word
+            string wordPath = @"D:/Test.doc";
+            //string wpsPath = @"D:\软件\Kingsoft\WPS Office\ksolaunch.exe";
+            string wpsPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wps.exe";
+            RegistryKey appPath = Registry.LocalMachine.OpenSubKey(wpsPath);
+            try
+            {
+                if (appPath != null)
+                {
+                    string exePath = appPath.GetValue("").ToString();
+                    if (File.Exists(exePath))
+                    {
+                        if (Process.Start(exePath, wordPath) != null)
+                        {
+                            Console.WriteLine("wps打开文件成功");
+                        }
+
+                        //通过命令打开wps
+                        //Process myprocess = new Process();
+                        //string param = $"/wps /w /fromksolaunch \"{wordPath}\"";
+                        //ProcessStartInfo startInfo = new ProcessStartInfo(wpsPath, param);
+                        //myprocess.StartInfo = startInfo;
+                        //myprocess.Start();
+                    }
+                    else
+                    {
+                        Console.WriteLine("读取的wps浏览器路径不存在");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("未能从注册表读取wps浏览器路径");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+
+            //if (File.Exists(wpsPath))
+            //{
+            //    Task.Factory.StartNew(() =>
+            //    {
+            //        Process myprocess = new Process();
+            //        string param = $"/wps /w /fromksolaunch \"{wordPath}\"";
+            //        ProcessStartInfo startInfo = new ProcessStartInfo(wpsPath, param);
+            //        myprocess.StartInfo = startInfo;
+            //        myprocess.Start();
+            //    });
+            //}
+            //else
+            //{
+            //    Console.WriteLine("wps未安装在默认路径");
+            //}
+            #endregion
             Console.Read();
         }
         #region 方法

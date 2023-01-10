@@ -2,7 +2,7 @@
 {
     public static class TaskTimeOut
     {
-        public static async Task<TResult> TimeoutAfter<TResult>(this Task<TResult> task, TimeSpan timeout)
+        public static async Task<TResult?> TimeoutAfter<TResult>(this Task<TResult?> task, TimeSpan timeout)
         {
             using (var timeoutCancellationTokenSource = new CancellationTokenSource())
             {
@@ -14,7 +14,7 @@
                 }
                 else
                 {
-                    throw new TimeoutException("The operation has timed out.");
+                    return default(TResult);
                 }
             }
         }
@@ -32,7 +32,7 @@
                 }
                 else
                 {
-                    throw new TimeoutException("The operation has timed out.");
+                    await Task.FromResult(-1);
                 }
             }
         }
