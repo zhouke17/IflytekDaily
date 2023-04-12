@@ -53,12 +53,18 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.base64Btn = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button15 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -287,11 +293,50 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.base64Btn);
+            this.panel6.Controls.Add(this.pictureBox1);
+            this.panel6.Controls.Add(this.button15);
+            this.panel6.Location = new System.Drawing.Point(0, 442);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(800, 298);
+            this.panel6.TabIndex = 11;
+            // 
+            // base64Btn
+            // 
+            this.base64Btn.Location = new System.Drawing.Point(713, 20);
+            this.base64Btn.Name = "base64Btn";
+            this.base64Btn.Size = new System.Drawing.Size(75, 23);
+            this.base64Btn.TabIndex = 2;
+            this.base64Btn.Text = "合并Base64";
+            this.base64Btn.UseVisualStyleBackColor = true;
+            this.base64Btn.Click += new System.EventHandler(this.base64Btn_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(209, 20);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(498, 261);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(60, 37);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(124, 23);
+            this.button15.TabIndex = 0;
+            this.button15.Text = "Application.Run";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 786);
+            this.Controls.Add(this.panel6);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
@@ -311,6 +356,8 @@
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -343,5 +390,9 @@
         private Button button11;
         private Button button13;
         private Button button14;
+        private Panel panel6;
+        private Button button15;
+        private PictureBox pictureBox1;
+        private Button base64Btn;
     }
 }

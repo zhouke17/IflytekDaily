@@ -965,11 +965,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kezhou3\\source\\repos\\PrismDemo\\PrismDemo.csproj",
+      "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\PrismDemo\\PrismDemo.csproj",
       "projectName": "PrismDemo",
-      "projectPath": "C:\\Users\\kezhou3\\source\\repos\\PrismDemo\\PrismDemo.csproj",
+      "projectPath": "D:\\source\\repos\\IflytekDaily\\PrismDemo\\PrismDemo.csproj",
       "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kezhou3\\source\\repos\\PrismDemo\\obj\\",
+      "outputPath": "D:\\source\\repos\\IflytekDaily\\PrismDemo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -979,21 +979,21 @@
         "net5.0-windows7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://www.nuget.org/api/v2/": {}
       },
       "frameworks": {
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
           "projectReferences": {
-            "C:\\Users\\kezhou3\\source\\repos\\ModuleA\\ModuleA.csproj": {
-              "projectPath": "C:\\Users\\kezhou3\\source\\repos\\ModuleA\\ModuleA.csproj"
+            "D:\\source\\repos\\IflytekDaily\\ModuleA\\ModuleA.csproj": {
+              "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleA\\ModuleA.csproj"
             },
-            "C:\\Users\\kezhou3\\source\\repos\\ModuleB\\ModuleB.csproj": {
-              "projectPath": "C:\\Users\\kezhou3\\source\\repos\\ModuleB\\ModuleB.csproj"
+            "D:\\source\\repos\\IflytekDaily\\ModuleB\\ModuleB.csproj": {
+              "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleB\\ModuleB.csproj"
             },
-            "C:\\Users\\kezhou3\\source\\repos\\ModuleC\\ModuleC.csproj": {
-              "projectPath": "C:\\Users\\kezhou3\\source\\repos\\ModuleC\\ModuleC.csproj"
+            "D:\\source\\repos\\IflytekDaily\\ModuleC\\ModuleC.csproj": {
+              "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleC\\ModuleC.csproj"
             }
           }
         }
@@ -1019,7 +1019,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -1031,7 +1032,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

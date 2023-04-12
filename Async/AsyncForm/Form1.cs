@@ -118,15 +118,177 @@ namespace AsyncForm
         }
         #endregion
 
+
+
         private async void button5_Click(object sender, EventArgs e)
         {
             int value;
             value = await GetNextValueAsync();
-
+            Console.WriteLine(value);
         }
+        private int asyncValue;
+        SemaphoreSlim mutex = new SemaphoreSlim(1);
         public async Task<int> GetNextValueAsync()
         {
-            return await Task.FromResult(new Random().Next(1, 100));
+            await mutex.WaitAsync().ConfigureAwait(false);
+            try
+            {
+                asyncValue = await Task.FromResult(asyncValue++);
+            }
+            catch (Exception ex)
+            { }
+            finally
+            {
+                mutex.Release();
+            }
+            return asyncValue;
+        }
+
+        private object monitorObj = new object();
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                if (Monitor.TryEnter(monitorObj, 2000))
+                {
+                    if (Monitor.Wait(monitorObj, 2000))
+                    {
+                        Console.WriteLine("2秒内成功获取到锁");
+                    }
+                    else
+                    {
+                        Console.WriteLine("2秒内未获取到锁");
+                    }
+                    Monitor.Exit(monitorObj);
+                }
+            });
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (Monitor.TryEnter(monitorObj, 2000))
+            {
+                Monitor.PulseAll(monitorObj);
+                Console.WriteLine("通知等待monitorObj锁的所有线程进入就绪队列，依次获取锁后执行");
+                Monitor.Exit(monitorObj);
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Monitor.Enter(monitorObj);
+            Monitor.Wait(monitorObj);//阻塞当前线程
+            Monitor.Exit(monitorObj);
+        }
+
+        private SpinLock _spinLock = new SpinLock();
+        int incrValue = 0;
+        private void button9_Click(object sender, EventArgs e)
+        {
+            spinLock();
+        }
+
+        private object lockObj = new object();
+        private void spinLock()
+        {
+            bool locked = false;
+            //_spinLock.Enter(ref locked);//获取锁
+            if (Monitor.TryEnter(lockObj))
+            {
+                incrValue++;  //安全的逻辑计算
+                Console.WriteLine(incrValue);
+                //if (locked) //释放锁
+                Monitor.Exit(lockObj);
+                //_spinLock.Exit();
+            }
+        }
+
+        private void Start()
+        {
+            var task = new Task(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(3));
+                Console.WriteLine("task.start()");
+            });
+            task.Start();
+            task.Wait();
+        }
+
+        private void Run()
+        {
+            var task = Task.Run(async () =>
+            {
+                await Task.Delay(TimeSpan.FromSeconds(3));
+                Console.WriteLine("task.run()");
+            });
+            task.Wait();
+        }
+
+        bool lockTaken = false;
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (Monitor.TryEnter(lockObj))
+            {
+                Thread.Sleep(10000);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 自己的写的AutoResetEvent
+    /// </summary>
+    public class AutoResetEventEx
+    {
+        /// <summary>
+        /// 内部的设置状态 
+        /// true  不等待信号
+        /// false 等待信号
+        /// </summary>
+        private bool _initialState = false;
+
+        /// <summary>
+        /// 内部锁
+        /// </summary>
+        private object _objLock = new object();
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="initialState">内部的设置状态</param>
+        public AutoResetEventEx(bool initialState)
+        {
+            this._initialState = initialState;
+        }
+
+        /// <summary>
+        /// 等待一个信号
+        /// </summary>
+        public void WaitOne()
+        {
+            if (!this._initialState)
+            {
+                lock (this._objLock)
+                {
+                    Monitor.Wait(this._objLock);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 发送一个信号
+        /// </summary>
+        public void Set()
+        {
+            if (!this._initialState)
+            {
+                this._initialState = true;
+
+                lock (this._objLock)
+                {
+                    Monitor.PulseAll(this._objLock);
+                }
+            }
         }
     }
 }

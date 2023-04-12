@@ -425,11 +425,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kezhou3\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp.csproj",
+      "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp.csproj",
       "projectName": "WinFormsApp",
-      "projectPath": "C:\\Users\\kezhou3\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp.csproj",
+      "projectPath": "D:\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp.csproj",
       "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kezhou3\\source\\repos\\IflytekDaily\\WinFormsApp\\obj\\",
+      "outputPath": "D:\\source\\repos\\IflytekDaily\\WinFormsApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",

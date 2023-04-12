@@ -1,8 +1,5 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections;
-using System.Diagnostics;
-using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,8 +10,6 @@ namespace ConsoleApp1
     class Program
     {
         #region 变量
-        private static DateTime audioTime;
-        private static DateTime inOrOutTime;
         private static int timer1Count = 0;
         private static int timer2Count = 0;
         private static System.Timers.Timer timer1;
@@ -108,55 +103,59 @@ namespace ConsoleApp1
 
 
             #region AutoResetEvent Monitor
-            //AutoResetEvent autoReset = new AutoResetEvent(true);
+            //AutoResetEvent autoReset = new AutoResetEvent(false);
 
             //object monitorObj = new object();
             //Task.Run(() =>
             //{
             //    for (int i = 0; i < 10; i++)
             //    {
-            //        autoReset.WaitOne(2000);//等待指定的时间，超时直接进入。
-            //        RegularExe(() =>
+            //        if (autoReset.WaitOne(2000))//等待指定的时间，超时离开。
             //        {
-            //            Console.WriteLine(i);
-            //        },
-            //        ref audioTime);//委托中传值易忽略变量值不变的问题
-            //        Console.WriteLine(audioTime.ToString());
+            //            RegularExe(() =>
+            //            {
+            //                Console.WriteLine(i);
+            //            },
+            //            ref audioTime);//委托中传值易忽略变量值不变的问题
+            //            Console.WriteLine(audioTime.ToString());
+            //        }
             //        autoReset.Set();
             //    }
-            //    for (int i = 0; i < 3; i++)
-            //    {
-            //        if (Monitor.TryEnter(monitorObj, 1000))//尝试在指定的时间内获取锁，超时后不再等待直接离开。
-            //        {
-            //            Console.WriteLine("1获得对象的排它锁");
-            //            Monitor.Exit(monitorObj);
-            //            Console.WriteLine("1释放对象的排它锁");
-            //        }
-            //    }
-            //});
-            //Task.Run(() =>
+            //for (int i = 0; i < 3; i++)
             //{
-            //    for (int i = 0; i < 10; i++)
+            //    if (Monitor.TryEnter(monitorObj, 1000))//尝试在指定的时间内获取锁，超时后不再等待直接离开。
             //    {
-            //        autoReset.WaitOne();//等待信号时长，约等于初始化时设置为True非终止状态；
-            //        RegularExe(() =>
-            //        {
-            //            Console.WriteLine(i);
-            //        }, ref inOrOutTime);//委托中传值易忽略变量值不变的问题
-            //        Console.WriteLine(audioTime.ToString());
-            //        autoReset.Set();
+            //        Console.WriteLine("1获得对象的排它锁");
+            //        Monitor.Exit(monitorObj);
+            //        Console.WriteLine("1释放对象的排它锁");
             //    }
-            //    for (int i = 0; i < 3; i++)
+            //}
+            //});
+            //System.Threading.Timer timer1 = new System.Threading.Timer(callback =>
+            //{
+            //    try
             //    {
-            //        if (Monitor.TryEnter(monitorObj))
+            //        if (autoReset.WaitOne(100))
             //        {
-            //            Console.WriteLine("2获得对象的排它锁");
-            //            Thread.Sleep(2000);
-            //            Monitor.Exit(monitorObj);
-            //            Console.WriteLine("2释放对象的排它锁");
+            //            Console.WriteLine("收到信号");
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("未收到信号");
             //        }
             //    }
-            //});
+            //    catch (Exception ex)
+            //    {
+
+            //    }
+            //}, null, 0, 2000);
+
+            //System.Threading.Timer timer2 = new System.Threading.Timer(callback =>
+            //{
+            //    if (timer2Count < 5)
+            //        autoReset.Set();
+            //    timer2Count++;
+            //}, null, 0, 1500);
 
             #endregion
 
@@ -341,43 +340,43 @@ namespace ConsoleApp1
 
 
             #region 通过wps注册表路径打开word
-            string wordPath = @"D:/Test.doc";
-            //string wpsPath = @"D:\软件\Kingsoft\WPS Office\ksolaunch.exe";
-            string wpsPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wps.exe";
-            RegistryKey appPath = Registry.LocalMachine.OpenSubKey(wpsPath);
-            try
-            {
-                if (appPath != null)
-                {
-                    string exePath = appPath.GetValue("").ToString();
-                    if (File.Exists(exePath))
-                    {
-                        if (Process.Start(exePath, wordPath) != null)
-                        {
-                            Console.WriteLine("wps打开文件成功");
-                        }
+            //string wordPath = @"D:/Test.doc";
+            ////string wpsPath = @"D:\软件\Kingsoft\WPS Office\ksolaunch.exe";
+            //string wpsPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wps.exe";
+            //RegistryKey appPath = Registry.LocalMachine.OpenSubKey(wpsPath);
+            //try
+            //{
+            //    if (appPath != null)
+            //    {
+            //        string exePath = appPath.GetValue("").ToString();
+            //        if (File.Exists(exePath))
+            //        {
+            //            if (Process.Start(exePath, wordPath) != null)
+            //            {
+            //                Console.WriteLine("wps打开文件成功");
+            //            }
 
-                        //通过命令打开wps
-                        //Process myprocess = new Process();
-                        //string param = $"/wps /w /fromksolaunch \"{wordPath}\"";
-                        //ProcessStartInfo startInfo = new ProcessStartInfo(wpsPath, param);
-                        //myprocess.StartInfo = startInfo;
-                        //myprocess.Start();
-                    }
-                    else
-                    {
-                        Console.WriteLine("读取的wps浏览器路径不存在");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("未能从注册表读取wps浏览器路径");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            //            //通过命令打开wps
+            //            //Process myprocess = new Process();
+            //            //string param = $"/wps /w /fromksolaunch \"{wordPath}\"";
+            //            //ProcessStartInfo startInfo = new ProcessStartInfo(wpsPath, param);
+            //            //myprocess.StartInfo = startInfo;
+            //            //myprocess.Start();
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine("读取的wps浏览器路径不存在");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("未能从注册表读取wps浏览器路径");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex);
+            //}
 
 
             //if (File.Exists(wpsPath))
@@ -396,6 +395,16 @@ namespace ConsoleApp1
             //    Console.WriteLine("wps未安装在默认路径");
             //}
             #endregion
+
+
+            var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+            var time2 = DateTime.Now.ToString();
+            var time3 = DateTime.Now;
+            var time4 = DateTime.Now.ToString("g");
+            Console.WriteLine(time);
+            Console.WriteLine(time2);
+            Console.WriteLine(time3);
+            Console.WriteLine(time4);
             Console.Read();
         }
         #region 方法
