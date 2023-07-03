@@ -42,14 +42,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
@@ -57,14 +49,24 @@
             this.base64Btn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button15 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.发送邮件 = new System.Windows.Forms.Button();
+            this.截取屏幕 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.课程选修的人数 = new System.Windows.Forms.Button();
+            this.选课数量 = new System.Windows.Forms.Button();
+            this.所有及格的课程对应的人 = new System.Windows.Forms.Button();
+            this.大于18岁的人 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -129,7 +131,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(275, 47);
+            this.button2.Location = new System.Drawing.Point(275, 35);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(149, 23);
             this.button2.TabIndex = 1;
@@ -186,83 +188,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.panel5);
-            this.panel4.Controls.Add(this.button8);
-            this.panel4.Controls.Add(this.button7);
-            this.panel4.Controls.Add(this.button6);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 243);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(800, 86);
-            this.panel4.TabIndex = 8;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.button9);
-            this.panel5.Controls.Add(this.button10);
-            this.panel5.Controls.Add(this.button11);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(800, 86);
-            this.panel5.TabIndex = 9;
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(399, 25);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(107, 44);
-            this.button9.TabIndex = 5;
-            this.button9.Text = "打开进程";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(228, 25);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(107, 44);
-            this.button10.TabIndex = 4;
-            this.button10.Text = "Task超时";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(60, 25);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(107, 44);
-            this.button11.TabIndex = 3;
-            this.button11.Text = "关闭进程树";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(0, 0);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 10;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(317, 25);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(107, 44);
-            this.button7.TabIndex = 4;
-            this.button7.Text = "Task超时";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(134, 25);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(107, 44);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "关闭进程树";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
             // button12
             // 
             this.button12.Location = new System.Drawing.Point(284, 372);
@@ -300,14 +225,14 @@
             this.panel6.Controls.Add(this.button15);
             this.panel6.Location = new System.Drawing.Point(0, 442);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(800, 298);
+            this.panel6.Size = new System.Drawing.Size(800, 183);
             this.panel6.TabIndex = 11;
             // 
             // base64Btn
             // 
-            this.base64Btn.Location = new System.Drawing.Point(713, 20);
+            this.base64Btn.Location = new System.Drawing.Point(659, 20);
             this.base64Btn.Name = "base64Btn";
-            this.base64Btn.Size = new System.Drawing.Size(75, 23);
+            this.base64Btn.Size = new System.Drawing.Size(103, 23);
             this.base64Btn.TabIndex = 2;
             this.base64Btn.Text = "合并Base64";
             this.base64Btn.UseVisualStyleBackColor = true;
@@ -315,15 +240,15 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(209, 20);
+            this.pictureBox1.Location = new System.Drawing.Point(142, 20);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(498, 261);
+            this.pictureBox1.Size = new System.Drawing.Size(498, 141);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(60, 37);
+            this.button15.Location = new System.Drawing.Point(12, 30);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(124, 23);
             this.button15.TabIndex = 0;
@@ -331,16 +256,120 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.richTextBox2);
+            this.groupBox2.Controls.Add(this.发送邮件);
+            this.groupBox2.Controls.Add(this.截取屏幕);
+            this.groupBox2.Location = new System.Drawing.Point(0, 249);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(800, 100);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "lock死锁";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(284, 4);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(218, 90);
+            this.richTextBox2.TabIndex = 2;
+            this.richTextBox2.Text = "";
+            // 
+            // 发送邮件
+            // 
+            this.发送邮件.Location = new System.Drawing.Point(153, 29);
+            this.发送邮件.Name = "发送邮件";
+            this.发送邮件.Size = new System.Drawing.Size(75, 23);
+            this.发送邮件.TabIndex = 1;
+            this.发送邮件.Text = "异步线程";
+            this.发送邮件.UseVisualStyleBackColor = true;
+            this.发送邮件.Click += new System.EventHandler(this.异步线程_Click);
+            // 
+            // 截取屏幕
+            // 
+            this.截取屏幕.Location = new System.Drawing.Point(12, 29);
+            this.截取屏幕.Name = "截取屏幕";
+            this.截取屏幕.Size = new System.Drawing.Size(91, 23);
+            this.截取屏幕.TabIndex = 0;
+            this.截取屏幕.Text = "主线程";
+            this.截取屏幕.UseVisualStyleBackColor = true;
+            this.截取屏幕.Click += new System.EventHandler(this.主线程_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button10);
+            this.groupBox3.Controls.Add(this.课程选修的人数);
+            this.groupBox3.Controls.Add(this.选课数量);
+            this.groupBox3.Controls.Add(this.所有及格的课程对应的人);
+            this.groupBox3.Controls.Add(this.大于18岁的人);
+            this.groupBox3.Location = new System.Drawing.Point(0, 631);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(800, 153);
+            this.groupBox3.TabIndex = 13;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Linq";
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(125, 23);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 4;
+            this.button10.Text = "button10";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // 课程选修的人数
+            // 
+            this.课程选修的人数.Location = new System.Drawing.Point(12, 130);
+            this.课程选修的人数.Name = "课程选修的人数";
+            this.课程选修的人数.Size = new System.Drawing.Size(75, 23);
+            this.课程选修的人数.TabIndex = 3;
+            this.课程选修的人数.Text = "课程选修的人数";
+            this.课程选修的人数.UseVisualStyleBackColor = true;
+            this.课程选修的人数.Click += new System.EventHandler(this.课程选修的人数_Click);
+            // 
+            // 选课数量
+            // 
+            this.选课数量.Location = new System.Drawing.Point(12, 93);
+            this.选课数量.Name = "选课数量";
+            this.选课数量.Size = new System.Drawing.Size(75, 23);
+            this.选课数量.TabIndex = 2;
+            this.选课数量.Text = "选课数量";
+            this.选课数量.UseVisualStyleBackColor = true;
+            this.选课数量.Click += new System.EventHandler(this.选课数量_Click);
+            // 
+            // 所有及格的课程对应的人
+            // 
+            this.所有及格的课程对应的人.Location = new System.Drawing.Point(12, 56);
+            this.所有及格的课程对应的人.Name = "所有及格的课程对应的人";
+            this.所有及格的课程对应的人.Size = new System.Drawing.Size(91, 23);
+            this.所有及格的课程对应的人.TabIndex = 1;
+            this.所有及格的课程对应的人.Text = "所有及格的课程对应的人";
+            this.所有及格的课程对应的人.UseVisualStyleBackColor = true;
+            this.所有及格的课程对应的人.Click += new System.EventHandler(this.所有及格的课程对应的人_Click);
+            // 
+            // 大于18岁的人
+            // 
+            this.大于18岁的人.Location = new System.Drawing.Point(12, 23);
+            this.大于18岁的人.Name = "大于18岁的人";
+            this.大于18岁的人.Size = new System.Drawing.Size(91, 23);
+            this.大于18岁的人.TabIndex = 0;
+            this.大于18岁的人.Text = "大于18岁的人";
+            this.大于18岁的人.UseVisualStyleBackColor = true;
+            this.大于18岁的人.Click += new System.EventHandler(this.大于18岁的人_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 786);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
-            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -354,10 +383,10 @@
             this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -379,20 +408,22 @@
         private Button button4;
         private Button button3;
         private Button button5;
-        private Panel panel4;
-        private Button button6;
-        private Button button7;
-        private Button button8;
-        private Panel panel5;
         private Button button12;
-        private Button button9;
-        private Button button10;
-        private Button button11;
         private Button button13;
         private Button button14;
         private Panel panel6;
         private Button button15;
         private PictureBox pictureBox1;
         private Button base64Btn;
+        private GroupBox groupBox2;
+        private Button 截取屏幕;
+        private Button 发送邮件;
+        private RichTextBox richTextBox2;
+        private GroupBox groupBox3;
+        private Button 大于18岁的人;
+        private Button button10;
+        private Button 课程选修的人数;
+        private Button 选课数量;
+        private Button 所有及格的课程对应的人;
     }
 }

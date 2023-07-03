@@ -6,7 +6,6 @@
       "version": "5.0.0"
     },
     "additionalProbingPaths": [
-      "C:\\Users\\kezhou3\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\kezhou3\\.nuget\\packages"
     ],
     "configProperties": {

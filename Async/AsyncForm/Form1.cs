@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,22 +16,64 @@ namespace AsyncForm
             InitializeComponent();
         }
 
-        #region 异步同步执行
-        private async void button1_Click(object sender, EventArgs e)
+
+        private static void TaskInfos(string name = "")
         {
-            for (int i = 0; i < 5; i++)
-            {
-                var res = await Task.Run(() => Form1.func());
-                this.BeginInvoke(new Action(() => { this.listBox1.Items.Add(res); }));
-            }
+            //获取正在运行的线程
+            Thread thread = Thread.CurrentThread;
+            //设置线程的名字
+            //thread.Name = name;//只能设置一次
+            Console.WriteLine(thread.Name);
+            Console.WriteLine(name);
+            //获取当前线程的唯一标识符
+            int id = thread.ManagedThreadId;
+            //获取当前线程的状态
+            System.Threading.ThreadState state = thread.ThreadState;
+            //获取当前线程的优先级
+            ThreadPriority priority = thread.Priority;
+            string strMsg = string.Format("Thread ID:{0}\n" + "Thread Name:{1}\n" +
+                "Thread State:{2}\n" + "Thread Priority:{3}\n", id, thread.Name,
+                state, priority);
+            Console.WriteLine(strMsg);
+            //执行耗时间耗资源的任务
+            Console.WriteLine(DateTime.Now);
         }
 
-        public static Task<int> func()
+
+        #region 异步同步执行(async,await 推荐安全的调用方式)
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            var res1 = await Task.Run(() => func());//防止func内部线程阻塞导致调用线程被阻塞，即安全的调用方式
+            this.BeginInvoke(new Action(() => { this.listBox1.Items.Add(res1); }));
+
+
+            //var res2 = await func();//默认切换调用线程的上下文
+            //this.listBox1.Items.Add(res2);
+
+
+            //var res3 = await func().ConfigureAwait(false);//不切换到调用线程的上下文(是否尝试将延续任务封送回原始上下文)
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
+            //this.BeginInvoke(new Action(() => { this.listBox1.Items.Add(res3); }));
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
+
+
+            //var res4 = func();
+            //this.listBox1.Items.Add(res4.Result);//阻塞式调用获取异步结果，导致死锁
+            //Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
+
+
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
+        }
+
+        public async Task<int> func()
         {
             Console.WriteLine("func开始执行");
-            Task.Run(() => Thread.Sleep(2000));
+            //Thread.Sleep(TimeSpan.FromSeconds(3)); //func内部线程阻塞导致调用线程被阻塞
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
+            await Task.Delay(TimeSpan.FromSeconds(3));
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
             Console.WriteLine("func结束执行");
-            return Task.FromResult(2);
+            return DateTime.Now.Day;
         }
         #endregion
 
@@ -94,6 +137,7 @@ namespace AsyncForm
         #endregion
 
 
+
         #region 线程安全的字典
         private static readonly object lockobj = new object();
         private void button4_Click(object sender, EventArgs e)
@@ -120,6 +164,7 @@ namespace AsyncForm
 
 
 
+        #region 信号量异步
         private async void button5_Click(object sender, EventArgs e)
         {
             int value;
@@ -143,7 +188,11 @@ namespace AsyncForm
             }
             return asyncValue;
         }
+        #endregion
 
+
+
+        #region Monitor用户态锁实现超时检测
         private object monitorObj = new object();
         private void button6_Click(object sender, EventArgs e)
         {
@@ -181,58 +230,93 @@ namespace AsyncForm
             Monitor.Wait(monitorObj);//阻塞当前线程
             Monitor.Exit(monitorObj);
         }
+        #endregion
 
-        private SpinLock _spinLock = new SpinLock();
-        int incrValue = 0;
+
+
+        #region AutoResetEvent 例子
         private void button9_Click(object sender, EventArgs e)
         {
-            spinLock();
-        }
-
-        private object lockObj = new object();
-        private void spinLock()
-        {
-            bool locked = false;
-            //_spinLock.Enter(ref locked);//获取锁
-            if (Monitor.TryEnter(lockObj))
+            // 创建AutoResetEvent对象
+            AutoResetEvent resetEvent = new AutoResetEvent(false);
+            // 创建计时器Thread3
+            Thread thread3 = new Thread(() =>
             {
-                incrValue++;  //安全的逻辑计算
-                Console.WriteLine(incrValue);
-                //if (locked) //释放锁
-                Monitor.Exit(lockObj);
-                //_spinLock.Exit();
-            }
-        }
-
-        private void Start()
-        {
-            var task = new Task(async () =>
-            {
-                await Task.Delay(TimeSpan.FromSeconds(3));
-                Console.WriteLine("task.start()");
+                // 等待5秒钟，然后释放AutoResetEvent
+                Thread.Sleep(5000);
+                resetEvent.Set();
             });
-            task.Start();
-            task.Wait();
-        }
 
-        private void Run()
-        {
-            var task = Task.Run(async () =>
+            // 创建生产者Thread1,用于生产产品
+            Thread producerThread = new Thread(() =>
             {
-                await Task.Delay(TimeSpan.FromSeconds(3));
-                Console.WriteLine("task.run()");
+                for (int i = 0; i < 10; i++)
+                {
+                    resetEvent.WaitOne();
+                    Console.WriteLine("Producer produced product #" + i);
+                    resetEvent.Set();
+                    /*  resetEvent.WaitOne();*/ // 等待消费者Thread2完成操作后才能继续生产产品
+                }
             });
-            task.Wait();
+
+            // 创建消费者Thread2,用于消费产品
+            Thread consumerThread = new Thread(() =>
+            {
+                // 在消费者线程开始时，等待生产者线程生产完所有产品后释放AutoResetEvent
+                //resetEvent.WaitOne();
+
+                for (int i = 0; i < 10; i++)
+                {
+                    resetEvent.WaitOne();
+                    Console.WriteLine("Consumer consumed product #" + i);
+                    resetEvent.Set();
+                }
+
+                // 当AutoResetEvent被释放时，通知生产者线程可以继续生产产品了
+                //resetEvent.Set();
+            });
+
+            // 启动生产者Thread1和消费者Thread2,以及计时器Thread3
+            producerThread.Start();
+            consumerThread.Start();
+            thread3.Start();
         }
 
-        bool lockTaken = false;
+
+        #endregion
+
+        #region Parallel并行
         private void button10_Click(object sender, EventArgs e)
         {
-            if (Monitor.TryEnter(lockObj))
+            //Parallel.For(0, 5, i => { Console.WriteLine("i=" + i); TaskInfos(); });
+            //Parallel.ForEach(new string[] { "0", "1", "2", "3", "4" }, j => { Console.WriteLine("j=" + j); TaskInfos(); });
+
+            // 将 JArray 转换为 List<int>
+            var jArray = JArray.Parse("[1, 2, 3]");
+            var list = jArray.ToObject<List<int>>();
+            Console.WriteLine(list[0]); // 输出：1
+
+
+            // 将 JToken 转换为 int 类型
+            var jobject = JToken.Parse(@"{""name"":""John Smith"",""age"":30}");
+            var age = jobject.Value<int>("age");
+            Console.WriteLine(age); // 输出：30
+
+
+            string res = "{\"success\":\"0\",\"msg\":\"\",\"data\":[{\"id\":null,\"ah\":null,\"ahdm\":null,\"litigantId\":null,\"litigantXh\":null,\"name\":\"李四\",\"ssdw\":\"被告\",\"telephone\":\"\",\"licenceId\":\"\",\"address\":null,\"litigantType\":\"法人\",\"litigantTypeCode\":null},{\"id\":null,\"ah\":null,\"ahdm\":null,\"litigantId\":null,\"litigantXh\":null,\"name\":\"张三\",\"ssdw\":\"原告\",\"telephone\":\"13111111111\",\"licenceId\":\"1234\",\"address\":null,\"litigantType\":\"自然人\",\"litigantTypeCode\":null}]}";
+            //var obj3 = JToken.Parse(res2).ToObject<dynamic>();
+            var obj = (dynamic)JObject.Parse(res);
+
+            List<string> list2 = new List<string>();
+            foreach (var item in obj.data)
             {
-                Thread.Sleep(10000);
+                string name = item.name;
+                list2.Add(name);
             }
+
         }
+        #endregion
+
     }
 
     /// <summary>

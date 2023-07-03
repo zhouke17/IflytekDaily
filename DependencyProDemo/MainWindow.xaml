@@ -21,7 +21,7 @@
         <Canvas Grid.Row="1">
             <Ellipse Fill="Red" Width="100" Height="60" local:AttachProperty.Angle="30"/>
             <Rectangle Fill="Blue" Width="80" Height="80" Canvas.Left="400" Canvas.Top="100" local:AttachProperty.Angle="50"/>
-            <Button Content="Hello" Canvas.Left="180" Canvas.Top="90" FontSize="40" local:AttachProperty.Angle="70"/>
+            <Button Content="Hello" Canvas.Left="180" Canvas.Top="90" FontSize="40" local:AttachProperty.Angle="90"/>
         </Canvas>
     </Grid>
 </Window>

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,32 +22,44 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             #region JObject遍历
-            //string res = "{  \"error_code\": 0,  \"error_msg\": \"SUCCESS\",  \"log_id\": 3014595066,  \"timestamp\": 1527234617,  \"cached\": 0,  \"result\": {    \"face_token\": \"49d58eacd7811e463429a1ae10b42173\",    \"user_list\": [      {        \"group_id\": \"NR\",        \"user_id\": \"1028867728\",        \"user_info\": \"cactus0117\",        \"score\": 97.499450683594      },      {        \"group_id\": \"BR\",        \"user_id\": \"3456378901\",        \"user_info\": \"cactus0117\",        \"score\":89.499450683594      }    ]  }}";
+            string res = "{  \"error_code\": 0,  \"error_msg\": \"SUCCESS\",  \"log_id\": 3014595066,  \"timestamp\": 1527234617,  \"cached\": 0,  \"result\": {    \"face_token\": \"49d58eacd7811e463429a1ae10b42173\",    \"user_list\": [      {        \"group_id\": \"NR\",        \"user_id\": \"1028867728\",        \"user_info\": \"cactus0117\",        \"score\": 97.499450683594      },      {        \"group_id\": \"BR\",        \"user_id\": \"3456378901\",        \"user_info\": \"cactus0117\",        \"score\":89.499450683594      }    ]  }}";
 
-            //JObject obj = JObject.Parse(res);
+            string res2 = "{\"success\":\"0\",\"msg\":\"\",\"data\":[{\"id\":null,\"ah\":null,\"ahdm\":null,\"litigantId\":null,\"litigantXh\":null,\"name\":\"李四\",\"ssdw\":\"被告\",\"telephone\":\"\",\"licenceId\":\"\",\"address\":null,\"litigantType\":\"法人\",\"litigantTypeCode\":null},{\"id\":null,\"ah\":null,\"ahdm\":null,\"litigantId\":null,\"litigantXh\":null,\"name\":\"张三\",\"ssdw\":\"原告\",\"telephone\":\"13111111111\",\"licenceId\":\"1234\",\"address\":null,\"litigantType\":\"自然人\",\"litigantTypeCode\":null}]}";
 
-            //var error_code = obj.Value<string>("error_code");
-            //var error_code2 = obj["error_code"].Value<string>();
-            //var error_code3 = obj["error_code"].ToString();
-            //Console.WriteLine($"三种JObject单层对象解析方式：{Environment.NewLine} error_code:{error_code}{Environment.NewLine}error_code2:{error_code2}{Environment.NewLine}error_code3:{error_code3}");
+            JObject obj = JObject.Parse(res);
+            var obj2 = JsonConvert.DeserializeObject<JObject>(res);
+            var obj3 = (dynamic)JObject.Parse(res2);
+
+            List<string> list = new List<string>();
+            foreach (var item in obj3.data)
+            {
+                var name = item.Value<string>("name");
+                list.Add(name);
+                list.Add(item.name);
+            }
+
+            var error_code = obj.Value<string>("error_code");//此种方式可避免空值引发异常
+            var error_code3 = obj["error_code"].ToString();
+            var error_code2 = obj["error_code"].Value<string>();
+            Console.WriteLine($"三种JObject单层对象解析方式：{Environment.NewLine} error_code:{error_code}{Environment.NewLine}error_code2:{error_code2}{Environment.NewLine}error_code3:{error_code3}");
 
 
-            //var face_token = obj["result"]["face_token"].Value<string>();
-            //var face_token2 = obj["result"].Value<string>("face_token");
-            //var face_token3 = ((dynamic)obj).result.face_token;
-            //Console.WriteLine($"三种JObject双层对象解析方式：{Environment.NewLine} face_token:{face_token}{Environment.NewLine}face_token2:{face_token2}{Environment.NewLine}face_token3:{face_token3}");
+            var face_token = obj["result"]["face_token"].Value<string>();
+            var face_token2 = obj["result"].Value<string>("face_token");
+            var face_token3 = ((dynamic)obj).result.face_token;
+            Console.WriteLine($"三种JObject双层对象解析方式：{Environment.NewLine} face_token:{face_token}{Environment.NewLine}face_token2:{face_token2}{Environment.NewLine}face_token3:{face_token3}");
 
 
-            //Console.WriteLine("转化成JArray后遍历");
-            //foreach (var item in obj["result"]["user_list"].Value<JArray>())
-            //{
-            //    Console.WriteLine($"{item["group_id"].Value<string>()}");
-            //}
-            //Console.WriteLine("直接遍历");
-            //foreach (var item in obj["result"]["user_list"])
-            //{
-            //    Console.WriteLine($"{item["group_id"].Value<string>()}");
-            //}
+            Console.WriteLine("转化成JArray后遍历");
+            foreach (var item in obj["result"]["user_list"].Value<JArray>())
+            {
+                Console.WriteLine($"{item["group_id"].Value<string>()}");
+            }
+            Console.WriteLine("直接遍历");
+            foreach (var item in obj["result"]["user_list"])
+            {
+                Console.WriteLine($"{item["group_id"].Value<string>()}");
+            }
             #endregion
 
 
@@ -397,16 +412,22 @@ namespace ConsoleApp1
             #endregion
 
 
-            var time = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-            var time2 = DateTime.Now.ToString();
-            var time3 = DateTime.Now;
-            var time4 = DateTime.Now.ToString("g");
-            Console.WriteLine(time);
-            Console.WriteLine(time2);
-            Console.WriteLine(time3);
-            Console.WriteLine(time4);
+            #region 运行bat文件
+            //Process proc = new Process();
+            //string a = @"D:\软件\GWQOcx\ZNXXJHZDService\ZNXXJHZDService.exe";
+            //proc.StartInfo.FileName = a.Replace("ZNXXJHZDService.exe", "run.bat");
+            //proc.StartInfo.UseShellExecute = false;//运行时隐藏dos窗口
+            //proc.StartInfo.CreateNoWindow = true;//运行时隐藏dos窗口
+            //proc.StartInfo.Verb = "runas";//设置该启动动作，会以管理员权限运行进程
+            //proc.Start();
+            //proc.WaitForExit();
+            #endregion
+
+
+
             Console.Read();
         }
+
         #region 方法
         static async Task UpdateValueAsync(SemaphoreSlim mutex, string name)
         {

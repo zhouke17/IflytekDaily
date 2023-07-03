@@ -1,8 +1,11 @@
-﻿using Microsoft.Office.Interop.Word;
+﻿using Prism.Commands;
 using System;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Threading;
 using System.Windows.Xps.Packaging;
 using WpfApp.WordContorl;
@@ -12,52 +15,80 @@ namespace WPFApp
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : System.Windows.Window
+    public partial class MainWindow : System.Windows.Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+        private bool isChecked;
+
+        public bool IsChecked
+        {
+            get
+            {
+                if (isChecked)
+                {
+                    this.PwTxTBox.Visibility = Visibility.Visible;
+                    this.PwBox.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    this.PwTxTBox.Visibility = Visibility.Collapsed;
+                    this.PwBox.Visibility = Visibility.Visible;
+                }
+                return isChecked;
+            }
+            set { isChecked = value; OnPropertyChanged(); }
+        }
+
+        public string Pwd
+        {
+            get { return (string)GetValue(PwdProperty); }
+            set { SetValue(PwdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Pwd.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PwdProperty =
+            DependencyProperty.Register("Pwd", typeof(string), typeof(MainWindow), new PropertyMetadata(default(string)));
+
+
+
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text", typeof(string), typeof(MainWindow), new PropertyMetadata(default(string)));
+
+
         private IWord word;
         private WordMainView WordMain;
         private string fileName;
+
+        public ICommand EnterCommand { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
             WordMain = new WordMainView();
             WordHost.Child = WordMain;
             //ConvertWordToXPS(@"D:\wordTest.doc");//利用DocumentViewer加载word：无法编辑
+            Text = "请输入文本";
+
+            EnterCommand = new DelegateCommand<string>(OnEnterCommand);
         }
 
-        private XpsDocument ConvertWordToXps1(string wordDocName, string xpsFilename)
+        private void OnEnterCommand(string obj)
         {
-            XpsDocument xpsDocument = null;
-
-            // Create a WordApplication and host word document
-            ApplicationClass wordApp = new ApplicationClass();
-            try
-            {
-                wordApp.Documents.Add(wordDocName);
-
-                // To Invisible the word document
-                wordApp.Application.Visible = false;
-
-                // Minimize the opened word document
-                wordApp.WindowState = WdWindowState.wdWindowStateMinimize;
-
-                Microsoft.Office.Interop.Word.Document doc = wordApp.ActiveDocument;
-
-                doc.SaveAs(xpsFilename, WdSaveFormat.wdFormatXPS);
-
-                xpsDocument = new XpsDocument(xpsFilename, FileAccess.ReadWrite);
-
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("发生错误，该错误消息  " + ex.ToString());
-            }
-            finally
-            {
-                wordApp.Documents.Close();
-                ((_Application)wordApp).Quit(WdSaveOptions.wdDoNotSaveChanges);
-            }
-            return xpsDocument;
+            System.Windows.MessageBox.Show("Enter");
         }
 
         private XpsDocument ConvertWordToXps2(string wordDocName, string xpsFilename)
@@ -67,22 +98,6 @@ namespace WPFApp
             document.Close();
 
             return new XpsDocument(xpsFilename, FileAccess.Read);
-        }
-        /// <summary>
-        /// 将word转换为XPS文件
-        /// </summary>
-        /// <param name="wordDocName"></param>
-        public void ConvertWordToXPS(string wordDocName)
-        {
-            string convertedXpsDoc = string.Concat(AppDomain.CurrentDomain.BaseDirectory, Guid.NewGuid().ToString(), ".xps");
-            XpsDocument xpsDocument = ConvertWordToXps2(wordDocName, convertedXpsDoc);
-            if (xpsDocument == null)
-            {
-                return;
-            }
-
-            //documentviewWord.Document = xpsDocument.GetFixedDocumentSequence();
-
         }
         /// <summary>
         /// 打开
@@ -109,6 +124,7 @@ namespace WPFApp
             }
         }
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
+
         /// <summary>
         /// 保存
         /// </summary>
@@ -151,6 +167,59 @@ namespace WPFApp
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             System.Windows.MessageBox.Show("Window_KeyDown");
+        }
+
+        /// <summary>
+        /// 输入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            editableBox.Visibility = Visibility.Visible;
+            readOnlyBlock.Visibility = Visibility.Collapsed;
+        }
+        /// <summary>
+        /// 完成输入
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            editableBox.Visibility = Visibility.Collapsed;
+            readOnlyBlock.Visibility = Visibility.Visible;
+
+            System.Windows.Forms.MessageBox.Show(this.Text);
+        }
+
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            button.Visibility = Visibility.Collapsed;
+        }
+
+        private void button_Click_4(object sender, RoutedEventArgs e)
+        {
+            button2.Visibility = Visibility.Collapsed;
+        }
+
+        private void OnPreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                //var textBox = (TextBox)sender;
+                //var binding = textBox.GetBindingExpression(TextBox.TextProperty);
+                //if (binding != null)
+                //{
+                //    // 执行命令并传递参数
+                //    binding.UpdateSource();
+                //}
+            }
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            new ImageList().Show();
         }
     }
 }

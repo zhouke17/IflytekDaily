@@ -30,3 +30,6 @@ D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.Generate
 D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.CoreCompileInputs.cache
 D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.exe
 D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.pdb
+D:\source\repos\IflytekDaily\Async\AsyncForm\bin\Debug\Newtonsoft.Json.dll
+D:\source\repos\IflytekDaily\Async\AsyncForm\bin\Debug\Newtonsoft.Json.xml
+D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.CopyComplete

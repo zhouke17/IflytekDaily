@@ -29,6 +29,8 @@ namespace 捷宇科技签字版
         private static readonly Object locker = new object();
         private static SignBoard_JieYu _instance = null;
 
+        public Action<string> ModeAction { get; set; }
+
         private Image signImg;
         private Image fingerImg;
         public static SignBoard_JieYu Instance
@@ -111,7 +113,7 @@ namespace 捷宇科技签字版
             jieyuSocketService.OnReceiveMessage -= jieyuSocketService_OnReceiveMessage;
             jieyuSocketService.OnReceiveMessage += jieyuSocketService_OnReceiveMessage;
 
-            var order = new { type = (int)OrderType.Init, projectCode = "U21FY+/orVlzg5lU+8MnDMGeFnoOA3tu2zcpo6SAg2QNncXmPazQ1XpS4s8wF8ZK40+fhppzPT49NOK5FBxL4lZbgjv1225Vm9QXYQRF+Tj1PP+niybIqTSBgDRv+1uVf3LnsuE5dNFNReBMY2m5mRzcUMET/kTtIG5t+w8KcIE=" };
+            var order = new { type = (int)OrderType.Init, projectCode = "sFDIxyb+W6VK5lWJbGqPaEaiLLGKOhCTEbezv4Y2UJreH5G+o2fXlp4n/9WD2tJQLf416VY7wWufYge3npVamUcwDwuSK5dg/U3YAUHpxamnlE1Qm5PPM4Ybd1dzR464PueyVUGGqCvyJfI1goxNITNYsYel4UMMr4PsvBOOVyo=" };
 
             jieyuSocketService.Send(JsonConvert.SerializeObject(order));
         }
@@ -167,18 +169,18 @@ namespace 捷宇科技签字版
                     if (obj["ret"].ToString() == "0")
                     {
                         SuccessFunc?.Invoke();
-                        if (SignType == SignType.Face)
-                        {
-                            //发送人脸核对命令
-                            var order = new { type = (int)OrderType.Face };
-                            jieyuSocketService.Send(JsonConvert.SerializeObject(order));
-                        }
-                        else
-                        {
-                            //发送签名命令
-                            var order = new { type = (int)OrderType.Signature, SignWidth = 300, LineWidth = 10 };
-                            jieyuSocketService.Send(JsonConvert.SerializeObject(order));
-                        }
+                        //if (SignType == SignType.Face)
+                        //{
+                        //    //发送人脸核对命令
+                        //    var order = new { type = (int)OrderType.Face };
+                        //    jieyuSocketService.Send(JsonConvert.SerializeObject(order));
+                        //}
+                        //else
+                        //{
+                        //    //发送签名命令
+                        //    var order = new { type = (int)OrderType.Signature, SignWidth = 300, LineWidth = 10 };
+                        //    jieyuSocketService.Send(JsonConvert.SerializeObject(order));
+                        //}
                     }
                     else
                     {
@@ -202,6 +204,42 @@ namespace 捷宇科技签字版
                     if (obj["ret"].ToString() != "0")
                     {
                         ShowErrorMessage(obj["ret"].ToString());
+                    }
+                }
+                else if (obj["type"].ToString() == Convert.ToString((int)OrderType.Mode))//设置模式
+                {
+                    if (obj["ret"].ToString() != "0")
+                    {
+                        ShowErrorMessage(obj["ret"].ToString());
+                    }
+                }
+                else if (obj["type"].ToString() == Convert.ToString((int)OrderType.Ip))//设置IP
+                {
+                    if (obj["ret"].ToString() != "0")
+                    {
+                        ShowErrorMessage(obj["ret"].ToString());
+                    }
+                }
+                else if (obj["type"].ToString() == Convert.ToString((int)OrderType.GetMode))//获取模式
+                {
+                    if (obj["ret"].ToString() != "0")
+                    {
+                        ShowErrorMessage(obj["ret"].ToString());
+                    }
+                    else
+                    {
+                        ModeAction?.Invoke(obj["ret"].ToString());
+                    }
+                }
+                else if (obj["type"].ToString() == Convert.ToString((int)OrderType.Confirm))//文档确认
+                {
+                    if (obj["ret"].ToString() != "0")
+                    {
+                        ShowErrorMessage(obj["ret"].ToString());
+                    }
+                    else
+                    {
+                        ModeAction?.Invoke(obj["ret"].ToString());
                     }
                 }
             }
@@ -261,6 +299,54 @@ namespace 捷宇科技签字版
             Action = action;
         }
 
+        public void StartSign()
+        {
+            //发送签名命令
+            var order = new { type = (int)OrderType.Signature, SignWidth = 300, LineWidth = 10 };
+            jieyuSocketService.Send(JsonConvert.SerializeObject(order));
+        }
+        public void StartSignAndFinger()
+        {
+            //发送签名捺印命令
+            var order = new { type = (int)OrderType.Signature, SignWidth = 300, LineWidth = 10 };
+            jieyuSocketService.Send(JsonConvert.SerializeObject(order));
+        }
+        public void StartFace()
+        {
+            //发送人脸核对命令
+            var order = new { type = (int)OrderType.Face };
+            jieyuSocketService.Send(JsonConvert.SerializeObject(order));
+        }
+        public void SetMode(long mode)
+        {
+            jieyuSocketService.Send(JsonConvert.SerializeObject(new { type = (int)OrderType.Mode, mode = mode }));
+        }
+
+        public void SetIp(string IpAddress)
+        {
+            jieyuSocketService.Send(JsonConvert.SerializeObject(new { type = (int)OrderType.Ip, IP = IpAddress }));
+        }
+
+        public void GetMode(Action<string> action)
+        {
+            this.ModeAction = action;
+            jieyuSocketService.Send(JsonConvert.SerializeObject(new { type = (int)OrderType.GetMode }));
+        }
+
+        public void GetIp(string IpAddress)
+        {
+            jieyuSocketService.Send(JsonConvert.SerializeObject(new { type = (int)OrderType.Ip, IP = IpAddress }));
+        }
+
+        public void StartElectronicSignature()
+        {
+            jieyuSocketService.Send(JsonConvert.SerializeObject(new
+            {
+                type = (int)OrderType.Confirm,
+                PDFPath = @"D:\Court\icourt5.2\code\bin\TempFile\Preview\(2023)京01民初051101号-1.pdf",
+                Timeout = "60"
+            }));
+        }
         /// <summary>  
         /// 合并图片，默认是垂直合并，图1在下，图2在上。
         /// </summary>  
@@ -365,7 +451,24 @@ namespace 捷宇科技签字版
         /// <summary>
         /// 人脸核对
         /// </summary>
-        Face = 122
+        Face = 122,
+        /// <summary>
+        /// 设置IP
+        /// </summary>
+        Ip = 72,
+        /// <summary>
+        /// 设置通信模式
+        /// </summary>
+        Mode = 59,
+        /// <summary>
+        /// 获取模式
+        /// </summary>
+        GetMode = 143,
+        /// <summary>
+        /// 文档确认
+        /// </summary>
+        Confirm = 13
+
     }
     public class UserInfo
     {

@@ -572,6 +572,9 @@ namespace WinFormsApp1
 
         #endregion
 
+
+        #region Base64图片合成
+
         private void button15_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Yes;
@@ -676,6 +679,136 @@ namespace WinFormsApp1
             {
                 throw;
             }
+        }
+
+        #endregion
+
+
+        #region lock死锁
+
+        private void 主线程_Click(object sender, EventArgs e)
+        {
+            byte[] bytes = Convert.FromBase64String(finger);
+            using (MemoryStream memStream = new MemoryStream(bytes))
+            {
+                fingerImg = Image.FromStream(memStream);
+                fingerImg = ResizeImage(fingerImg, new Size(200, 100));
+            };
+            SetPic(fingerImg, "sync");
+        }
+
+        private void 异步线程_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                byte[] bytes = Convert.FromBase64String(finger);
+                using (MemoryStream memStream = new MemoryStream(bytes))
+                {
+                    fingerImg = Image.FromStream(memStream);
+                    fingerImg = ResizeImage(fingerImg, new Size(200, 100));
+                };
+                SetPic(fingerImg, "async");
+            });
+        }
+
+        private static object lockObj = new object();
+        void SetPic(Image image, string form)
+        {
+            lock (lockObj)
+            {
+                for (int i = 0; i < 1000000000; i++)
+                {
+                    ++i;
+                }
+                richTextBox2.Text += form;
+                pictureBox1.Image = image;
+            }
+        }
+        #endregion
+
+
+        #region Linq
+        List<Person> list = new List<Person>();
+        List<Course> list2 = new List<Course>();
+
+        private void Init()
+        {
+            list.Add(new Person() { name = "小明", age = 19 });
+            list.Add(new Person() { name = "小红", age = 17 });
+            list.Add(new Person() { name = "小强", age = 20 });
+
+            list2.Add(new Course() { personName = "小明", name = "数学", score = 90 });
+            list2.Add(new Course() { personName = "小明", name = "英语", score = 56 });
+            list2.Add(new Course() { personName = "小红", name = "数学", score = 60 });
+            list2.Add(new Course() { personName = "小红", name = "英语", score = 100 });
+        }
+
+        #endregion
+
+        private void 大于18岁的人_Click(object sender, EventArgs e)
+        {
+            Init();
+            var res = list.Where(x => x.age > 18).ToList();
+        }
+
+        private void 所有及格的课程对应的人_Click(object sender, EventArgs e)
+        {
+            var res = from p in list
+                      from c in list2
+                      where p.name == c.personName && c.score >= 60
+                      select new { c, p };
+
+            var res1 = from p in list
+                       join c in list2 on p.name equals c.personName
+                       where c.score >= 60
+                       select new { c, p };
+
+
+            var res2 = list.SelectMany(c => list2, (person, course) => new { person, course }).Where(x => x.course.personName == x.person.name & x.course.score >= 60);
+
+            var res3 = list.Join(list2, p => p.name, c => c.personName, (p, c) => new { c, p }).Where(x => x.c.score >= 60);
+        }
+
+        private void 选课数量_Click(object sender, EventArgs e)
+        {
+            var res1 = list.GroupJoin(list2, p => p.name, c => c.personName, (p, ct) => new { p.name, count = ct.Count() });
+        }
+
+        private void 课程选修的人数_Click(object sender, EventArgs e)
+        {
+            var res1 = list2.GroupBy(c => c.personName).Select((sub) => new { proName = sub.Key, count = sub.Count() });
+        }
+
+
+        private void MeasureText1(PaintEventArgs e)
+        {
+            String text1 = "Measure this text";
+            Font arialBold = new Font("Arial", 12.0F);
+            Size textSize = TextRenderer.MeasureText(text1, arialBold);
+            TextRenderer.DrawText(e.Graphics, text1, arialBold,
+                new Rectangle(new Point(10, 10), textSize), Color.Red);
+        }
+    }
+
+    class Person
+    {
+        public string name;
+        public int age;
+        public override string ToString()
+        {
+            return "name: " + name + ", age: " + age;
+        }
+    }
+
+    class Course
+    {
+        public string personName;
+        public string name;
+        public int score;
+
+        public override string ToString()
+        {
+            return "name: " + name + ", score: " + score + ", personName: " + personName;
         }
     }
 }
