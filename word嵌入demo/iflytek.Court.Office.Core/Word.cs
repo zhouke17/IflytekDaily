@@ -26,7 +26,7 @@ namespace iflytek.Court.Office.Core
         /// <param name="height">高度</param>
         public void SetParent(IntPtr hwnd, int width, int height)
         {
-            wordApp.Hwnd = WindowNativeApi.FindWindow("Opusapp", wordApp.Instance.Caption);
+            wordApp.Hwnd = WindowNativeApi.FindWindow("Opusapp", "Test.doc - WPS 文字 - 兼容模式");
             WindowNativeApi.SetParent(wordApp.Hwnd, hwnd);
             Layout(width, height);
             //WindowNativeApi.SetWindowPos(wordInst.Hwnd, hwnd, 0, 0, width - 20, height - 20, WindowNativeApi.SWP_NOZORDER | WindowNativeApi.SWP_NOMOVE | WindowNativeApi.SWP_DRAWFRAME);
@@ -315,9 +315,12 @@ namespace iflytek.Court.Office.Core
                             var e = page.End - 1;
                             var s = local > 0 && local > page.Start ? local : e > 0 ? e : 0;
                             object range = wordApp.Document.Range(s, s);
-                            //object range = wordApp.Document.Range(page.End, page.End);
                             var shapes = wordApp.Document.InlineShapes.AddPicture(path, ref missing, ref missing, ref range);
-                            //shapes.AlternativeText = "sign";
+                            var shape = shapes.ConvertToShape();
+                            shape.Top = wordApp.Document.ActiveWindow.Document.PageSetup.PageHeight - shape.Height - 100;
+                            shape.Left = 50;
+                            shape.AlternativeText = "签名";
+                            shape.WrapFormat.Type = WdWrapType.wdWrapNone;
 
                             //以下方式将导致无法获取嵌入型的图片对象
                             //shapes.Select();

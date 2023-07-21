@@ -2,10 +2,12 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Management;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 using System.Windows.Xps.Packaging;
 using WpfApp.WordContorl;
@@ -221,5 +223,63 @@ namespace WPFApp
         {
             new ImageList().Show();
         }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PointingDevice");
+                foreach (ManagementObject device in searcher.Get())
+                {
+                    if (device["PNPDeviceID"].ToString().Contains("Touch"))
+                    {
+                        System.Windows.MessageBox.Show("This computer has a touch screen.");
+                        return;
+                    }
+                }
+                System.Windows.MessageBox.Show("This computer does not have a touch screen.");
+                TipBar.Success("", this.TopTips);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        public void ShowTips(TipsMassageType type, string msg, System.Windows.Controls.Panel panel)
+        {
+            var tip = new TipBar
+            {
+                Text = msg,
+                IsAutoClose = true
+            };
+
+            switch (type)
+            {
+                case TipsMassageType.Info:
+                    tip.BorderBrush = panel?.TryFindResource("Common.TipBar.Info_Border") as SolidColorBrush;
+                    tip.Foreground = panel?.TryFindResource("Common.TipBar.Info_Foreground") as SolidColorBrush;
+                    tip.Background = panel?.TryFindResource("Common.TipBar.Info_Background") as SolidColorBrush;
+                    break;
+                case TipsMassageType.Success:
+                    tip.BorderBrush = panel?.TryFindResource("Common.TipBar.Success_Border") as SolidColorBrush;
+                    tip.Foreground = panel?.TryFindResource("Common.TipBar.Success_Foreground") as SolidColorBrush;
+                    tip.Background = panel?.TryFindResource("Common.TipBar.Success_Background") as SolidColorBrush;
+                    break;
+                case TipsMassageType.Error:
+                    tip.BorderBrush = panel?.TryFindResource("Common.TipBar.Error_Border") as SolidColorBrush;
+                    tip.Foreground = panel?.TryFindResource("Common.TipBar.Error_Foreground") as SolidColorBrush;
+                    tip.Background = panel?.TryFindResource("Common.TipBar.Error_Background") as SolidColorBrush;
+                    break;
+            }
+
+            TipBar.Show(tip, panel);
+        }
+    }
+    public enum TipsMassageType
+    {
+        Info,
+        Success,
+        Error
     }
 }

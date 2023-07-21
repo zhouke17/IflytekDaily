@@ -198,16 +198,17 @@ namespace AsyncForm
         {
             Task.Run(() =>
             {
-                if (Monitor.TryEnter(monitorObj, 2000))
+                if (Monitor.TryEnter(monitorObj, 5000))
                 {
-                    if (Monitor.Wait(monitorObj, 2000))
-                    {
-                        Console.WriteLine("2秒内成功获取到锁");
-                    }
-                    else
-                    {
-                        Console.WriteLine("2秒内未获取到锁");
-                    }
+                    //if (Monitor.Wait(monitorObj, 5000))
+                    //{
+                    //    Console.WriteLine("5秒内成功获取到锁");
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("5秒内未获取到锁");
+                    //}
+                    Thread.Sleep(5000);
                     Monitor.Exit(monitorObj);
                 }
             });
@@ -226,9 +227,16 @@ namespace AsyncForm
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Monitor.Enter(monitorObj);
-            Monitor.Wait(monitorObj);//阻塞当前线程
-            Monitor.Exit(monitorObj);
+            //Monitor.Enter(monitorObj);
+            //Monitor.Wait(monitorObj);//阻塞当前主线程
+            //Monitor.Exit(monitorObj);
+
+            Task.Run(() =>
+            {
+                Monitor.Enter(monitorObj);
+                Console.WriteLine("获取到monitorObj锁");
+                Monitor.Exit(monitorObj);
+            });
         }
         #endregion
 
@@ -317,6 +325,23 @@ namespace AsyncForm
         }
         #endregion
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            AutoResetEvent resetEvent = new AutoResetEvent(true);
+            Mutex mutex = new Mutex();
+            for (int i = 0; i < 3; i++)
+            {
+                resetEvent.WaitOne();
+                //mutex.WaitOne();
+                Thread newThread = new Thread(() =>
+                {
+                    TaskInfos($"Thread{i + 1}");
+                });
+                newThread.Start();
+                resetEvent.Set();
+                //mutex.ReleaseMutex();
+            }
+        }
     }
 
     /// <summary>

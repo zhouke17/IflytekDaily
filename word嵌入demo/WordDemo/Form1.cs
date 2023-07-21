@@ -35,7 +35,7 @@ namespace WordDemo
 
             EasyOp.TryDo(3, () =>
             {
-                word.OpenFile(@"D:\wordTest.doc");
+                word.OpenFile(@"D:\Test.doc");
             });
 
             Console.WriteLine($"{DateTime.Now:HH:mm:ss.ffff}打开文件End");
@@ -238,6 +238,41 @@ namespace WordDemo
         private void button3_Click(object sender, EventArgs e)
         {
             word.RemovePictures();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // WPS Office的安装路径，根据实际情况修改
+            string wpsPath = @"D:\软件\wps\WPS Office\10.8.2.7119\office6\wps.exe";
+
+            // 要打开的Word文档路径，根据实际情况修改
+            string documentPath = @"D:\Test.doc";
+
+            Process myprocess = new Process();
+            string args = $"/wps /w /fromksolaunch \"{documentPath}\"";
+            ProcessStartInfo startInfo = new ProcessStartInfo(wpsPath, args);
+            myprocess.StartInfo = startInfo;
+            myprocess.Start();
+            //Thread thread = new Thread(() => RunWps(wpsPath, documentPath));
+            //thread.Start();
+        }
+        static void RunWps(string wpsPath, string documentPath)
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = wpsPath;
+            process.StartInfo.Arguments = $"/e \"{documentPath}\""; // 使用/e参数打开文档，将文件路径作为参数传递给WPS Office
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.CreateNoWindow = false;
+
+            process.Start();
+
+            // 从WPS Office进程的标准输出中读取结果
+            string result = process.StandardOutput.ReadToEnd();
+
+            process.WaitForExit();
+
+            Console.WriteLine(result); // 在控制台输出结果，可以根据需要进行处理或显示
         }
     }
 }

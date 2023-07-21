@@ -38,3 +38,13 @@ C:\Users\kezhou3\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.C
 C:\Users\kezhou3\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.dll
 C:\Users\kezhou3\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.pdb
 C:\Users\kezhou3\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.csproj.AssemblyReference.cache
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\bin\Debug\iflytek.Court.Office.Core.dll
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\bin\Debug\iflytek.Court.Office.Core.pdb
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\bin\Debug\Newtonsoft.Json.dll
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\bin\Debug\Newtonsoft.Json.xml
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.csproj.AssemblyReference.cache
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.csproj.CoreCompileInputs.cache
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.csproj.CopyComplete
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.dll
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\obj\Debug\iflytek.Court.Office.Core.pdb
+D:\source\repos\IflytekDaily\word嵌入demo\iflytek.Court.Office.Core\bin\Debug\Microsoft.Office.Interop.Word.dll

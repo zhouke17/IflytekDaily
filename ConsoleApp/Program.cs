@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace ConsoleApp1
             {
                 var name = item.Value<string>("name");
                 list.Add(name);
-                list.Add(item.name);
+                //list.Add(item.name);//不可直接add
             }
 
             var error_code = obj.Value<string>("error_code");//此种方式可避免空值引发异常
@@ -424,6 +425,16 @@ namespace ConsoleApp1
             #endregion
 
 
+
+            #region linq + split包含空字符串
+            string cbr = "测试005,cs005;测试227,test227;童强-法官,qiangtong2;";
+            Console.WriteLine("cbr第一个元素组成的集合：" + string.Join(",", cbr.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(x => x.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0])));
+            Console.WriteLine(string.Join("|", cbr.Split(';')));
+            foreach (var item in cbr.Split(';'))
+            {
+                Console.WriteLine("split子元素：" + item + "\n");
+            }
+            #endregion
 
             Console.Read();
         }
