@@ -1,0 +1,16 @@
+D:\Github\IflytekCode\ScreenShotWPF\bin\Debug\ScreenShotWPF.exe.config
+D:\Github\IflytekCode\ScreenShotWPF\bin\Debug\ScreenShotWPF.exe
+D:\Github\IflytekCode\ScreenShotWPF\bin\Debug\ScreenShotWPF.pdb
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF.csproj.AssemblyReference.cache
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF.csproj.SuggestedBindingRedirects.cache
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\MainWindow.g.cs
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\App.g.cs
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF_MarkupCompile.cache
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF_MarkupCompile.lref
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\MainWindow.baml
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF.g.resources
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF.Properties.Resources.resources
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF.csproj.GenerateResource.cache
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF.csproj.CoreCompileInputs.cache
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF.exe
+D:\Github\IflytekCode\ScreenShotWPF\obj\Debug\ScreenShotWPF.pdb

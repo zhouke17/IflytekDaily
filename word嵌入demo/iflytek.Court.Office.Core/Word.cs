@@ -26,7 +26,7 @@ namespace iflytek.Court.Office.Core
         /// <param name="height">高度</param>
         public void SetParent(IntPtr hwnd, int width, int height)
         {
-            wordApp.Hwnd = WindowNativeApi.FindWindow("Opusapp", "Test.doc - WPS 文字 - 兼容模式");
+            wordApp.Hwnd = WindowNativeApi.FindWindow("Opusapp", "");
             WindowNativeApi.SetParent(wordApp.Hwnd, hwnd);
             Layout(width, height);
             //WindowNativeApi.SetWindowPos(wordInst.Hwnd, hwnd, 0, 0, width - 20, height - 20, WindowNativeApi.SWP_NOZORDER | WindowNativeApi.SWP_NOMOVE | WindowNativeApi.SWP_DRAWFRAME);

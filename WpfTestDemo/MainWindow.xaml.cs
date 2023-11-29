@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WpfTestDemo.MyRouteEvent;
 
 namespace WpfTestDemo
 {
@@ -40,15 +41,15 @@ namespace WpfTestDemo
 
 
 
-        public string PassWord
+        public string MyPassWord
         {
-            get { return (string)GetValue(PassWordProperty); }
-            set { SetValue(PassWordProperty, value); }
+            get { return (string)GetValue(MyPassWordProperty); }
+            set { SetValue(MyPassWordProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for PassWord.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PassWordProperty =
-            DependencyProperty.Register("PassWord", typeof(string), typeof(MainWindow), new PropertyMetadata(""));
+        public static readonly DependencyProperty MyPassWordProperty =
+            DependencyProperty.Register("MyPassWord", typeof(string), typeof(MainWindow), new PropertyMetadata(""));
 
 
         #endregion
@@ -57,8 +58,33 @@ namespace WpfTestDemo
         {
             InitializeComponent();
             this.DataContext = this;
+            this.RootGrid.AddHandler(CornerButton.ClickEvent, new RoutedEventHandler(CornerButton_Click));//添加内置路由事件的路由处理程序
+
+            this.RootGrid.AddHandler(TimeButton.ReportTimeEvent, new RoutedEventHandler(RootEvent_Listener));//添加自定义路由事件的路由处理程序
+
+            //this.moveRectAnimation.Begin(); // 开始动画
+        }
+        private void Window_unLoaded(object sender, RoutedEventArgs e)
+        {
+            //browser?.Dispose();
+            //engine?.Dispose();
+        }
+        private void RootEvent_Listener(object sender, RoutedEventArgs e)
+        {
+            var args = e as ReportTimeEventArgs;
+            var originalSource = $"VisualTree start point：{(args.OriginalSource as FrameworkElement).Name}， Type is ：{args.OriginalSource.GetType().Name}";
+
+            var source = $"LogicalTree start point：{(args.Source as FrameworkElement).Name}， Type is ：{args.Source.GetType().Name}";
+
+
+            MessageBox.Show($"{args.ClickTime.ToLocalTime()}\r\n{originalSource}\r\n{source}");
+
         }
 
+        private void CornerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show((e.OriginalSource as FrameworkElement).Name);
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -101,6 +127,31 @@ namespace WpfTestDemo
         private void pwdBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             //PassWord = pwdBox.Password;
+        }
+
+        private void stackPanel_ReportTime(object sender, ReportTimeEventArgs e)
+        {
+            var originalSource = $"VisualTree start point：{(e.OriginalSource as FrameworkElement).Name}， Type is ：{e.OriginalSource.GetType().Name}";
+
+            var source = $"LogicalTree start point：{(e.Source as FrameworkElement).Name}， Type is ：{e.Source.GetType().Name}";
+
+
+            MessageBox.Show($"{e.ClickTime.ToLocalTime()}\r\n{originalSource}\r\n{source}");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShowPwd_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"PassWord绑定源值：{MyPassWord}");
+        }
+
+        private void stackPanel_ReportTime(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

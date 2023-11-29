@@ -36,15 +36,17 @@ namespace AsyncForm
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button9 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.Monitor2 = new System.Windows.Forms.Button();
+            this.Monitor = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.MonitorWait = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button10 = new System.Windows.Forms.Button();
+            this.cpu爆炸 = new System.Windows.Forms.Button();
+            this.内存溢出 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -103,8 +105,8 @@ namespace AsyncForm
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button9);
-            this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.Monitor2);
+            this.groupBox2.Controls.Add(this.Monitor);
             this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.button3);
@@ -127,25 +129,25 @@ namespace AsyncForm
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // button7
+            // Monitor2
             // 
-            this.button7.Location = new System.Drawing.Point(24, 416);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(148, 23);
-            this.button7.TabIndex = 8;
-            this.button7.Text = "Monitor2";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.Monitor2.Location = new System.Drawing.Point(24, 416);
+            this.Monitor2.Name = "Monitor2";
+            this.Monitor2.Size = new System.Drawing.Size(148, 23);
+            this.Monitor2.TabIndex = 8;
+            this.Monitor2.Text = "MonitorPulseAll";
+            this.Monitor2.UseVisualStyleBackColor = true;
+            this.Monitor2.Click += new System.EventHandler(this.MonitorPulseAll_Click);
             // 
-            // button6
+            // Monitor
             // 
-            this.button6.Location = new System.Drawing.Point(24, 365);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(148, 23);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "Monitor";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.Monitor.Location = new System.Drawing.Point(24, 365);
+            this.Monitor.Name = "Monitor";
+            this.Monitor.Size = new System.Drawing.Size(148, 23);
+            this.Monitor.TabIndex = 7;
+            this.Monitor.Text = "Monitor";
+            this.Monitor.UseVisualStyleBackColor = true;
+            this.Monitor.Click += new System.EventHandler(this.Monitor_Click);
             // 
             // button5
             // 
@@ -177,21 +179,23 @@ namespace AsyncForm
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button8
+            // MonitorWait
             // 
-            this.button8.Location = new System.Drawing.Point(27, 36);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(101, 23);
-            this.button8.TabIndex = 6;
-            this.button8.Text = "Monitor.Wait";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.MonitorWait.Location = new System.Drawing.Point(27, 36);
+            this.MonitorWait.Name = "MonitorWait";
+            this.MonitorWait.Size = new System.Drawing.Size(101, 23);
+            this.MonitorWait.TabIndex = 6;
+            this.MonitorWait.Text = "MonitorWait";
+            this.MonitorWait.UseVisualStyleBackColor = true;
+            this.MonitorWait.Click += new System.EventHandler(this.MonitorWait_Click);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cpu爆炸);
+            this.groupBox3.Controls.Add(this.内存溢出);
             this.groupBox3.Controls.Add(this.button11);
             this.groupBox3.Controls.Add(this.button10);
-            this.groupBox3.Controls.Add(this.button8);
+            this.groupBox3.Controls.Add(this.MonitorWait);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox3.Location = new System.Drawing.Point(340, 0);
             this.groupBox3.Name = "groupBox3";
@@ -200,15 +204,25 @@ namespace AsyncForm
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "groupBox3";
             // 
-            // button10
+            // cpu爆炸
             // 
-            this.button10.Location = new System.Drawing.Point(27, 84);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 7;
-            this.button10.Text = "Parallel";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.cpu爆炸.Location = new System.Drawing.Point(24, 239);
+            this.cpu爆炸.Name = "cpu爆炸";
+            this.cpu爆炸.Size = new System.Drawing.Size(75, 23);
+            this.cpu爆炸.TabIndex = 10;
+            this.cpu爆炸.Text = "Cpu爆炸";
+            this.cpu爆炸.UseVisualStyleBackColor = true;
+            this.cpu爆炸.Click += new System.EventHandler(this.cpu爆炸_Click);
+            // 
+            // 内存溢出
+            // 
+            this.内存溢出.Location = new System.Drawing.Point(24, 193);
+            this.内存溢出.Name = "内存溢出";
+            this.内存溢出.Size = new System.Drawing.Size(75, 23);
+            this.内存溢出.TabIndex = 9;
+            this.内存溢出.Text = "内存溢出";
+            this.内存溢出.UseVisualStyleBackColor = true;
+            this.内存溢出.Click += new System.EventHandler(this.内存溢出_Click);
             // 
             // button11
             // 
@@ -219,6 +233,16 @@ namespace AsyncForm
             this.button11.Text = "线程间同步";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(27, 84);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 7;
+            this.button10.Text = "Parallel";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // Form1
             // 
@@ -249,13 +273,15 @@ namespace AsyncForm
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button Monitor;
+        private System.Windows.Forms.Button Monitor2;
+        private System.Windows.Forms.Button MonitorWait;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button 内存溢出;
+        private System.Windows.Forms.Button cpu爆炸;
     }
 }
 

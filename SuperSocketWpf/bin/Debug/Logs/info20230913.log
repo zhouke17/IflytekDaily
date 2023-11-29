@@ -1,0 +1,27 @@
+﻿2023-09-13 11:10:11,932 [1] INFO  AppServer-21653700 - The server instance AppServer-21653700 has been started!
+2023-09-13 11:10:21,950 [5] INFO  AppServer-21653700 - Session: 2bb115b4-e1df-4330-801e-c34111d23a33/10.4.125.10:57371
+A new session connected!
+2023-09-13 11:13:29,069 [1] INFO  AppServer-21653700 - The server instance AppServer-21653700 has been started!
+2023-09-13 11:13:36,873 [5] INFO  AppServer-21653700 - Session: 96008ee0-a12d-45ea-95e1-5f3132dba6d0/10.4.125.10:57424
+A new session connected!
+2023-09-13 11:21:55,490 [1] INFO  AppServer-21653700 - The server instance AppServer-21653700 has been started!
+2023-09-13 11:21:59,409 [5] INFO  AppServer-21653700 - Session: 503dd639-0fb1-465c-a19f-0fcecf8fd930/10.4.125.10:57627
+A new session connected!
+2023-09-13 11:22:00,177 [3] INFO  AppServer-21653700 - Session: 503dd639-0fb1-465c-a19f-0fcecf8fd930/10.4.125.10:57627
+This session was closed for ClientClosing!
+2023-09-13 11:22:24,231 [5] INFO  AppServer-21653700 - Session: 6650c869-c677-41fa-9807-89e2731a4b7b/10.4.125.10:57633
+A new session connected!
+2023-09-13 11:22:32,840 [3] INFO  AppServer-21653700 - Session: 6650c869-c677-41fa-9807-89e2731a4b7b/10.4.125.10:57633
+This session was closed for ClientClosing!
+2023-09-13 11:22:34,140 [5] INFO  AppServer-21653700 - Session: 535d7bb4-55e3-4ad8-8c13-2b12e21ac262/10.4.125.10:57638
+A new session connected!
+2023-09-13 11:26:02,273 [3] INFO  AppServer-21653700 - Session: 535d7bb4-55e3-4ad8-8c13-2b12e21ac262/10.4.125.10:57638
+This session was closed for SocketError!
+2023-09-13 11:26:54,718 [11] INFO  AppServer-21653700 - Session: f6feed7f-da03-4498-9bcf-eedec86a145d/10.4.125.10:57703
+A new session connected!
+2023-09-13 11:28:16,606 [3] INFO  AppServer-21653700 - Session: f6feed7f-da03-4498-9bcf-eedec86a145d/10.4.125.10:57703
+This session was closed for SocketError!
+2023-09-13 11:34:02,951 [22] INFO  AppServer-21653700 - Session: b65c4ba1-972a-4543-a5dc-ac9201a1ef14/10.4.125.10:57985
+A new session connected!
+2023-09-13 14:27:03,860 [3] INFO  AppServer-21653700 - Session: b65c4ba1-972a-4543-a5dc-ac9201a1ef14/10.4.125.10:57985
+This session was closed for SocketError!

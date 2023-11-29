@@ -153,6 +153,15 @@
             "rid": "win"
           }
         }
+      },
+      "InteractivePictureBox/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/InteractivePictureBox.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/InteractivePictureBox.dll": {}
+        }
       }
     }
   },
@@ -410,11 +419,17 @@
         "system.management.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "InteractivePictureBox/1.0.0": {
+      "type": "project",
+      "path": "InteractivePictureBox/InteractivePictureBox.csproj",
+      "msbuildProject": "InteractivePictureBox/InteractivePictureBox.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "Autoupdater.NET.Official >= 1.7.6",
+      "InteractivePictureBox >= 1.0.0",
       "Newtonsoft.Json >= 13.0.1",
       "System.Management >= 6.0.0"
     ]
@@ -425,11 +440,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp.csproj",
+      "projectUniqueName": "D:\\Github\\IflytekCode\\WinFormsApp\\WinFormsApp.csproj",
       "projectName": "WinFormsApp",
-      "projectPath": "D:\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp.csproj",
+      "projectPath": "D:\\Github\\IflytekCode\\WinFormsApp\\WinFormsApp.csproj",
       "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-      "outputPath": "D:\\source\\repos\\IflytekDaily\\WinFormsApp\\obj\\",
+      "outputPath": "D:\\Github\\IflytekCode\\WinFormsApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -445,7 +460,11 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Github\\IflytekCode\\WinFormsApp\\InteractivePictureBox\\InteractivePictureBox.csproj": {
+              "projectPath": "D:\\Github\\IflytekCode\\WinFormsApp\\InteractivePictureBox\\InteractivePictureBox.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -22,8 +22,6 @@ C:\Users\kezhou3\source\repos\IflytekDaily\AsyncForm\obj\Debug\AsyncForm.pdb
 D:\source\repos\IflytekDaily\Async\AsyncForm\bin\Debug\AsyncForm.exe.config
 D:\source\repos\IflytekDaily\Async\AsyncForm\bin\Debug\AsyncForm.exe
 D:\source\repos\IflytekDaily\Async\AsyncForm\bin\Debug\AsyncForm.pdb
-D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.AssemblyReference.cache
-D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.SuggestedBindingRedirects.cache
 D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.Form1.resources
 D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.Properties.Resources.resources
 D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.GenerateResource.cache
@@ -33,3 +31,4 @@ D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.pdb
 D:\source\repos\IflytekDaily\Async\AsyncForm\bin\Debug\Newtonsoft.Json.dll
 D:\source\repos\IflytekDaily\Async\AsyncForm\bin\Debug\Newtonsoft.Json.xml
 D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.CopyComplete
+D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csprojAssemblyReference.cache

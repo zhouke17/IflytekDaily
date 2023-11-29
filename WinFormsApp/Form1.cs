@@ -13,6 +13,8 @@ namespace WinFormsApp1
         {
             //Initialize();
             InitializeComponent();
+            listBox1.SelectedIndex = 0;
+
         }
 
         #region 屏蔽消息
@@ -276,6 +278,7 @@ namespace WinFormsApp1
         private static extern void DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS margin);
         #endregion
 
+
         #region 打开Notepad.exe 并且输入文本
         private void button1_Click(object sender, EventArgs e)
         {
@@ -334,6 +337,7 @@ namespace WinFormsApp1
         }
         #endregion
 
+
         #region 弹窗
         private void button3_Click(object sender, EventArgs e)
         {
@@ -370,6 +374,7 @@ namespace WinFormsApp1
 
         #endregion
 
+
         #region 关闭进程
         private void button6_Click(object sender, EventArgs e)
         {
@@ -392,6 +397,7 @@ namespace WinFormsApp1
             }
         }
         #endregion
+
 
         #region 超时
         private async void button7_Click(object sender, EventArgs e)
@@ -733,9 +739,9 @@ namespace WinFormsApp1
 
         private void Init()
         {
-            list.Add(new Person() { name = "小明", age = 19 });
-            list.Add(new Person() { name = "小红", age = 17 });
-            list.Add(new Person() { name = "小强", age = 20 });
+            list.Add(new Person() { Name = "小明", Age = 19 });
+            list.Add(new Person() { Name = "小红", Age = 17 });
+            list.Add(new Person() { Name = "小强", Age = 20 });
 
             list2.Add(new Course() { personName = "小明", name = "数学", score = 90 });
             list2.Add(new Course() { personName = "小明", name = "英语", score = 56 });
@@ -743,35 +749,34 @@ namespace WinFormsApp1
             list2.Add(new Course() { personName = "小红", name = "英语", score = 100 });
         }
 
-        #endregion
 
         private void 大于18岁的人_Click(object sender, EventArgs e)
         {
             Init();
-            var res = list.Where(x => x.age > 18).ToList();
+            var res = list.Where(x => x.Age > 18).ToList();
         }
 
         private void 所有及格的课程对应的人_Click(object sender, EventArgs e)
         {
             var res = from p in list
                       from c in list2
-                      where p.name == c.personName && c.score >= 60
+                      where p.Name == c.personName && c.score >= 60
                       select new { c, p };
 
             var res1 = from p in list
-                       join c in list2 on p.name equals c.personName
+                       join c in list2 on p.Name equals c.personName
                        where c.score >= 60
                        select new { c, p };
 
 
-            var res2 = list.SelectMany(c => list2, (person, course) => new { person, course }).Where(x => x.course.personName == x.person.name & x.course.score >= 60);
+            var res2 = list.SelectMany(c => list2, (person, course) => new { person, course }).Where(x => x.course.personName == x.person.Name & x.course.score >= 60);
 
-            var res3 = list.Join(list2, p => p.name, c => c.personName, (p, c) => new { c, p }).Where(x => x.c.score >= 60);
+            var res3 = list.Join(list2, p => p.Name, c => c.personName, (p, c) => new { c, p }).Where(x => x.c.score >= 60);
         }
 
         private void 选课数量_Click(object sender, EventArgs e)
         {
-            var res1 = list.GroupJoin(list2, p => p.name, c => c.personName, (p, ct) => new { p.name, count = ct.Count() });
+            var res1 = list.GroupJoin(list2, p => p.Name, c => c.personName, (p, ct) => new { p.Name, count = ct.Count() });
         }
 
         private void 课程选修的人数_Click(object sender, EventArgs e)
@@ -779,25 +784,129 @@ namespace WinFormsApp1
             var res1 = list2.GroupBy(c => c.personName).Select((sub) => new { proName = sub.Key, count = sub.Count() });
         }
 
+        #endregion
 
-        private void MeasureText1(PaintEventArgs e)
+
+        #region ListBox宽高自适应
+        private void button6_Click_1(object sender, EventArgs e)
         {
-            String text1 = "Measure this text";
-            Font arialBold = new Font("Arial", 12.0F);
-            Size textSize = TextRenderer.MeasureText(text1, arialBold);
-            TextRenderer.DrawText(e.Graphics, text1, arialBold,
-                new Rectangle(new Point(10, 10), textSize), Color.Red);
+            List<Person> people = new List<Person>
+            {
+                new Person { Name = "显示屏左", Age = 25 },
+                new Person { Name = "显示屏右", Age = 30 }
+            };
+
+            foreach (var item in people)
+            {
+                item.Name = $" {item.Name} ";
+            }
+
+            listBox1.DataSource = people;
+            listBox1.DisplayMember = "Name";
+            listBox1.Height = 20 * people.Count;
+
+            listBox1.Width = TextRenderer.MeasureText(people[0].Name, listBox1.Font).Width;
         }
+
+        #endregion
+
+
+        private async void button7_Click_1(object sender, EventArgs e)
+        {
+            AsyncLocal<Person> context = new AsyncLocal<Person>();
+            context.Value = new Person { Age = 1, Name = "张三" };
+            Debug.WriteLine($"Main之前:{context.Value.Name},ThreadId={Thread.CurrentThread.ManagedThreadId}");
+            await Task.Run(() =>
+            {
+                Debug.WriteLine($"Task1之前:{context.Value.Name},ThreadId={Thread.CurrentThread.ManagedThreadId}");
+                context.Value.Name = "李四";
+                Debug.WriteLine($"Task1之后:{context.Value.Name},ThreadId={Thread.CurrentThread.ManagedThreadId}");
+            });
+
+            await Task.Run(() =>
+            {
+                Debug.WriteLine($"Task2之前:{context.Value.Name},ThreadId={Thread.CurrentThread.ManagedThreadId}");
+                context.Value.Name = "王五";
+                Debug.WriteLine($"Task2之后:{context.Value.Name},ThreadId={Thread.CurrentThread.ManagedThreadId}");
+            });
+            Debug.WriteLine($"Main之后:{context.Value.Name},ThreadId={Thread.CurrentThread.ManagedThreadId}");
+        }
+
+
+        #region 截屏
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // 获取屏幕大小
+            Rectangle bounds = Screen.GetBounds(Screen.PrimaryScreen.WorkingArea);
+
+
+            // 创建一个bitmap对象并将其设置为屏幕大小
+            using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+            {
+                // 创建一个Graphics对象并将其设置为bitmap
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    // 将整个屏幕绘制到Graphics对象中
+                    g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                }
+
+
+                // 将截图保存为jpg文件
+                bitmap.Save("screenshot.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetWindowRect(IntPtr hWnd, ref Rectangle rect);
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr CreateCompatibleDC(IntPtr hdc);
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr CreateCompatibleBitmap(IntPtr hdc, int nWidth, int nHeight);
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
+        [DllImport("gdi32.dll")]
+        private static extern int DeleteDC(IntPtr hdc);
+        [DllImport("user32.dll")]
+        private static extern bool PrintWindow(IntPtr hwnd, IntPtr hdcBlt, int nFlags);
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetWindowDC(IntPtr hwnd);
+        int i = 0;
+        private Bitmap ScreenshotControlIntPtr(IntPtr hWnd)
+        {
+            try
+            {
+                IntPtr hscrdc = GetWindowDC(hWnd);
+                Rectangle windowRect = new Rectangle();
+                GetWindowRect(hWnd, ref windowRect);
+                int width = Math.Abs(windowRect.X - windowRect.Width);
+                int height = Math.Abs(windowRect.Y - windowRect.Height);
+                IntPtr hbitmap = CreateCompatibleBitmap(hscrdc, width, height);
+                IntPtr hmemdc = CreateCompatibleDC(hscrdc);
+                SelectObject(hmemdc, hbitmap);
+                PrintWindow(hWnd, hmemdc, 0);
+                Bitmap bmp = Image.FromHbitmap(hbitmap);
+                bmp?.Save($"D:\\image\\{i}.bmp");
+                i++;
+                DeleteDC(hscrdc);
+                DeleteDC(hmemdc);
+                return bmp;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 
     class Person
     {
-        public string name;
-        public int age;
-        public override string ToString()
-        {
-            return "name: " + name + ", age: " + age;
-        }
+        public string Name { get; set; }
+        public int Age { get; set; }
+        //public override string ToString()
+        //{
+        //    return "name: " + name + ", age: " + age;
+        //}
     }
 
     class Course

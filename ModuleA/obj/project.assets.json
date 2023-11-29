@@ -899,11 +899,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\ModuleA\\ModuleA.csproj",
+      "projectUniqueName": "D:\\Github\\IflytekCode\\ModuleA\\ModuleA.csproj",
       "projectName": "ModuleA",
-      "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleA\\ModuleA.csproj",
+      "projectPath": "D:\\Github\\IflytekCode\\ModuleA\\ModuleA.csproj",
       "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-      "outputPath": "D:\\source\\repos\\IflytekDaily\\ModuleA\\obj\\",
+      "outputPath": "D:\\Github\\IflytekCode\\ModuleA\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",

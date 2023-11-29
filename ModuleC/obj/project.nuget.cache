@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8d2bIkQkozfb201WDhgkCibQ/O0+Miy+yamdsjqM57p1Yv+o/nEmuIjMVb5dNYNceq9NSYe200y5DW1rWhKszA==",
+  "dgSpecHash": "/UEOqvhYWM6gwNsIT1/CY45YUuP5J324sjIjNnuhl3xNCc1zWDG5c9r333GBbfI6PsmuDLNiFnP7r/C7nAY3Gg==",
   "success": true,
-  "projectFilePath": "D:\\source\\repos\\IflytekDaily\\ModuleC\\ModuleC.csproj",
+  "projectFilePath": "D:\\Github\\IflytekCode\\ModuleC\\ModuleC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kezhou3\\.nuget\\packages\\dryioc.dll\\4.7.7\\dryioc.dll.4.7.7.nupkg.sha512",
     "C:\\Users\\kezhou3\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5fARw3sEi5n22j9H3JuhyVL0F/OI/sVT7heiQl9DFImzD0bF0dbM09C0Knrl2q23o+D1nFSsLqb5U14PDwKv7w==",
+  "dgSpecHash": "uUW84mVIlgwdesqD/CqhjSXu6KuUDOMq/NBAxymWyqyxnpT4/L6jlJx0vSF7lfdM/vmQc35bsdj6SfspnbCjVw==",
   "success": true,
-  "projectFilePath": "D:\\source\\repos\\IflytekDaily\\PrismDemo\\PrismDemo.csproj",
+  "projectFilePath": "D:\\Github\\IflytekCode\\PrismDemo\\PrismDemo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kezhou3\\.nuget\\packages\\dryioc.dll\\4.7.7\\dryioc.dll.4.7.7.nupkg.sha512",
     "C:\\Users\\kezhou3\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

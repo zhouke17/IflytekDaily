@@ -1,0 +1,8 @@
+﻿2023-09-27 15:50:08,863 [1] INFO  AppServer-21653700 - The server instance AppServer-21653700 has been started!
+2023-09-27 15:54:24,838 [5] INFO  AppServer-21653700 - Session: f1104be2-daa6-4223-af63-6c15ce64929f/10.4.125.10:61194
+A new session connected!
+2023-09-27 15:55:27,969 [5] INFO  AppServer-21653700 - Session: 0311ddbd-9419-45e3-bb9e-6a83a64b47d2/10.4.125.10:61443
+A new session connected!
+2023-09-27 16:23:58,872 [1] INFO  AppServer-60665573 - The server instance AppServer-60665573 has been started!
+2023-09-27 16:24:12,175 [5] INFO  AppServer-60665573 - Session: 2af05537-1b7d-44fe-9aec-3639779f0819/10.4.125.10:53127
+A new session connected!

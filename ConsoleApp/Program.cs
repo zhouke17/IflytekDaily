@@ -2,9 +2,11 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -19,11 +21,10 @@ namespace ConsoleApp1
         private static System.Timers.Timer timer1;
         private static System.Threading.Timer timer2;
         #endregion
-
         static void Main(string[] args)
         {
             #region JObject遍历
-            string res = "{  \"error_code\": 0,  \"error_msg\": \"SUCCESS\",  \"log_id\": 3014595066,  \"timestamp\": 1527234617,  \"cached\": 0,  \"result\": {    \"face_token\": \"49d58eacd7811e463429a1ae10b42173\",    \"user_list\": [      {        \"group_id\": \"NR\",        \"user_id\": \"1028867728\",        \"user_info\": \"cactus0117\",        \"score\": 97.499450683594      },      {        \"group_id\": \"BR\",        \"user_id\": \"3456378901\",        \"user_info\": \"cactus0117\",        \"score\":89.499450683594      }    ]  }}";
+            string res = "{  \"error_code\": 10,  \"error_msg\": \"SUCCESS\",  \"log_id\": 3014595066,  \"timestamp\": 1527234617,  \"cached\": 0,  \"result\": {    \"face_token\": \"49d58eacd7811e463429a1ae10b42173\",    \"user_list\": [      {        \"group_id\": \"NR\",        \"user_id\": \"1028867728\",        \"user_info\": \"cactus0117\",        \"score\": 97.499450683594      },      {        \"group_id\": \"BR\",        \"user_id\": \"3456378901\",        \"user_info\": \"cactus0117\",        \"score\":89.499450683594      }    ]  }}";
 
             string res2 = "{\"success\":\"0\",\"msg\":\"\",\"data\":[{\"id\":null,\"ah\":null,\"ahdm\":null,\"litigantId\":null,\"litigantXh\":null,\"name\":\"李四\",\"ssdw\":\"被告\",\"telephone\":\"\",\"licenceId\":\"\",\"address\":null,\"litigantType\":\"法人\",\"litigantTypeCode\":null},{\"id\":null,\"ah\":null,\"ahdm\":null,\"litigantId\":null,\"litigantXh\":null,\"name\":\"张三\",\"ssdw\":\"原告\",\"telephone\":\"13111111111\",\"licenceId\":\"1234\",\"address\":null,\"litigantType\":\"自然人\",\"litigantTypeCode\":null}]}";
 
@@ -31,36 +32,47 @@ namespace ConsoleApp1
             var obj2 = JsonConvert.DeserializeObject<JObject>(res);
             var obj3 = (dynamic)JObject.Parse(res2);
 
-            List<string> list = new List<string>();
-            foreach (var item in obj3.data)
+            //List<string> list = new List<string>();
+            //foreach (var item in obj3.data)
+            //{
+            //    var name = item.Value<string>("name");
+            //    list.Add(name);
+            //    //list.Add(item.name);//不可直接add
+            //}
+
+            var result = obj.Value<JObject>("result1");//此种方式可避免空值引发异常,而且会有默认值
+            if (result == null)
             {
-                var name = item.Value<string>("name");
-                list.Add(name);
-                //list.Add(item.name);//不可直接add
+                var child = result?.Value<JObject>("face_token");
             }
-
-            var error_code = obj.Value<string>("error_code");//此种方式可避免空值引发异常
-            var error_code3 = obj["error_code"].ToString();
-            var error_code2 = obj["error_code"].Value<string>();
-            Console.WriteLine($"三种JObject单层对象解析方式：{Environment.NewLine} error_code:{error_code}{Environment.NewLine}error_code2:{error_code2}{Environment.NewLine}error_code3:{error_code3}");
+            //var error_code3 = obj["error_code"].ToString();
+            //var error_code2 = obj["error_code"].Value<string>();
+            //Console.WriteLine($"三种JObject单层对象解析方式：{Environment.NewLine} error_code:{error_code}{Environment.NewLine}error_code2:{error_code2}{Environment.NewLine}error_code3:{error_code3}");
 
 
-            var face_token = obj["result"]["face_token"].Value<string>();
-            var face_token2 = obj["result"].Value<string>("face_token");
-            var face_token3 = ((dynamic)obj).result.face_token;
-            Console.WriteLine($"三种JObject双层对象解析方式：{Environment.NewLine} face_token:{face_token}{Environment.NewLine}face_token2:{face_token2}{Environment.NewLine}face_token3:{face_token3}");
+            //var face_token = obj["result"]["face_token"].Value<string>();
+            //var face_token2 = obj["result"].Value<string>("face_token");
+            //var face_token3 = ((dynamic)obj).result.face_token;
+            //Console.WriteLine($"三种JObject双层对象解析方式：{Environment.NewLine} face_token:{face_token}{Environment.NewLine}face_token2:{face_token2}{Environment.NewLine}face_token3:{face_token3}");
 
 
-            Console.WriteLine("转化成JArray后遍历");
-            foreach (var item in obj["result"]["user_list"].Value<JArray>())
-            {
-                Console.WriteLine($"{item["group_id"].Value<string>()}");
-            }
-            Console.WriteLine("直接遍历");
-            foreach (var item in obj["result"]["user_list"])
-            {
-                Console.WriteLine($"{item["group_id"].Value<string>()}");
-            }
+            //Console.WriteLine("转化成JArray后遍历");
+            //foreach (var item in obj["result"]["user_list"].Value<JArray>())
+            //{
+            //    Console.WriteLine($"{item["group_id"].Value<string>()}");
+            //}
+            //Console.WriteLine("直接遍历");
+            //foreach (var item in obj["result"]["user_list"])
+            //{
+            //    Console.WriteLine($"{item["group_id"].Value<string>()}");
+            //}
+
+
+            //Console.WriteLine("反序列化数组：");
+            //var user_list = JsonConvert.SerializeObject(obj["result"]["user_list"].Value<JArray>());
+            //List<User_list> userlist = new List<User_list>();
+            //userlist = JsonConvert.DeserializeObject<List<User_list>>(user_list);
+            //userlist.RemoveAll(s => { return s.user_id == "1028867728"; });
             #endregion
 
 
@@ -436,6 +448,110 @@ namespace ConsoleApp1
             }
             #endregion
 
+
+
+            #region 遍历集合元素
+            List<int> ints = new List<int>() { 1, 2, 3, 4, 5, 6 };
+            Dictionary<int, string> keyValuePairs = new Dictionary<int, string> { { 1, "one" }, { 2, "two" } };
+            var intres = string.Join(", ", ints.Select(kvp => string.Format("[{0}]",
+                            kvp)));
+            var keyValueres = string.Join(", ", keyValuePairs.Select(s => $"{s.Key},{s.Value}"));
+            Console.WriteLine($"ints:{intres}");
+            Console.WriteLine($"keyValuePairs:{keyValueres}");
+            #endregion
+
+
+
+            #region 截取字符串
+            string str = "01234567890";
+            if (str.Length > 10)
+            {
+                str = str.Substring(0, 4) + "..." + str.Substring((str.Length - 4));
+            }
+            Console.WriteLine($"01234567890截取之后：{str}");
+            #endregion
+
+
+
+            #region BlockingCollection
+            int count = 0;
+            BlockingCollection<string> blockingCollection = new BlockingCollection<string>(1);
+            //生产者
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    blockingCollection.Add("string:" + count);
+                    Console.WriteLine("Add string：" + count);
+                    count++;
+                    if (count > 10)
+                    {
+                        blockingCollection.CompleteAdding();
+                        break;
+                    }
+                }
+            });
+            //消费者
+            Task.Factory.StartNew(() =>
+            {
+                //foreach (var element in blockingCollection.GetConsumingEnumerable())
+                //{
+                //    Console.WriteLine("Work:" + element);
+                //}
+
+                while (!blockingCollection.IsCompleted)
+                {
+                    try
+                    {
+                        var element2 = blockingCollection.Take();
+                        Console.WriteLine("Take:" + element2);
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        Console.WriteLine("Adding was completed!");
+                    }
+                }
+            });
+
+
+            ConcurrentQueue<string> Collection = new ConcurrentQueue<string>();
+            ConcurrentDictionary<string, string> dic = new ConcurrentDictionary<string, string>();
+            string input = "书记员3：对的。审判长3：你是怎么走的？书记员3：正常的住在医院的实习同学都这么走的。审判长3：你简单向法庭陈述一下。书记员3：沿着医学院路一直走到东安路，然后穿过东安路进入学校，然后沿着学校里面的路再往宿舍里面走，审判长3：你是直接回到宿舍是吗？书记员3：应该是。审判长3：你的宿舍楼具体是在哪个宿舍楼？几号？书记员3：20号4楼421。审判长3：你当时的宿舍里一共是住着几个人？书记员3：住着三个人，审判长3：除了你之外，还有谁？书记员3：还有黄洋以及俊奇，审判长3：那么你和盛磊回到西20宿舍楼是吗？书记员3：对的。审判长3：然后你进入宿舍楼后回到自己的寝室，书记员3：对的。审判长3：你回到寝室里面有人吗？书记员3：里面没有人。审判长3：之后你做了什么？书记员3：之后，我就把原液以及注射器里面的二甲基亚硝胺都倒进了饮水机里面，然后边上建了几滴液体，所以我就用我桌上的一瓶农夫山泉矿泉水，把它冲了进去。审判长3：你当时是把原液以及注射器里的原液一起倒进饮水机里的是吧？书记员3：对的。审判长3：你是怎样到的？倒在饮水机的什么位置？书记员3：倒在饮水机的，靠近我们这一侧。右边右手边，我是右手操作的。";
+            string[] key = { "书记员3", "审判长3" };
+            List<string> strList = input.Split(key, StringSplitOptions.RemoveEmptyEntries).ToList();
+            if (!dic.IsEmpty && dic.LastOrDefault().Key.Contains("abc"))
+            {
+
+            }
+            Task.Factory.StartNew(new Action(() =>
+            {
+                foreach (var item in strList)
+                {
+                    Collection.Enqueue(item);
+                    Console.WriteLine("Enqueue：" + item);
+                }
+            }));
+
+            Task.Factory.StartNew(new Action(() =>
+            {
+                Thread.Sleep(1000);
+                while (!Collection.IsEmpty)
+                {
+                    if (Collection.TryDequeue(out string item))
+                    {
+                        Console.WriteLine("Dequeue：" + item);
+                    }
+                }
+            }));
+
+            string tag = " 正在转写...";
+            string str2 = "正在转写工行：工行意见与农行的意见一致。正在转写..其他意见没有补充请法院依职权依法裁判。平安：与工行农行意见一致，请法院依法裁判。审：对于他们债权转让，你们什么时候知道的？平安、农行、工行：这次发传票的时候知道。正在转写...审：各方当事人有证据向法庭提交吗？正在转写.";
+            if (Regex.IsMatch(str2, @"正在转写|正在转写\.|正在转写\.\.|正在转写\.\.\."))
+            {
+                str2 = str2.Replace("正在转写...", "").Replace("正在转写..", "").Replace("正在转写.", "").Replace("正在转写", "");
+            }
+            var index = str2.LastIndexOf(tag);
+            #endregion
             Console.Read();
         }
 
@@ -564,4 +680,32 @@ public class Collection
             yield return str[i];
         }
     }
+}
+
+public class User_list
+{
+    public string group_id { get; set; }
+    public string user_id { get; set; }
+
+    public string user_info { get; set; }
+    public double score { get; set; }
+}
+
+
+public class Paragraph
+{
+    public TextType TextType { get; set; }
+
+    public string Content { get; set; }
+}
+public enum TextType
+{
+    /// <summary>
+    /// 原文
+    /// </summary>
+    original,
+    /// <summary>
+    /// 翻译
+    /// </summary>
+    translation
 }

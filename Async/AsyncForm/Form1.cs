@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace AsyncForm
 {
@@ -44,16 +43,19 @@ namespace AsyncForm
         private async void button1_Click(object sender, EventArgs e)
         {
             var res1 = await Task.Run(() => func());//防止func内部线程阻塞导致调用线程被阻塞，即安全的调用方式
-            this.BeginInvoke(new Action(() => { this.listBox1.Items.Add(res1); }));
+            this.BeginInvoke(new Action(() =>
+            {
+                this.listBox1.Items.Add(res1);
+            }));
 
 
-            //var res2 = await func();//默认切换调用线程的上下文
+            //var res2 = await func();//默认切换调用线程的上下文(func内部有可能被阻塞，从而导致主线程阻塞)
             //this.listBox1.Items.Add(res2);
 
 
             //var res3 = await func().ConfigureAwait(false);//不切换到调用线程的上下文(是否尝试将延续任务封送回原始上下文)
             //Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
-            //this.BeginInvoke(new Action(() => { this.listBox1.Items.Add(res3); }));
+            //this.BeginInvoke(new Action(() => { this.listBox1.Items.Add(res3); }));//可能不是主线程id,故使用BeginInvoke
             //Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
 
 
@@ -194,48 +196,45 @@ namespace AsyncForm
 
         #region Monitor用户态锁实现超时检测
         private object monitorObj = new object();
-        private void button6_Click(object sender, EventArgs e)
+        private void Monitor_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
             {
-                if (Monitor.TryEnter(monitorObj, 5000))
+                if (System.Threading.Monitor.TryEnter(monitorObj, 5000))
                 {
-                    //if (Monitor.Wait(monitorObj, 5000))
-                    //{
-                    //    Console.WriteLine("5秒内成功获取到锁");
-                    //}
-                    //else
-                    //{
-                    //    Console.WriteLine("5秒内未获取到锁");
-                    //}
+                    if (System.Threading.Monitor.Wait(monitorObj, 5000))
+                    {
+                        Console.WriteLine("5秒内成功获取到锁");
+                    }
+                    else
+                    {
+                        Console.WriteLine("5秒内未获取到锁");
+                    }
                     Thread.Sleep(5000);
-                    Monitor.Exit(monitorObj);
+                    System.Threading.Monitor.Exit(monitorObj);
                 }
             });
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void MonitorPulseAll_Click(object sender, EventArgs e)
         {
-            if (Monitor.TryEnter(monitorObj, 2000))
+            if (System.Threading.Monitor.TryEnter(monitorObj, 2000))
             {
-                Monitor.PulseAll(monitorObj);
+                System.Threading.Monitor.PulseAll(monitorObj);
                 Console.WriteLine("通知等待monitorObj锁的所有线程进入就绪队列，依次获取锁后执行");
-                Monitor.Exit(monitorObj);
+                System.Threading.Monitor.Exit(monitorObj);
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void MonitorWait_Click(object sender, EventArgs e)
         {
-            //Monitor.Enter(monitorObj);
-            //Monitor.Wait(monitorObj);//阻塞当前主线程
-            //Monitor.Exit(monitorObj);
-
             Task.Run(() =>
             {
-                Monitor.Enter(monitorObj);
+                System.Threading.Monitor.Enter(monitorObj);
+                System.Threading.Monitor.Wait(monitorObj);
                 Console.WriteLine("获取到monitorObj锁");
-                Monitor.Exit(monitorObj);
+                System.Threading.Monitor.Exit(monitorObj);
             });
         }
         #endregion
@@ -342,6 +341,32 @@ namespace AsyncForm
                 //mutex.ReleaseMutex();
             }
         }
+
+
+        #region 系统崩溃
+        private void 内存溢出_Click(object sender, EventArgs e)
+        {
+            List<string> list = new List<string>();
+
+            for (int i = 0; i < int.MaxValue; i++)
+            {
+                list.Add(string.Join(",", Enumerable.Range(0, 10000)));
+            }
+        }
+
+        private void cpu爆炸_Click(object sender, EventArgs e)
+        {
+            Parallel.For(0, int.MaxValue, (i) =>
+             {
+                 while (true)
+                 {
+
+                 }
+             });
+        }
+
+
+        #endregion
     }
 
     /// <summary>

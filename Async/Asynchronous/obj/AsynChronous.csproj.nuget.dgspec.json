@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\source\\repos\\IflytekDaily\\Async\\Asynchronous\\AsynChronous.csproj": {}
+    "D:\\Github\\IflytekCode\\Async\\Asynchronous\\AsynChronous.csproj": {}
   },
   "projects": {
-    "D:\\source\\repos\\IflytekDaily\\Async\\Asynchronous\\AsynChronous.csproj": {
+    "D:\\Github\\IflytekCode\\Async\\Asynchronous\\AsynChronous.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\Async\\Asynchronous\\AsynChronous.csproj",
+        "projectUniqueName": "D:\\Github\\IflytekCode\\Async\\Asynchronous\\AsynChronous.csproj",
         "projectName": "AsynChronous",
-        "projectPath": "D:\\source\\repos\\IflytekDaily\\Async\\Asynchronous\\AsynChronous.csproj",
+        "projectPath": "D:\\Github\\IflytekCode\\Async\\Asynchronous\\AsynChronous.csproj",
         "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-        "outputPath": "D:\\source\\repos\\IflytekDaily\\Async\\Asynchronous\\obj\\",
+        "outputPath": "D:\\Github\\IflytekCode\\Async\\Asynchronous\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",

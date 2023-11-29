@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\source\\repos\\IflytekDaily\\PrismDemo\\PrismDemo.csproj": {}
+    "D:\\Github\\IflytekCode\\PrismDemo\\PrismDemo.csproj": {}
   },
   "projects": {
-    "D:\\source\\repos\\IflytekDaily\\ModuleA\\ModuleA.csproj": {
+    "D:\\Github\\IflytekCode\\ModuleA\\ModuleA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\ModuleA\\ModuleA.csproj",
+        "projectUniqueName": "D:\\Github\\IflytekCode\\ModuleA\\ModuleA.csproj",
         "projectName": "ModuleA",
-        "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleA\\ModuleA.csproj",
+        "projectPath": "D:\\Github\\IflytekCode\\ModuleA\\ModuleA.csproj",
         "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-        "outputPath": "D:\\source\\repos\\IflytekDaily\\ModuleA\\obj\\",
+        "outputPath": "D:\\Github\\IflytekCode\\ModuleA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -68,14 +68,14 @@
         }
       }
     },
-    "D:\\source\\repos\\IflytekDaily\\ModuleB\\ModuleB.csproj": {
+    "D:\\Github\\IflytekCode\\ModuleB\\ModuleB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\ModuleB\\ModuleB.csproj",
+        "projectUniqueName": "D:\\Github\\IflytekCode\\ModuleB\\ModuleB.csproj",
         "projectName": "ModuleB",
-        "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleB\\ModuleB.csproj",
+        "projectPath": "D:\\Github\\IflytekCode\\ModuleB\\ModuleB.csproj",
         "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-        "outputPath": "D:\\source\\repos\\IflytekDaily\\ModuleB\\obj\\",
+        "outputPath": "D:\\Github\\IflytekCode\\ModuleB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -132,14 +132,14 @@
         }
       }
     },
-    "D:\\source\\repos\\IflytekDaily\\ModuleC\\ModuleC.csproj": {
+    "D:\\Github\\IflytekCode\\ModuleC\\ModuleC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\ModuleC\\ModuleC.csproj",
+        "projectUniqueName": "D:\\Github\\IflytekCode\\ModuleC\\ModuleC.csproj",
         "projectName": "ModuleC",
-        "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleC\\ModuleC.csproj",
+        "projectPath": "D:\\Github\\IflytekCode\\ModuleC\\ModuleC.csproj",
         "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-        "outputPath": "D:\\source\\repos\\IflytekDaily\\ModuleC\\obj\\",
+        "outputPath": "D:\\Github\\IflytekCode\\ModuleC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -196,14 +196,14 @@
         }
       }
     },
-    "D:\\source\\repos\\IflytekDaily\\PrismDemo\\PrismDemo.csproj": {
+    "D:\\Github\\IflytekCode\\PrismDemo\\PrismDemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\PrismDemo\\PrismDemo.csproj",
+        "projectUniqueName": "D:\\Github\\IflytekCode\\PrismDemo\\PrismDemo.csproj",
         "projectName": "PrismDemo",
-        "projectPath": "D:\\source\\repos\\IflytekDaily\\PrismDemo\\PrismDemo.csproj",
+        "projectPath": "D:\\Github\\IflytekCode\\PrismDemo\\PrismDemo.csproj",
         "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-        "outputPath": "D:\\source\\repos\\IflytekDaily\\PrismDemo\\obj\\",
+        "outputPath": "D:\\Github\\IflytekCode\\PrismDemo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -220,14 +220,14 @@
           "net5.0-windows7.0": {
             "targetAlias": "net5.0-windows",
             "projectReferences": {
-              "D:\\source\\repos\\IflytekDaily\\ModuleA\\ModuleA.csproj": {
-                "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleA\\ModuleA.csproj"
+              "D:\\Github\\IflytekCode\\ModuleA\\ModuleA.csproj": {
+                "projectPath": "D:\\Github\\IflytekCode\\ModuleA\\ModuleA.csproj"
               },
-              "D:\\source\\repos\\IflytekDaily\\ModuleB\\ModuleB.csproj": {
-                "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleB\\ModuleB.csproj"
+              "D:\\Github\\IflytekCode\\ModuleB\\ModuleB.csproj": {
+                "projectPath": "D:\\Github\\IflytekCode\\ModuleB\\ModuleB.csproj"
               },
-              "D:\\source\\repos\\IflytekDaily\\ModuleC\\ModuleC.csproj": {
-                "projectPath": "D:\\source\\repos\\IflytekDaily\\ModuleC\\ModuleC.csproj"
+              "D:\\Github\\IflytekCode\\ModuleC\\ModuleC.csproj": {
+                "projectPath": "D:\\Github\\IflytekCode\\ModuleC\\ModuleC.csproj"
               }
             }
           }

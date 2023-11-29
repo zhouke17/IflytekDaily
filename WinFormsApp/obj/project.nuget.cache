@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LGd+Z624OpExnh4/JWGRzleOpoMXt8UHh0cwJoBUKewAImtZzA/4gv+KqvB2sL1SwlnLdrSgN8utqDrFZplodQ==",
+  "dgSpecHash": "My7d5xSc+SwRDR3nJmHlzL2UorgpqfeWVKux7wO1jey8L1+ut1xgnVXDUKvXmTeaRfRw8H6dOfBBRYfSvYA65A==",
   "success": true,
-  "projectFilePath": "D:\\source\\repos\\IflytekDaily\\WinFormsApp\\WinFormsApp.csproj",
+  "projectFilePath": "D:\\Github\\IflytekCode\\WinFormsApp\\WinFormsApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kezhou3\\.nuget\\packages\\autoupdater.net.official\\1.7.6\\autoupdater.net.official.1.7.6.nupkg.sha512",
     "C:\\Users\\kezhou3\\.nuget\\packages\\microsoft.web.webview2\\1.0.1418.22\\microsoft.web.webview2.1.0.1418.22.nupkg.sha512",
