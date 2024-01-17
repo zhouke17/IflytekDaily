@@ -53,3 +53,14 @@ D:\Github\IflytekCode\ConsoleApp\bin\Debug\ConsoleApp.pdb
 D:\Github\IflytekCode\ConsoleApp\bin\Debug\Newtonsoft.Json.dll
 D:\Github\IflytekCode\ConsoleApp\bin\Debug\Newtonsoft.Json.xml
 D:\Github\IflytekCode\ConsoleApp\obj\Debug\ConsoleApp.csproj.CopyComplete
+D:\IflytekDaily\ConsoleApp\obj\Debug\ConsoleApp.csproj.AssemblyReference.cache
+D:\IflytekDaily\ConsoleApp\obj\Debug\ConsoleApp.csproj.SuggestedBindingRedirects.cache
+D:\IflytekDaily\ConsoleApp\obj\Debug\ConsoleApp.csproj.CoreCompileInputs.cache
+D:\IflytekDaily\ConsoleApp\obj\Debug\ConsoleApp.exe
+D:\IflytekDaily\ConsoleApp\obj\Debug\ConsoleApp.pdb
+D:\IflytekDaily\ConsoleApp\bin\Debug\ConsoleApp.exe.config
+D:\IflytekDaily\ConsoleApp\bin\Debug\ConsoleApp.exe
+D:\IflytekDaily\ConsoleApp\bin\Debug\ConsoleApp.pdb
+D:\IflytekDaily\ConsoleApp\bin\Debug\Newtonsoft.Json.dll
+D:\IflytekDaily\ConsoleApp\bin\Debug\Newtonsoft.Json.xml
+D:\IflytekDaily\ConsoleApp\obj\Debug\ConsoleApp.csproj.CopyComplete

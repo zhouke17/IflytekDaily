@@ -60,7 +60,7 @@ namespace ModuleA.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ModuleA;V1.0.0.0;component/views/viewa.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ModuleA;component/views/viewa.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\ViewA.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

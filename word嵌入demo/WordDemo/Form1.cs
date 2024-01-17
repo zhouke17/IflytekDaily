@@ -1,12 +1,17 @@
 ﻿using iflytek.Court.Office.Core;
 using iflytek.Court.Office.Core.Interface;
 using iflytek.Court.Office.Core.Utils;
+using Spire.Doc;
+using Spire.Doc.Documents;
+using Spire.Doc.Fields;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Xml;
 using WordDemo.Model;
 using static WordDemo.Model.WinApi;
 
@@ -273,6 +278,48 @@ namespace WordDemo
             process.WaitForExit();
 
             Console.WriteLine(result); // 在控制台输出结果，可以根据需要进行处理或显示
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //创建Document类实例，加载文档 
+            Document document = new Document();
+            document.LoadFromFile("开庭模板.doc");
+
+            Section sec = document.AddSection();//添加section
+            sec.AddParagraph().AppendText("Welcome Back, \n My Friend!"); //添加段落到section，并添加字符串内容
+
+            //获取段落内容 
+            ParagraphBase firstReplacementParagraph = sec.Paragraphs[0].Items.FirstItem as ParagraphBase;
+            ParagraphBase lastReplacementParagraph = sec.Paragraphs[sec.Paragraphs.Count - 1].Items.LastItem as ParagraphBase;
+            //实例化类TextBodySelection和TextBodyPart
+            TextBodySelection selection = new TextBodySelection(firstReplacementParagraph, lastReplacementParagraph);
+            TextBodyPart part = new TextBodyPart(selection);
+
+            BookmarksNavigator bookmarkNavigator = new BookmarksNavigator(document);//实例化BookmarksNavigator类 
+            bookmarkNavigator.MoveToBookmark("CourtName", true, true);//定位到书签“bookmark1”所在段落的位置
+            bookmarkNavigator.DeleteBookmarkContent(true);//删除原有书签位置的内容
+            bookmarkNavigator.ReplaceBookmarkContent(part, true, true);//用新添加段落的内容替换掉原书签的内容并保留格式            
+
+            //保存文档并打开
+            document.SaveToFile("替换书签.docx");
+            System.Diagnostics.Process.Start("替换书签.docx");
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (File.Exists("test.xml"))
+            {
+                XmlDocument _xmlDoc = new XmlDocument();
+                _xmlDoc.LoadXml(File.ReadAllText("test.xml"));
+                XmlElement _xmlElement = _xmlDoc.DocumentElement;
+                XmlNodeList xmlNodeLists = _xmlElement.ChildNodes;
+                foreach (XmlElement item in xmlNodeLists)
+                {
+                    var name = item.GetAttribute("name");
+                    var bookMark = item.GetAttribute("bookmark1");
+                }
+            }
         }
     }
 }

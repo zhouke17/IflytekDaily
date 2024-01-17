@@ -552,10 +552,51 @@ namespace ConsoleApp1
             }
             var index = str2.LastIndexOf(tag);
             #endregion
+
+
+
+            string text = "法庭纪律：1.诉讼参与人在开庭期间要求发言、提问、陈述和辨论，需经审判长许可；发言不允许采用辱骂、讽刺、中伤、诽谤等不文明语言；法庭审理期间，因事需暂时离庭的诉讼参与人应报告审判长同意后方可离庭；擅自离庭者按无故中途退庭处理。2.请到庭人员和旁听人员将手机等通讯工具调至静音或关闭,未经法庭允许不得录音录像；3.对违反法庭纪律不听审判长制止者，审判长有权根据不同情节予以训诫或责令其退出法庭。4.旁听席上是否有证人，如有证人，请退出审判区域，等候通知出庭作证。回避确认：依照《中华人民共和国民事诉讼法》第四十七条、第四十八条之规定，当事人如果认为审判员与本案有利害关系，可能影响本案的公正审理，有权申请回避，但应当说明理由。各方当事人确认是否申请回避。当事人的诉讼权利和义务：依照《中华人民共和国民事诉讼法》第一百四十条第二款的规定，现在告知当事人诉讼权利、义务及诉讼风险。当事人有如下诉讼权利：当事人有权委托代理人，有权申请审判员、书记员回避，有权提供证据、进行辩论、请求调解、自行和解、放弃或变更诉讼请求、承认和反驳对方的诉讼请求，有权申请执行，有权对法院工作和法官行为进行监督，有权对违法违纪问题向纪检、监察部门举报。当事人有如下诉讼义务：依法行使诉讼权利、遵守诉讼程序和法庭规则，如实、及时提供证据、自动履行生效的法律文书、缴纳诉讼费用，代理律师和其他代理人应遵守律师执业纪律和代理权限。诉讼有如下风险：如举证不能，承担败诉的风险；如无财产可供执行，承担执行不能的风险。";
+
+            string[] stringArray = text.Split(new string[] { "：" }, StringSplitOptions.RemoveEmptyEntries);
+            GetGeneralText(stringArray);
+
             Console.Read();
         }
 
         #region 方法
+
+        private static Dictionary<string, string> GetGeneralText(string[] stringArray)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            char separator = '：';
+            string newText = "";
+            string key = "";
+            string value = "";
+
+            for (int i = 0; i < stringArray.Length - 1; i++)
+            {
+                if (stringArray[i].IndexOf("。") != -1)
+                {
+                    if (stringArray[i].Length - 1 == stringArray[i].IndexOf("。"))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        key = stringArray[i].Substring(stringArray[i].LastIndexOf("。") + 1);
+                        value = stringArray[i + 1].Substring(0, stringArray[i + 1].LastIndexOf("。") + 1);
+                        dic.Add(key + "：", value);
+                    }
+                }
+                else
+                {
+                    key = stringArray[i];
+                    value = stringArray[i + 1].Substring(0, stringArray[i + 1].LastIndexOf("。") + 1);
+                    dic.Add(key + "：", value);
+                }
+            }
+            return dic;
+        }
         static async Task UpdateValueAsync(SemaphoreSlim mutex, string name)
         {
             Console.WriteLine("{0} 等待被异步执行", name);

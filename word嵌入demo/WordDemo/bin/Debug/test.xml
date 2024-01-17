@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Positions>
+	<Position name="法院名称"  bookmark="CourtName" />
+	<Position name="庭审类型" bookmark="CourtType" />	
+	<Position name="开庭时间" bookmark="OpenCourtTime" />			
+	<Position name="开庭地点"  bookmark="OpenCourtPlace" />
+	<Position name="案号" bookmark="CaseNo" />	
+	<Position name="案件名称" bookmark="CaseName" />		
+	<Position name="案由/立案案由"  bookmark="CaseCause" />
+	<Position name="审判成员" bookmark="TrialMembers" />	
+	<Position name="书记员" bookmark="Clerk" />		
+	<Position name="当事人及委托诉讼代理人"  bookmark="PartiesAndAgents" />
+	<Position name="起诉方地位、姓名" bookmark="Plaintiff" />	
+	<Position name="被诉方地位、姓名" bookmark="Defendant" />		
+	<Position name="案由2"  bookmark="CaseCause2" />
+	<Position name="法庭名称2" bookmark="CourtName2" />	
+	<Position name="业务庭" bookmark="BusinessCourt" />		
+	<Position name="起诉方地位、姓名2"  bookmark="Plaintiff2" />
+	<Position name="被诉方地位、姓名2" bookmark="Defendant2" />	
+	<Position name="案由3" bookmark="CaseCause3" />			
+	<Position name="承办人/法官"  bookmark="ContractingParty" />
+	<Position name="被诉方地位、姓名3" bookmark="Defendant3" />	
+	<Position name="起诉方诉讼地位" bookmark="PlaintiffPosition" />		
+	<Position name="被诉方诉讼地位"  bookmark="DefendantPosition" />
+	<Position name="被起诉方诉讼地位2" bookmark="DefendantPosition2" />	
+	<Position name="起诉方诉讼地位2" bookmark="PlaintiffPosition2" />		
+	<Position name="被起诉方诉讼地位3"  bookmark="DefendantPosition3" />
+	<Position name="被起诉方诉讼地位" bookmark="DefendantPosition4" />	
+	<Position name="起诉方诉讼地位3" bookmark="PlaintiffPosition3" />		
+	<Position name="被起诉方诉讼地位5"  bookmark="DefendantPosition5" />
+	<Position name="起诉方诉讼地位4" bookmark="PlaintiffPosition4" />	
+	<Position name="起诉方诉讼地位5" bookmark="PlaintiffPosition5" />
+	<Position name="被起诉方诉讼地位6" bookmark="DefendantPosition6" />		
+	<Position name="起诉方诉讼地位6"  bookmark="PlaintiffPosition6" />
+	<Position name="起诉方地位、姓名3" bookmark="Plaintiff3" />	
+	<Position name="被起诉方地位、姓名4" bookmark="Defendant4" />		
+	<Position name="案由4"  bookmark="CaseCause4" />
+	<Position name="起诉方诉讼地位7" bookmark="PlaintiffPosition7" />	
+	<Position name="被起诉方诉讼地位7" bookmark="DefendantPosition7" />	
+</Positions>
