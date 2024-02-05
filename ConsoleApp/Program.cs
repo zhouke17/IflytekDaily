@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -560,10 +561,43 @@ namespace ConsoleApp1
             string[] stringArray = text.Split(new string[] { "：" }, StringSplitOptions.RemoveEmptyEntries);
             GetGeneralText(stringArray);
 
+            if (text.Length > 100)
+            {
+                List<string> segements = new List<string>();
+                for (int i = 0; i < text.Length; i += 50)
+                {
+                    int length = Math.Min(text.Substring(i).Length, 50);
+                    segements.Add(text.Substring(i, length));
+                }
+            }
+
+            byte[] base64 = Convert.FromBase64String("5Y6f5ZGKLTIwMjQwMTI1MTY0MTI5LnBkZg==");
+            string base64ToString = Encoding.UTF8.GetString(base64);
+
+
+
+            try
+            {
+                try
+                {
+                    int i = 0;
+                    int j = 100 / i;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             Console.Read();
         }
 
         #region 方法
+
 
         private static Dictionary<string, string> GetGeneralText(string[] stringArray)
         {
