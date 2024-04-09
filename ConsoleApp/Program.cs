@@ -6,8 +6,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -363,7 +361,7 @@ namespace ConsoleApp1
 
 
             #region ConfigureAwait(false) 1，防止死锁2，提高性能
-            //DelayAsync();
+            DelayAsync();
             #endregion
 
 
@@ -544,60 +542,47 @@ namespace ConsoleApp1
                     }
                 }
             }));
-
-            string tag = " 正在转写...";
-            string str2 = "正在转写工行：工行意见与农行的意见一致。正在转写..其他意见没有补充请法院依职权依法裁判。平安：与工行农行意见一致，请法院依法裁判。审：对于他们债权转让，你们什么时候知道的？平安、农行、工行：这次发传票的时候知道。正在转写...审：各方当事人有证据向法庭提交吗？正在转写.";
-            if (Regex.IsMatch(str2, @"正在转写|正在转写\.|正在转写\.\.|正在转写\.\.\."))
-            {
-                str2 = str2.Replace("正在转写...", "").Replace("正在转写..", "").Replace("正在转写.", "").Replace("正在转写", "");
-            }
-            var index = str2.LastIndexOf(tag);
             #endregion
 
 
 
-            string text = "法庭纪律：1.诉讼参与人在开庭期间要求发言、提问、陈述和辨论，需经审判长许可；发言不允许采用辱骂、讽刺、中伤、诽谤等不文明语言；法庭审理期间，因事需暂时离庭的诉讼参与人应报告审判长同意后方可离庭；擅自离庭者按无故中途退庭处理。2.请到庭人员和旁听人员将手机等通讯工具调至静音或关闭,未经法庭允许不得录音录像；3.对违反法庭纪律不听审判长制止者，审判长有权根据不同情节予以训诫或责令其退出法庭。4.旁听席上是否有证人，如有证人，请退出审判区域，等候通知出庭作证。回避确认：依照《中华人民共和国民事诉讼法》第四十七条、第四十八条之规定，当事人如果认为审判员与本案有利害关系，可能影响本案的公正审理，有权申请回避，但应当说明理由。各方当事人确认是否申请回避。当事人的诉讼权利和义务：依照《中华人民共和国民事诉讼法》第一百四十条第二款的规定，现在告知当事人诉讼权利、义务及诉讼风险。当事人有如下诉讼权利：当事人有权委托代理人，有权申请审判员、书记员回避，有权提供证据、进行辩论、请求调解、自行和解、放弃或变更诉讼请求、承认和反驳对方的诉讼请求，有权申请执行，有权对法院工作和法官行为进行监督，有权对违法违纪问题向纪检、监察部门举报。当事人有如下诉讼义务：依法行使诉讼权利、遵守诉讼程序和法庭规则，如实、及时提供证据、自动履行生效的法律文书、缴纳诉讼费用，代理律师和其他代理人应遵守律师执业纪律和代理权限。诉讼有如下风险：如举证不能，承担败诉的风险；如无财产可供执行，承担执行不能的风险。";
+            #region SortedDictionary  有序的字典
+            KeyDescendingComparer keyDescendingComparer = new KeyDescendingComparer();
+            SortedDictionary<string, string> dic2 = new System.Collections.Generic.SortedDictionary<string, string>(keyDescendingComparer);
+            dic2.Add("原告1", "123");
+            dic2.Add("原告2", "234");
+            dic2.Add("被告2", "345");
+            dic2.Add("被告1", "345");
 
-            string[] stringArray = text.Split(new string[] { "：" }, StringSplitOptions.RemoveEmptyEntries);
-            GetGeneralText(stringArray);
-
-            if (text.Length > 100)
+            foreach (var item in dic2)
             {
-                List<string> segements = new List<string>();
-                for (int i = 0; i < text.Length; i += 50)
-                {
-                    int length = Math.Min(text.Substring(i).Length, 50);
-                    segements.Add(text.Substring(i, length));
-                }
+                Console.WriteLine($"{item.Key} : {item.Value}");
             }
-
-            byte[] base64 = Convert.FromBase64String("5Y6f5ZGKLTIwMjQwMTI1MTY0MTI5LnBkZg==");
-            string base64ToString = Encoding.UTF8.GetString(base64);
+            #endregion
 
 
+            #region 排序
+            List<string> list = new List<string> { "原告方2", "原告方3", "原告方7", "原告方9", "原告方10", "原告方11", "原告方12" };
+            int max = list.Where(s => s.Contains("原告方")).Select(s => { return int.Parse(s.Substring(3)); }).ToList().Max();
+            Console.WriteLine($"最大元素：{max}");
+            #endregion
 
-            try
-            {
-                try
-                {
-                    int i = 0;
-                    int j = 100 / i;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-            catch (Exception ex)
-            {
 
-            }
 
             Console.Read();
         }
 
         #region 方法
 
+        // 自定义比较器，按键的降序排序
+        public class KeyDescendingComparer : IComparer<string>
+        {
+            public int Compare(string x, string y)
+            {
+                // 按照键的降序排序
+                return y.CompareTo(x);
+            }
+        }
 
         private static Dictionary<string, string> GetGeneralText(string[] stringArray)
         {
