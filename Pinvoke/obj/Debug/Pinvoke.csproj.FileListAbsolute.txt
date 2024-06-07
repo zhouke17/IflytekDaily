@@ -1,0 +1,8 @@
+D:\IflytekDaily\Pinvoke\obj\Debug\Pinvoke.csproj.AssemblyReference.cache
+D:\IflytekDaily\Pinvoke\obj\Debug\Pinvoke.csproj.SuggestedBindingRedirects.cache
+D:\IflytekDaily\Pinvoke\obj\Debug\Pinvoke.csproj.CoreCompileInputs.cache
+D:\IflytekDaily\Pinvoke\bin\Debug\Pinvoke.exe.config
+D:\IflytekDaily\Pinvoke\bin\Debug\Pinvoke.exe
+D:\IflytekDaily\Pinvoke\bin\Debug\Pinvoke.pdb
+D:\IflytekDaily\Pinvoke\obj\Debug\Pinvoke.exe
+D:\IflytekDaily\Pinvoke\obj\Debug\Pinvoke.pdb

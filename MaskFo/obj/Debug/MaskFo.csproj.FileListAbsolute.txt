@@ -1,0 +1,11 @@
+D:\IflytekDaily\MaskFo\bin\Debug\MaskFo.exe.config
+D:\IflytekDaily\MaskFo\bin\Debug\MaskFo.exe
+D:\IflytekDaily\MaskFo\bin\Debug\MaskFo.pdb
+D:\IflytekDaily\MaskFo\obj\Debug\MaskFo.csproj.AssemblyReference.cache
+D:\IflytekDaily\MaskFo\obj\Debug\MaskFo.Form1.resources
+D:\IflytekDaily\MaskFo\obj\Debug\MaskFo.MaskLayer.resources
+D:\IflytekDaily\MaskFo\obj\Debug\MaskFo.Properties.Resources.resources
+D:\IflytekDaily\MaskFo\obj\Debug\MaskFo.csproj.GenerateResource.cache
+D:\IflytekDaily\MaskFo\obj\Debug\MaskFo.csproj.CoreCompileInputs.cache
+D:\IflytekDaily\MaskFo\obj\Debug\MaskFo.exe
+D:\IflytekDaily\MaskFo\obj\Debug\MaskFo.pdb

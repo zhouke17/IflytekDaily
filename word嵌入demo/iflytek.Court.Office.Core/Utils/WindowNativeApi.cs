@@ -6,6 +6,8 @@ namespace iflytek.Court.Office.Core.Utils
     public static class WindowNativeApi
     {
         [DllImport("user32.dll")]
+        public static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll")]
         public static extern IntPtr FindWindow(string strclassName, string strWindowName);
 
         [DllImport("user32.dll")]

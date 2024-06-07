@@ -86,6 +86,10 @@ namespace iflytek.Court.Office.Core.Interface
         /// <returns></returns>
         ChangeSt CheckCommentChange();
         /// <summary>
+        /// 设置文本插入方向
+        /// </summary>
+        void SetReadingOrder();
+        /// <summary>
         /// 退出word进程
         /// </summary>
         void Exit();

@@ -40,7 +40,7 @@ namespace WordDemo
 
             EasyOp.TryDo(3, () =>
             {
-                word.OpenFile(@"D:\Test.doc");
+                word.OpenFile(@"D:/wordTest.doc");
             });
 
             Console.WriteLine($"{DateTime.Now:HH:mm:ss.ffff}打开文件End");
@@ -320,6 +320,11 @@ namespace WordDemo
                     var bookMark = item.GetAttribute("bookmark1");
                 }
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            word.SetReadingOrder();
         }
     }
 }

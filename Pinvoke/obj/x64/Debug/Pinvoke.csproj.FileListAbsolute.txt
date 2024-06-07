@@ -1,0 +1,10 @@
+D:\IflytekDaily\Pinvoke\bin\x64\Debug\Pinvoke.exe.config
+D:\IflytekDaily\Pinvoke\bin\x64\Debug\Pinvoke.exe
+D:\IflytekDaily\Pinvoke\bin\x64\Debug\Pinvoke.pdb
+D:\IflytekDaily\Pinvoke\obj\x64\Debug\Pinvoke.csproj.AssemblyReference.cache
+D:\IflytekDaily\Pinvoke\obj\x64\Debug\Pinvoke.csproj.CoreCompileInputs.cache
+D:\IflytekDaily\Pinvoke\obj\x64\Debug\Pinvoke.exe
+D:\IflytekDaily\Pinvoke\obj\x64\Debug\Pinvoke.pdb
+D:\IflytekDaily\Pinvoke\bin\x64\Debug\Newtonsoft.Json.dll
+D:\IflytekDaily\Pinvoke\bin\x64\Debug\Newtonsoft.Json.xml
+D:\IflytekDaily\Pinvoke\obj\x64\Debug\Pinvoke.csproj.Up2Date

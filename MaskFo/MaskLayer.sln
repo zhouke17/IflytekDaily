@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaskLayer", "MaskLayer.csproj", "{12C8561A-515B-46B3-8921-9EFD3B1114C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12C8561A-515B-46B3-8921-9EFD3B1114C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C8561A-515B-46B3-8921-9EFD3B1114C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C8561A-515B-46B3-8921-9EFD3B1114C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C8561A-515B-46B3-8921-9EFD3B1114C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7565B1F0-C95B-4DA8-A040-CE1AB0C3A922}
+	EndGlobalSection
+EndGlobal

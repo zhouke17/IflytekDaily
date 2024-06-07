@@ -2,10 +2,10 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -361,7 +361,7 @@ namespace ConsoleApp1
 
 
             #region ConfigureAwait(false) 1，防止死锁2，提高性能
-            DelayAsync();
+            //DelayAsync();
             #endregion
 
 
@@ -438,141 +438,233 @@ namespace ConsoleApp1
 
 
             #region linq + split包含空字符串
-            string cbr = "测试005,cs005;测试227,test227;童强-法官,qiangtong2;";
-            Console.WriteLine("cbr第一个元素组成的集合：" + string.Join(",", cbr.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(x => x.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0])));
-            Console.WriteLine(string.Join("|", cbr.Split(';')));
-            foreach (var item in cbr.Split(';'))
-            {
-                Console.WriteLine("split子元素：" + item + "\n");
-            }
+            //string cbr = "测试005,cs005;测试227,test227;童强-法官,qiangtong2;";
+            //Console.WriteLine("cbr第一个元素组成的集合：" + string.Join(",", cbr.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(x => x.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)[0])));
+            //Console.WriteLine(string.Join("|", cbr.Split(';')));
+            //foreach (var item in cbr.Split(';'))
+            //{
+            //    Console.WriteLine("split子元素：" + item + "\n");
+            //}
             #endregion
 
 
 
             #region 遍历集合元素
-            List<int> ints = new List<int>() { 1, 2, 3, 4, 5, 6 };
-            Dictionary<int, string> keyValuePairs = new Dictionary<int, string> { { 1, "one" }, { 2, "two" } };
-            var intres = string.Join(", ", ints.Select(kvp => string.Format("[{0}]",
-                            kvp)));
-            var keyValueres = string.Join(", ", keyValuePairs.Select(s => $"{s.Key},{s.Value}"));
-            Console.WriteLine($"ints:{intres}");
-            Console.WriteLine($"keyValuePairs:{keyValueres}");
+            //List<int> ints = new List<int>() { 1, 2, 3, 4, 5, 6 };
+            //Dictionary<int, string> keyValuePairs = new Dictionary<int, string> { { 1, "one" }, { 2, "two" } };
+            //var intres = string.Join(", ", ints.Select(kvp => string.Format("[{0}]",
+            //                kvp)));
+            //var keyValueres = string.Join(", ", keyValuePairs.Select(s => $"{s.Key},{s.Value}"));
+            //Console.WriteLine($"ints:{intres}");
+            //Console.WriteLine($"keyValuePairs:{keyValueres}");
             #endregion
 
 
 
             #region 截取字符串
-            string str = "01234567890";
-            if (str.Length > 10)
-            {
-                str = str.Substring(0, 4) + "..." + str.Substring((str.Length - 4));
-            }
-            Console.WriteLine($"01234567890截取之后：{str}");
+            //string str = "01234567890";
+            //if (str.Length > 10)
+            //{
+            //    str = str.Substring(0, 4) + "..." + str.Substring((str.Length - 4));
+            //}
+            //Console.WriteLine($"01234567890截取之后：{str}");
             #endregion
 
 
 
             #region BlockingCollection
-            int count = 0;
-            BlockingCollection<string> blockingCollection = new BlockingCollection<string>(1);
-            //生产者
-            Task.Factory.StartNew(() =>
-            {
-                while (true)
-                {
-                    blockingCollection.Add("string:" + count);
-                    Console.WriteLine("Add string：" + count);
-                    count++;
-                    if (count > 10)
-                    {
-                        blockingCollection.CompleteAdding();
-                        break;
-                    }
-                }
-            });
-            //消费者
-            Task.Factory.StartNew(() =>
-            {
-                //foreach (var element in blockingCollection.GetConsumingEnumerable())
-                //{
-                //    Console.WriteLine("Work:" + element);
-                //}
+            //int count = 0;
+            //BlockingCollection<string> blockingCollection = new BlockingCollection<string>(1);
+            ////生产者
+            //Task.Factory.StartNew(() =>
+            //{
+            //    while (true)
+            //    {
+            //        blockingCollection.Add("string:" + count);
+            //        Console.WriteLine("Add string：" + count);
+            //        count++;
+            //        if (count > 10)
+            //        {
+            //            blockingCollection.CompleteAdding();
+            //            break;
+            //        }
+            //    }
+            //});
+            ////消费者
+            //Task.Factory.StartNew(() =>
+            //{
+            //    //foreach (var element in blockingCollection.GetConsumingEnumerable())
+            //    //{
+            //    //    Console.WriteLine("Work:" + element);
+            //    //}
 
-                while (!blockingCollection.IsCompleted)
-                {
-                    try
-                    {
-                        var element2 = blockingCollection.Take();
-                        Console.WriteLine("Take:" + element2);
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        Console.WriteLine("Adding was completed!");
-                    }
-                }
-            });
+            //    while (!blockingCollection.IsCompleted)
+            //    {
+            //        try
+            //        {
+            //            var element2 = blockingCollection.Take();
+            //            Console.WriteLine("Take:" + element2);
+            //        }
+            //        catch (InvalidOperationException)
+            //        {
+            //            Console.WriteLine("Adding was completed!");
+            //        }
+            //    }
+            //});
 
 
-            ConcurrentQueue<string> Collection = new ConcurrentQueue<string>();
-            ConcurrentDictionary<string, string> dic = new ConcurrentDictionary<string, string>();
-            string input = "书记员3：对的。审判长3：你是怎么走的？书记员3：正常的住在医院的实习同学都这么走的。审判长3：你简单向法庭陈述一下。书记员3：沿着医学院路一直走到东安路，然后穿过东安路进入学校，然后沿着学校里面的路再往宿舍里面走，审判长3：你是直接回到宿舍是吗？书记员3：应该是。审判长3：你的宿舍楼具体是在哪个宿舍楼？几号？书记员3：20号4楼421。审判长3：你当时的宿舍里一共是住着几个人？书记员3：住着三个人，审判长3：除了你之外，还有谁？书记员3：还有黄洋以及俊奇，审判长3：那么你和盛磊回到西20宿舍楼是吗？书记员3：对的。审判长3：然后你进入宿舍楼后回到自己的寝室，书记员3：对的。审判长3：你回到寝室里面有人吗？书记员3：里面没有人。审判长3：之后你做了什么？书记员3：之后，我就把原液以及注射器里面的二甲基亚硝胺都倒进了饮水机里面，然后边上建了几滴液体，所以我就用我桌上的一瓶农夫山泉矿泉水，把它冲了进去。审判长3：你当时是把原液以及注射器里的原液一起倒进饮水机里的是吧？书记员3：对的。审判长3：你是怎样到的？倒在饮水机的什么位置？书记员3：倒在饮水机的，靠近我们这一侧。右边右手边，我是右手操作的。";
-            string[] key = { "书记员3", "审判长3" };
-            List<string> strList = input.Split(key, StringSplitOptions.RemoveEmptyEntries).ToList();
-            if (!dic.IsEmpty && dic.LastOrDefault().Key.Contains("abc"))
-            {
+            //ConcurrentQueue<string> Collection = new ConcurrentQueue<string>();
+            //ConcurrentDictionary<string, string> dic = new ConcurrentDictionary<string, string>();
+            //string input = "书记员3：对的。审判长3：你是怎么走的？书记员3：正常的住在医院的实习同学都这么走的。审判长3：你简单向法庭陈述一下。书记员3：沿着医学院路一直走到东安路，然后穿过东安路进入学校，然后沿着学校里面的路再往宿舍里面走，审判长3：你是直接回到宿舍是吗？书记员3：应该是。审判长3：你的宿舍楼具体是在哪个宿舍楼？几号？书记员3：20号4楼421。审判长3：你当时的宿舍里一共是住着几个人？书记员3：住着三个人，审判长3：除了你之外，还有谁？书记员3：还有黄洋以及俊奇，审判长3：那么你和盛磊回到西20宿舍楼是吗？书记员3：对的。审判长3：然后你进入宿舍楼后回到自己的寝室，书记员3：对的。审判长3：你回到寝室里面有人吗？书记员3：里面没有人。审判长3：之后你做了什么？书记员3：之后，我就把原液以及注射器里面的二甲基亚硝胺都倒进了饮水机里面，然后边上建了几滴液体，所以我就用我桌上的一瓶农夫山泉矿泉水，把它冲了进去。审判长3：你当时是把原液以及注射器里的原液一起倒进饮水机里的是吧？书记员3：对的。审判长3：你是怎样到的？倒在饮水机的什么位置？书记员3：倒在饮水机的，靠近我们这一侧。右边右手边，我是右手操作的。";
+            //string[] key = { "书记员3", "审判长3" };
+            //List<string> strList = input.Split(key, StringSplitOptions.RemoveEmptyEntries).ToList();
+            //if (!dic.IsEmpty && dic.LastOrDefault().Key.Contains("abc"))
+            //{
 
-            }
-            Task.Factory.StartNew(new Action(() =>
-            {
-                foreach (var item in strList)
-                {
-                    Collection.Enqueue(item);
-                    Console.WriteLine("Enqueue：" + item);
-                }
-            }));
+            //}
+            //Task.Factory.StartNew(new Action(() =>
+            //{
+            //    foreach (var item in strList)
+            //    {
+            //        Collection.Enqueue(item);
+            //        Console.WriteLine("Enqueue：" + item);
+            //    }
+            //}));
 
-            Task.Factory.StartNew(new Action(() =>
-            {
-                Thread.Sleep(1000);
-                while (!Collection.IsEmpty)
-                {
-                    if (Collection.TryDequeue(out string item))
-                    {
-                        Console.WriteLine("Dequeue：" + item);
-                    }
-                }
-            }));
+            //Task.Factory.StartNew(new Action(() =>
+            //{
+            //    Thread.Sleep(1000);
+            //    while (!Collection.IsEmpty)
+            //    {
+            //        if (Collection.TryDequeue(out string item))
+            //        {
+            //            Console.WriteLine("Dequeue：" + item);
+            //        }
+            //    }
+            //}));
             #endregion
 
 
 
             #region SortedDictionary  有序的字典
-            KeyDescendingComparer keyDescendingComparer = new KeyDescendingComparer();
-            SortedDictionary<string, string> dic2 = new System.Collections.Generic.SortedDictionary<string, string>(keyDescendingComparer);
-            dic2.Add("原告1", "123");
-            dic2.Add("原告2", "234");
-            dic2.Add("被告2", "345");
-            dic2.Add("被告1", "345");
+            //KeyDescendingComparer keyDescendingComparer = new KeyDescendingComparer();
+            //SortedDictionary<string, string> dic2 = new System.Collections.Generic.SortedDictionary<string, string>(keyDescendingComparer);
+            //dic2.Add("原告1", "123");
+            //dic2.Add("原告2", "234");
+            //dic2.Add("被告2", "345");
+            //dic2.Add("被告1", "345");
 
-            foreach (var item in dic2)
-            {
-                Console.WriteLine($"{item.Key} : {item.Value}");
-            }
+            //foreach (var item in dic2)
+            //{
+            //    Console.WriteLine($"{item.Key} : {item.Value}");
+            //}
             #endregion
 
 
             #region 排序
-            List<string> list = new List<string> { "原告方2", "原告方3", "原告方7", "原告方9", "原告方10", "原告方11", "原告方12" };
-            int max = list.Where(s => s.Contains("原告方")).Select(s => { return int.Parse(s.Substring(3)); }).ToList().Max();
-            Console.WriteLine($"最大元素：{max}");
+            //List<string> list = new List<string> { "原告方2", "原告方3", "原告方7", "原告方9", "原告方10", "原告方11", "原告方12" };
+            //int max = list.Where(s => s.Contains("原告方")).Select(s => { return int.Parse(s.Substring(3)); }).ToList().Max();
+            //Console.WriteLine($"最大元素：{max}");
             #endregion
 
 
+            #region try catch
+            //try
+            //{
+            //    ExceptionMethod();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    try
+            //    {
+            //        ExceptionMethod();
+            //    }
+            //    catch (Exception)
+            //    {
+            //        Console.WriteLine("异常抛出111111");
+            //        throw;
+            //    }
+            //    Console.WriteLine("异常抛出222222");
+            //    throw;
+            //}
+            #endregion
 
+
+            #region 字符串匹配
+            string key1 = "你好";
+            string value = "你好123,hello 你,Hello 好,hello 你好,盆友们你们好,你好";
+            List<string> list2 = value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+            string ret = string.Join("-", list2.Where(s => s.Contains(key1)).ToList());
+            Console.WriteLine($"匹配：{ret}");
+
+            if (list2.Where(s => s.Equals(key1)).Count() > 0)
+            {
+                Console.WriteLine("已匹配");
+            }
+
+            string key2 = "سوراق قىلماق ";//审
+            string key3 = "سودىيە ";//法官
+            string value2 = "باش سوتچى ";//审判长
+            string value3 = "ئاساسلىق سوت قىلغۇچى سودىيە ";//主审法官
+            if (value2.Contains(key2))
+            {
+                Console.WriteLine("审判长已匹配");//单字无法匹配
+            }
+            else if (value3.Contains(key3))
+            {
+                Console.WriteLine("主审法官已匹配");//单词可以匹配
+            }
+
+            string key4 = "توغرا ئىككى123 قېتىم بارغان";
+            string value4 = new string(key4.Reverse().ToArray());
+            Console.WriteLine($"反转前:{key4}\r\n反转后:{value4}");
+            //将反转的数字恢复成阿拉伯数字正序方向
+            int index = value4.IndexOf("321");
+            string subToReverse = value4.Substring(index, 3);
+            string reverstRes = new string(subToReverse.Reverse().ToArray());
+            string newStr = value4.Substring(0, index) + reverstRes + value4.Substring(index + 3);
+
+
+            //取出字符串中的数字
+            string input = "abc123def456ghi789";
+            Console.WriteLine($"反转之前文本：{input}");
+            var reverse = new string(input.Reverse().ToArray());
+            Dictionary<string, int> digit = new Dictionary<string, int>();
+            Regex regex = new Regex(@"\d+");
+            if (regex.IsMatch(reverse))
+            {
+                foreach (Match match in regex.Matches(reverse))
+                {
+                    digit.Add(match.Value, match.Value.Length);
+                }
+                foreach (KeyValuePair<string, int> item in digit)
+                {
+                    var index1 = reverse.IndexOf(item.Key);
+                    var preStr = reverse.Substring(index1, item.Value);
+                    var curStr = new string(preStr.Reverse().ToArray());
+                    reverse = reverse.Substring(0, index1) + curStr + reverse.Substring(index1 + item.Value);
+                }
+            }
+            Console.WriteLine($"首先反转字符串，然后取出其中的数字并正序显示：{reverse}");
+            #endregion
             Console.Read();
         }
 
         #region 方法
+
+        public static void ExceptionMethod()
+        {
+            try
+            {
+                int i = 0;
+                int j = 1 / i;
+            }
+            catch (Exception)
+            {
+                throw new Exception("被除数为0");
+            }
+        }
 
         // 自定义比较器，按键的降序排序
         public class KeyDescendingComparer : IComparer<string>
@@ -751,13 +843,13 @@ public class User_list
     public double score { get; set; }
 }
 
-
 public class Paragraph
 {
     public TextType TextType { get; set; }
 
     public string Content { get; set; }
 }
+
 public enum TextType
 {
     /// <summary>

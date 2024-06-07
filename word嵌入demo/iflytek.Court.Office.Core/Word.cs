@@ -5,6 +5,7 @@ using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -26,7 +27,26 @@ namespace iflytek.Court.Office.Core
         /// <param name="height">高度</param>
         public void SetParent(IntPtr hwnd, int width, int height)
         {
-            wordApp.Hwnd = WindowNativeApi.FindWindow("Opusapp", "");
+            IntPtr mainWindowHandle = IntPtr.Zero;
+            // 查找 WPS 进程
+            Process[] processes = Process.GetProcessesByName("wps");
+
+            foreach (Process process in processes)
+            {
+                // 获取主窗口句柄
+                mainWindowHandle = process.MainWindowHandle;
+
+                if (mainWindowHandle != IntPtr.Zero)
+                {
+                    Console.WriteLine("WPS 进程主窗口句柄: " + mainWindowHandle);
+                }
+                else
+                {
+                    Console.WriteLine("WPS 进程未找到主窗口句柄.");
+                }
+            }
+            //wordApp.Hwnd = WindowNativeApi.FindWindow("Opusapp", "");
+            wordApp.Hwnd = mainWindowHandle;
             WindowNativeApi.SetParent(wordApp.Hwnd, hwnd);
             Layout(width, height);
             //WindowNativeApi.SetWindowPos(wordInst.Hwnd, hwnd, 0, 0, width - 20, height - 20, WindowNativeApi.SWP_NOZORDER | WindowNativeApi.SWP_NOMOVE | WindowNativeApi.SWP_DRAWFRAME);
@@ -59,6 +79,7 @@ namespace iflytek.Court.Office.Core
             wordApp.TransformFont = new FontClass();
             wordApp.MarkFont.Color = WdColor.wdColorDarkRed;
             wordApp.Comments = new List<CommentSt>();
+            wordApp.Paragraph = wordApp.Document.Paragraphs.Add();
         }
 
         /// <summary>
@@ -77,6 +98,7 @@ namespace iflytek.Court.Office.Core
         public void OpenFile(string path)
         {
             wordApp.Document = wordApp.Instance.Documents.Open(path);
+            wordApp.Paragraph = wordApp.Document.Paragraphs.Add();
 
             foreach (Comment wordComment in wordApp.Document.Comments)
             {
@@ -416,6 +438,14 @@ namespace iflytek.Court.Office.Core
                 }
             }
             return null;
+        }
+
+        public void SetReadingOrder()
+        {
+            // 设置段落文字方向为从右到左
+            wordApp.Paragraph.Range.ParagraphFormat.ReadingOrder = Microsoft.Office.Interop.Word.WdReadingOrder.wdReadingOrderRtl;
+            // 设置段落文字
+            wordApp.Range.Text += "ياخشىمۇ سىز ئۇيغۇر";
         }
 
         #region 内部方法

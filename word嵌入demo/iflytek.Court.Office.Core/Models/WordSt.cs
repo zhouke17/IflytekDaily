@@ -40,5 +40,9 @@ namespace iflytek.Court.Office.Core.Models
         /// 批注列表
         /// </summary>
         public List<CommentSt> Comments { set; get; }
+        /// <summary>
+        /// 段落
+        /// </summary>
+        public Paragraph Paragraph { set; get; }
     }
 }

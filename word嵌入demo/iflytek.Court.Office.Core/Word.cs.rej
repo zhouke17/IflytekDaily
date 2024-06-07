@@ -1,0 +1,18 @@
+diff a/word嵌入demo/iflytek.Court.Office.Core/Word.cs b/word嵌入demo/iflytek.Court.Office.Core/Word.cs	(rejected hunks)
+@@ -23,14 +23,14 @@
+         /// </summary>
+         /// <param name="hwnd">父容器句柄</param>
+         /// <param name="width">宽度</param>
+         /// <param name="height">高度</param>
+         public void SetParent(IntPtr hwnd, int width, int height)
+         {
+-            wordApp.Hwnd = WindowNativeApi.FindWindow("Opusapp", "");
+-            WindowNativeApi.SetParent(wordApp.Hwnd, hwnd);
++            IntPtr intPtr = new IntPtr(Convert.ToInt32("001620F0", 16));
++            wordApp.Hwnd = WindowNativeApi.FindWindow(intPtr, null);
+             Layout(width, height);
+             //WindowNativeApi.SetWindowPos(wordInst.Hwnd, hwnd, 0, 0, width - 20, height - 20, WindowNativeApi.SWP_NOZORDER | WindowNativeApi.SWP_NOMOVE | WindowNativeApi.SWP_DRAWFRAME);
+             wordApp.Instance.Visible = true;
+         }
+ 
+         /// <summary>
