@@ -1,0 +1,10 @@
+D:\IflytekDaily\DumpWinForm\DumpWinForm\bin\Debug\DumpWinForm.exe.config
+D:\IflytekDaily\DumpWinForm\DumpWinForm\bin\Debug\DumpWinForm.exe
+D:\IflytekDaily\DumpWinForm\DumpWinForm\bin\Debug\DumpWinForm.pdb
+D:\IflytekDaily\DumpWinForm\DumpWinForm\obj\Debug\DumpWinForm.csproj.AssemblyReference.cache
+D:\IflytekDaily\DumpWinForm\DumpWinForm\obj\Debug\DumpWinForm.Properties.Resources.resources
+D:\IflytekDaily\DumpWinForm\DumpWinForm\obj\Debug\DumpWinForm.csproj.GenerateResource.cache
+D:\IflytekDaily\DumpWinForm\DumpWinForm\obj\Debug\DumpWinForm.csproj.CoreCompileInputs.cache
+D:\IflytekDaily\DumpWinForm\DumpWinForm\obj\Debug\DumpWinForm.exe
+D:\IflytekDaily\DumpWinForm\DumpWinForm\obj\Debug\DumpWinForm.pdb
+D:\IflytekDaily\DumpWinForm\DumpWinForm\obj\Debug\DumpWinForm.Form1.resources

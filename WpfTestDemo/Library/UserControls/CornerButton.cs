@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace CustomControls
 {
@@ -37,5 +38,33 @@ namespace CustomControls
         // Using a DependencyProperty as the backing store for CornerRadius2.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CornerRadius2Property =
             DependencyProperty.RegisterAttached("CornerRadius2", typeof(CornerRadius), typeof(CornerButton2));
+    }
+
+    public class CornerButton3
+    {
+
+
+        public static CornerRadius GetCornerButton3(DependencyObject obj)
+        {
+            return (CornerRadius)obj.GetValue(CornerButton3Property);
+        }
+
+        public static void SetCornerButton3(DependencyObject obj, CornerRadius value)
+        {
+            obj.SetValue(CornerButton3Property, value);
+        }
+
+        // Using a DependencyProperty as the backing store for CornerButton3.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerButton3Property =
+            DependencyProperty.RegisterAttached("CornerButton3", typeof(CornerRadius), typeof(CornerButton3), new PropertyMetadata(new CornerRadius(0, 0, 0, 0), new PropertyChangedCallback((s, e) =>
+            {
+                var cornerButton = (Button)s;
+                if (cornerButton != null)
+                {
+                    SetCornerButton3(cornerButton, (CornerRadius)e.NewValue);
+                }
+            })));
+
+
     }
 }

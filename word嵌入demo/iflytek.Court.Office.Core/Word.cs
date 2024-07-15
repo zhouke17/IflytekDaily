@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace iflytek.Court.Office.Core
 {
@@ -33,19 +34,34 @@ namespace iflytek.Court.Office.Core
 
             foreach (Process process in processes)
             {
-                // 获取主窗口句柄
-                mainWindowHandle = process.MainWindowHandle;
-
-                if (mainWindowHandle != IntPtr.Zero)
+                if (process.MainWindowHandle != IntPtr.Zero)
                 {
+                    mainWindowHandle = process.MainWindowHandle;
                     Console.WriteLine("WPS 进程主窗口句柄: " + mainWindowHandle);
                 }
-                else
-                {
-                    Console.WriteLine("WPS 进程未找到主窗口句柄.");
-                }
+            }
+            if (mainWindowHandle == IntPtr.Zero)
+            {
+                Console.WriteLine("WPS 未找到主窗口句柄");
             }
             //wordApp.Hwnd = WindowNativeApi.FindWindow("Opusapp", "");
+            if (mainWindowHandle == IntPtr.Zero)
+            {
+                processes = Process.GetProcessesByName("Winword");
+
+                foreach (Process process in processes)
+                {
+                    if (process.MainWindowHandle != IntPtr.Zero)
+                    {
+                        mainWindowHandle = process.MainWindowHandle;
+                        Console.WriteLine("word 进程主窗口句柄: " + mainWindowHandle);
+                    }
+                }
+                if (mainWindowHandle == IntPtr.Zero)
+                {
+                    Console.WriteLine("word 进程未找到主窗口句柄");
+                }
+            }
             wordApp.Hwnd = mainWindowHandle;
             WindowNativeApi.SetParent(wordApp.Hwnd, hwnd);
             Layout(width, height);
@@ -60,7 +76,7 @@ namespace iflytek.Court.Office.Core
         {
             wordApp.Instance = new ApplicationClass()
             {
-                //Visible = false,
+                //Visible = false
             };
             //wordApp.MarkFont = new FontClass();
             //wordApp.TransformFont = new FontClass();
@@ -445,7 +461,23 @@ namespace iflytek.Court.Office.Core
             // 设置段落文字方向为从右到左
             wordApp.Paragraph.Range.ParagraphFormat.ReadingOrder = Microsoft.Office.Interop.Word.WdReadingOrder.wdReadingOrderRtl;
             // 设置段落文字
-            wordApp.Range.Text += "ياخشىمۇ سىز ئۇيغۇر";
+            //wordApp.Range.Text += "ياخشىمۇ سىز ئۇيغۇر";
+        }
+
+        public void SetOrderToText()
+        {
+            foreach (Paragraph para in wordApp.Document.Paragraphs)
+            {
+                if (para.Range.ListFormat.ListType != WdListType.wdListNoNumbering)
+                {
+                    // 获取段落的列表编号
+                    string listString = para.Range.ListFormat.ListString;
+                    //para.Range.ListFormat.ConvertNumbersToText();
+                    string paraText = para.Range.Text;
+
+                    Console.WriteLine($"列表编号: {listString}, 段落文本: {paraText}");
+                }
+            }
         }
 
         #region 内部方法

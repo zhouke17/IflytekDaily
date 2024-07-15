@@ -31,47 +31,47 @@ namespace ConsoleApp1
             var obj2 = JsonConvert.DeserializeObject<JObject>(res);
             var obj3 = (dynamic)JObject.Parse(res2);
 
-            //List<string> list = new List<string>();
-            //foreach (var item in obj3.data)
-            //{
-            //    var name = item.Value<string>("name");
-            //    list.Add(name);
-            //    //list.Add(item.name);//不可直接add
-            //}
+            List<string> list = new List<string>();
+            foreach (var item in obj3.data)
+            {
+                var name = item.Value<string>("name");
+                list.Add(name);
+                //list.Add(item.name);//不可直接add
+            }
 
             var result = obj.Value<JObject>("result1");//此种方式可避免空值引发异常,而且会有默认值
             if (result == null)
             {
                 var child = result?.Value<JObject>("face_token");
             }
-            //var error_code3 = obj["error_code"].ToString();
-            //var error_code2 = obj["error_code"].Value<string>();
-            //Console.WriteLine($"三种JObject单层对象解析方式：{Environment.NewLine} error_code:{error_code}{Environment.NewLine}error_code2:{error_code2}{Environment.NewLine}error_code3:{error_code3}");
+            var error_code3 = obj["error_code"].ToString();
+            var error_code2 = obj["error_code"].Value<string>();
+            Console.WriteLine($"JObject单层对象解析方式：{Environment.NewLine}error_code2:{error_code2}{Environment.NewLine}error_code3:{error_code3}");
 
 
-            //var face_token = obj["result"]["face_token"].Value<string>();
-            //var face_token2 = obj["result"].Value<string>("face_token");
-            //var face_token3 = ((dynamic)obj).result.face_token;
-            //Console.WriteLine($"三种JObject双层对象解析方式：{Environment.NewLine} face_token:{face_token}{Environment.NewLine}face_token2:{face_token2}{Environment.NewLine}face_token3:{face_token3}");
+            var face_token = obj["result"]["face_token"].Value<string>();
+            var face_token2 = obj["result"].Value<string>("face_token");
+            var face_token3 = ((dynamic)obj).result.face_token;
+            Console.WriteLine($"三种JObject双层对象解析方式：{Environment.NewLine} face_token:{face_token}{Environment.NewLine}face_token2:{face_token2}{Environment.NewLine}face_token3:{face_token3}");
 
 
-            //Console.WriteLine("转化成JArray后遍历");
-            //foreach (var item in obj["result"]["user_list"].Value<JArray>())
-            //{
-            //    Console.WriteLine($"{item["group_id"].Value<string>()}");
-            //}
-            //Console.WriteLine("直接遍历");
-            //foreach (var item in obj["result"]["user_list"])
-            //{
-            //    Console.WriteLine($"{item["group_id"].Value<string>()}");
-            //}
+            Console.WriteLine("转化成JArray后遍历");
+            foreach (var item in obj["result"]["user_list"].Value<JArray>())
+            {
+                Console.WriteLine($"{item["group_id"].Value<string>()}");
+            }
+            Console.WriteLine("直接遍历");
+            foreach (var item in obj["result"]["user_list"])
+            {
+                Console.WriteLine($"{item["group_id"].Value<string>()}");
+            }
 
 
-            //Console.WriteLine("反序列化数组：");
-            //var user_list = JsonConvert.SerializeObject(obj["result"]["user_list"].Value<JArray>());
-            //List<User_list> userlist = new List<User_list>();
-            //userlist = JsonConvert.DeserializeObject<List<User_list>>(user_list);
-            //userlist.RemoveAll(s => { return s.user_id == "1028867728"; });
+            Console.WriteLine("反序列化数组：");
+            var user_list = JsonConvert.SerializeObject(obj["result"]["user_list"].Value<JArray>());
+            List<User_list> userlist = new List<User_list>();
+            userlist = JsonConvert.DeserializeObject<List<User_list>>(user_list);
+            userlist.RemoveAll(s => { return s.user_id == "1028867728"; });
             #endregion
 
 
@@ -647,7 +647,14 @@ namespace ConsoleApp1
                 }
             }
             Console.WriteLine($"首先反转字符串，然后取出其中的数字并正序显示：{reverse}");
+
+            string input2 = "؟توغرا ئىككى123 قېتىم بارغان،؟";
+            char[] chars = { '،', '؟' };
+            string input3 = input2.TrimEnd(chars);
+            Console.WriteLine(input3);
             #endregion
+
+
             Console.Read();
         }
 

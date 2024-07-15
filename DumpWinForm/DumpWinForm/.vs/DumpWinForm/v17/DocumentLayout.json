@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F2235FB2-B5DC-4C2E-8A44-2DA6E34421A9}|DumpWinForm.csproj|d:\\iflytekdaily\\dumpwinform\\dumpwinform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2235FB2-B5DC-4C2E-8A44-2DA6E34421A9}|DumpWinForm.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\bin\\Release\\DumpWinForm.exe.23760.dmp||{FF0A863B-6F9C-46BF-9684-DBE4C0A3ED6D}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:bin\\Release\\DumpWinForm.exe.23760.dmp||{FF0A863B-6F9C-46BF-9684-DBE4C0A3ED6D}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2235FB2-B5DC-4C2E-8A44-2DA6E34421A9}|DumpWinForm.csproj|d:\\iflytekdaily\\dumpwinform\\dumpwinform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F2235FB2-B5DC-4C2E-8A44-2DA6E34421A9}|DumpWinForm.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2235FB2-B5DC-4C2E-8A44-2DA6E34421A9}|DumpWinForm.csproj|d:\\iflytekdaily\\dumpwinform\\dumpwinform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2235FB2-B5DC-4C2E-8A44-2DA6E34421A9}|DumpWinForm.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 12,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{25f7e850-ffa1-11d0-b63f-00a0c922e851}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DumpWinForm.exe.23760.dmp",
+              "DocumentMoniker": "D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\bin\\Release\\DumpWinForm.exe.23760.dmp",
+              "RelativeDocumentMoniker": "bin\\Release\\DumpWinForm.exe.23760.dmp",
+              "ToolTip": "D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\bin\\Release\\DumpWinForm.exe.23760.dmp",
+              "RelativeToolTip": "bin\\Release\\DumpWinForm.exe.23760.dmp",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000712|",
+              "WhenOpened": "2024-06-13T06:37:39.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T09:43:29.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAwwCQAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T09:33:54.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "D:\\IflytekDaily\\DumpWinForm\\DumpWinForm\\Form1.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "Form1.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T09:31:42.406Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

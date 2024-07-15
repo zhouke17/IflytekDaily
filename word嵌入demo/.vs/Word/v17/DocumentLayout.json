@@ -1,0 +1,131 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\IflytekDaily\\word\u5D4C\u5165demo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F94A3169-D852-49E1-ADCC-D0250D943669}|iflytek.Court.Office.Core\\iflytek.Court.Office.Core.csproj|d:\\iflytekdaily\\word\u5D4C\u5165demo\\iflytek.court.office.core\\word.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F94A3169-D852-49E1-ADCC-D0250D943669}|iflytek.Court.Office.Core\\iflytek.Court.Office.Core.csproj|solutionrelative:iflytek.court.office.core\\word.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A408EC1E-80CA-4741-BBC2-1FE97FC04FD3}|WordDemo\\WordDemo.csproj|D:\\IflytekDaily\\word\u5D4C\u5165demo\\worddemo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A408EC1E-80CA-4741-BBC2-1FE97FC04FD3}|WordDemo\\WordDemo.csproj|solutionrelative:worddemo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F94A3169-D852-49E1-ADCC-D0250D943669}|iflytek.Court.Office.Core\\iflytek.Court.Office.Core.csproj|d:\\iflytekdaily\\word\u5D4C\u5165demo\\iflytek.court.office.core\\interface\\iword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F94A3169-D852-49E1-ADCC-D0250D943669}|iflytek.Court.Office.Core\\iflytek.Court.Office.Core.csproj|solutionrelative:iflytek.court.office.core\\interface\\iword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A408EC1E-80CA-4741-BBC2-1FE97FC04FD3}|WordDemo\\WordDemo.csproj|d:\\iflytekdaily\\word\u5D4C\u5165demo\\worddemo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A408EC1E-80CA-4741-BBC2-1FE97FC04FD3}|WordDemo\\WordDemo.csproj|solutionrelative:worddemo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 14,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{25f7e850-ffa1-11d0-b63f-00a0c922e851}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IWord.cs",
+              "DocumentMoniker": "D:\\IflytekDaily\\word\u5D4C\u5165demo\\iflytek.Court.Office.Core\\Interface\\IWord.cs",
+              "RelativeDocumentMoniker": "iflytek.Court.Office.Core\\Interface\\IWord.cs",
+              "ToolTip": "D:\\IflytekDaily\\word\u5D4C\u5165demo\\iflytek.Court.Office.Core\\Interface\\IWord.cs",
+              "RelativeToolTip": "iflytek.Court.Office.Core\\Interface\\IWord.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAqwF4AAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-05T01:43:51.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\IflytekDaily\\word\u5D4C\u5165demo\\WordDemo\\Form1.cs",
+              "RelativeDocumentMoniker": "WordDemo\\Form1.cs",
+              "ToolTip": "D:\\IflytekDaily\\word\u5D4C\u5165demo\\WordDemo\\Form1.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "WordDemo\\Form1.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-05T01:42:12.269Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\IflytekDaily\\word\u5D4C\u5165demo\\WordDemo\\Form1.cs",
+              "RelativeDocumentMoniker": "WordDemo\\Form1.cs",
+              "ToolTip": "D:\\IflytekDaily\\word\u5D4C\u5165demo\\WordDemo\\Form1.cs",
+              "RelativeToolTip": "WordDemo\\Form1.cs",
+              "ViewState": "AQIAACwBAAAAAAAAAAA1wDYBAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-06T07:46:57.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Word.cs",
+              "DocumentMoniker": "D:\\IflytekDaily\\word\u5D4C\u5165demo\\iflytek.Court.Office.Core\\Word.cs",
+              "RelativeDocumentMoniker": "iflytek.Court.Office.Core\\Word.cs",
+              "ToolTip": "D:\\IflytekDaily\\word\u5D4C\u5165demo\\iflytek.Court.Office.Core\\Word.cs",
+              "RelativeToolTip": "iflytek.Court.Office.Core\\Word.cs",
+              "ViewState": "AQIAAM4BAAAAAAAAAAA0wNUBAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-12-06T07:46:58.174Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

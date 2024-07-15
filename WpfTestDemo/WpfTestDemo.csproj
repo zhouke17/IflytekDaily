@@ -58,6 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ImageMemoryOptimization\DisposableVirtualizingStackPanel.cs" />
+    <Compile Include="ImageMemoryOptimization\ImageDrawingVisual.cs" />
     <Compile Include="MyDependencyProperty\PassWordAttached.cs" />
     <Compile Include="MyDependencyProperty\PasswordBoxWaterMark.cs" />
     <Compile Include="MyRouteEvent\TimeButton.cs" />
@@ -121,5 +123,6 @@
       <Name>CustomControls</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

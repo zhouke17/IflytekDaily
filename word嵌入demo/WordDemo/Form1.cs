@@ -1,6 +1,7 @@
 ﻿using iflytek.Court.Office.Core;
 using iflytek.Court.Office.Core.Interface;
 using iflytek.Court.Office.Core.Utils;
+using Microsoft.Win32;
 using Spire.Doc;
 using Spire.Doc.Documents;
 using Spire.Doc.Fields;
@@ -247,19 +248,30 @@ namespace WordDemo
 
         private void button4_Click(object sender, EventArgs e)
         {
-            // WPS Office的安装路径，根据实际情况修改
-            string wpsPath = @"D:\软件\wps\WPS Office\10.8.2.7119\office6\wps.exe";
+            try
+            {
+                string openFilePath = @"D:/wordTest.doc";
+                string wpsPath = string.Empty;
+                string chromeKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wps.exe";
+                RegistryKey appPath = Registry.LocalMachine.OpenSubKey(chromeKey);
+                wpsPath = appPath?.GetValue("").ToString();
+                if (File.Exists(wpsPath))
+                {
+                    System.Threading.Tasks.Task.Factory.StartNew(() =>
+                    {
+                        Process myprocess = new Process();
+                        string args = $"/wps /w /fromksolaunch \"{openFilePath}\"";
+                        ProcessStartInfo startInfo = new ProcessStartInfo(wpsPath, args);
+                        myprocess.StartInfo = startInfo;
+                        myprocess.Start();
+                    });
+                }
+            }
+            catch (Exception)
+            {
 
-            // 要打开的Word文档路径，根据实际情况修改
-            string documentPath = @"D:\Test.doc";
-
-            Process myprocess = new Process();
-            string args = $"/wps /w /fromksolaunch \"{documentPath}\"";
-            ProcessStartInfo startInfo = new ProcessStartInfo(wpsPath, args);
-            myprocess.StartInfo = startInfo;
-            myprocess.Start();
-            //Thread thread = new Thread(() => RunWps(wpsPath, documentPath));
-            //thread.Start();
+                throw;
+            }
         }
         static void RunWps(string wpsPath, string documentPath)
         {
@@ -325,6 +337,11 @@ namespace WordDemo
         private void button7_Click(object sender, EventArgs e)
         {
             word.SetReadingOrder();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            word.SetOrderToText();
         }
     }
 }

@@ -90,6 +90,10 @@ namespace iflytek.Court.Office.Core.Interface
         /// </summary>
         void SetReadingOrder();
         /// <summary>
+        /// 将序号设置成文本
+        /// </summary>
+        void SetOrderToText();
+        /// <summary>
         /// 退出word进程
         /// </summary>
         void Exit();

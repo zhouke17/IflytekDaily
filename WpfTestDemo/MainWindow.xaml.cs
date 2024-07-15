@@ -1,6 +1,8 @@
 ﻿using CustomControls;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,9 +40,6 @@ namespace WpfTestDemo
             }
         }
 
-
-
-
         public string MyPassWord
         {
             get { return (string)GetValue(MyPassWordProperty); }
@@ -52,6 +51,38 @@ namespace WpfTestDemo
             DependencyProperty.Register("MyPassWord", typeof(string), typeof(MainWindow), new PropertyMetadata(""));
 
 
+
+        public CornerRadius MyCorner
+        {
+            get { return (CornerRadius)GetValue(MyCornerProperty); }
+            set { SetValue(MyCornerProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyCorner.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyCornerProperty =
+            DependencyProperty.Register("MyCorner", typeof(CornerRadius), typeof(MainWindow), new PropertyMetadata(new CornerRadius(1, 1, 1, 1)));
+
+
+
+        private ObservableCollection<ImageSource> imageList;
+
+        public ObservableCollection<ImageSource> ImageList
+        {
+            get { return imageList; }
+            set { imageList = value; OnPropertyChanged("ImageList"); }
+        }
+
+
+        public ObservableCollection<string> ImagePathList
+        {
+            get { return (ObservableCollection<string>)GetValue(ImagePathListProperty); }
+            set { SetValue(ImagePathListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ImagePathList.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ImagePathListProperty =
+            DependencyProperty.Register("ImagePathList", typeof(ObservableCollection<string>), typeof(MainWindow), new PropertyMetadata(default(string)));
+
         #endregion
 
         public MainWindow()
@@ -62,7 +93,34 @@ namespace WpfTestDemo
 
             this.RootGrid.AddHandler(TimeButton.ReportTimeEvent, new RoutedEventHandler(RootEvent_Listener));//添加自定义路由事件的路由处理程序
 
-            //this.moveRectAnimation.Begin(); // 开始动画
+            //ImageList = new ObservableCollection<ImageSource>();
+            //var selectedPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ImageList");
+            //var files = Directory.GetFiles(selectedPath);
+            //foreach (var item in files)
+            //{
+            //    var bitmap = new BitmapImage();
+            //    using (var fileStream = new FileStream(item, FileMode.Open, FileAccess.Read))
+            //    {
+            //        bitmap.BeginInit();
+            //        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+            //        //缩放，以减少内存占用并提高性能
+            //        //bitmap.DecodePixelWidth = 100;
+            //        //bitmap.DecodePixelHeight = 100;
+            //        bitmap.StreamSource = fileStream;
+            //        bitmap.EndInit();
+            //        bitmap.Freeze();
+            //    }
+            //    ImageList.Add(bitmap);
+            //}
+
+            ImagePathList = new ObservableCollection<string>();
+            var paths = "ImageList";
+            var files = Directory.GetFiles(paths);
+            foreach (var item in files)
+            {
+                ImagePathList.Add(item);
+            }
+
         }
         private void Window_unLoaded(object sender, RoutedEventArgs e)
         {

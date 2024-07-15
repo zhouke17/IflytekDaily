@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace AsyncForm
 {
@@ -14,7 +17,6 @@ namespace AsyncForm
         {
             InitializeComponent();
         }
-
 
         private static void TaskInfos(string name = "")
         {
@@ -38,8 +40,8 @@ namespace AsyncForm
             Console.WriteLine(DateTime.Now);
         }
 
-
         #region 异步同步执行(async,await 推荐安全的调用方式)
+
         private async void button1_Click(object sender, EventArgs e)
         {
             var res1 = await Task.Run(() => func());//防止func内部线程阻塞导致调用线程被阻塞，即安全的调用方式
@@ -48,21 +50,17 @@ namespace AsyncForm
                 this.listBox1.Items.Add(res1);
             }));
 
-
             //var res2 = await func();//默认切换调用线程的上下文(func内部有可能被阻塞，从而导致主线程阻塞)
             //this.listBox1.Items.Add(res2);
-
 
             //var res3 = await func().ConfigureAwait(false);//不切换到调用线程的上下文(是否尝试将延续任务封送回原始上下文)
             //Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
             //this.BeginInvoke(new Action(() => { this.listBox1.Items.Add(res3); }));//可能不是主线程id,故使用BeginInvoke
             //Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
 
-
             //var res4 = func();
             //this.listBox1.Items.Add(res4.Result);//阻塞式调用获取异步结果，导致死锁
             //Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
-
 
             Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
         }
@@ -70,23 +68,25 @@ namespace AsyncForm
         public async Task<int> func()
         {
             Console.WriteLine("func开始执行");
-            //Thread.Sleep(TimeSpan.FromSeconds(3)); //func内部线程阻塞导致调用线程被阻塞
+            Thread.Sleep(TimeSpan.FromSeconds(3)); //func内部线程阻塞导致调用线程被阻塞
             Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
             await Task.Delay(TimeSpan.FromSeconds(3));
             Console.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
             Console.WriteLine("func结束执行");
             return DateTime.Now.Day;
         }
-        #endregion
 
-
+        #endregion 异步同步执行(async,await 推荐安全的调用方式)
 
         #region TaskCompletionSource 实现异步同步执行
+
         private async void button2_Click(object sender, EventArgs e)
         {
+            Debug.WriteLine($"TaskCompleteSource start!");
             var result = await AwaitByTaskCompleteSource(TestWithResultAsync);
             Debug.WriteLine($"TaskCompleteSource end:{result}");
         }
+
         private static async Task<string> TestWithResultAsync()
         {
             Debug.WriteLine("1. 异步任务start……");
@@ -94,6 +94,7 @@ namespace AsyncForm
             Debug.WriteLine("2. 异步任务end……");
             return "执行了2秒时间";
         }
+
         private async Task<string> AwaitByTaskCompleteSource(Func<Task<string>> func)
         {
             var taskCompletionSource = new TaskCompletionSource<string>();
@@ -105,11 +106,11 @@ namespace AsyncForm
             );
             return await taskCompletionSource.Task;
         }
-        #endregion
 
-
+        #endregion TaskCompletionSource 实现异步同步执行
 
         #region AutoResetEvent 异步转同步 防止死锁
+
         private void button3_Click(object sender, EventArgs e)
         {
             AwaitUsingAutoResetEvent(TestAsync());
@@ -129,6 +130,7 @@ namespace AsyncForm
                 Debug.WriteLine("AwaitAutoResetEvent end");
             });
         }
+
         private static async Task TestAsync()
         {
             Debug.WriteLine("异步任务start……");
@@ -136,12 +138,12 @@ namespace AsyncForm
             Debug.WriteLine("异步任务end……");
         }
 
-        #endregion
-
-
+        #endregion AutoResetEvent 异步转同步 防止死锁
 
         #region 线程安全的字典
+
         private static readonly object lockobj = new object();
+
         private void button4_Click(object sender, EventArgs e)
         {
             var list1 = new List<int>();
@@ -162,19 +164,21 @@ namespace AsyncForm
                 Console.WriteLine($"输出：键-{item.Key}，值-{item.Value}");
             }
         }
-        #endregion
 
-
+        #endregion 线程安全的字典
 
         #region 信号量异步
+
         private async void button5_Click(object sender, EventArgs e)
         {
             int value;
             value = await GetNextValueAsync();
             Console.WriteLine(value);
         }
+
         private int asyncValue;
-        SemaphoreSlim mutex = new SemaphoreSlim(1);
+        private SemaphoreSlim mutex = new SemaphoreSlim(1);
+
         public async Task<int> GetNextValueAsync()
         {
             await mutex.WaitAsync().ConfigureAwait(false);
@@ -190,12 +194,13 @@ namespace AsyncForm
             }
             return asyncValue;
         }
-        #endregion
 
-
+        #endregion 信号量异步
 
         #region Monitor用户态锁实现超时检测
+
         private object monitorObj = new object();
+
         private void Monitor_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
@@ -214,7 +219,6 @@ namespace AsyncForm
                     System.Threading.Monitor.Exit(monitorObj);
                 }
             });
-
         }
 
         private void MonitorPulseAll_Click(object sender, EventArgs e)
@@ -237,11 +241,11 @@ namespace AsyncForm
                 System.Threading.Monitor.Exit(monitorObj);
             });
         }
-        #endregion
 
-
+        #endregion Monitor用户态锁实现超时检测
 
         #region AutoResetEvent 例子
+
         private void button9_Click(object sender, EventArgs e)
         {
             // 创建AutoResetEvent对象
@@ -289,40 +293,66 @@ namespace AsyncForm
             thread3.Start();
         }
 
-
-        #endregion
+        #endregion AutoResetEvent 例子
 
         #region Parallel并行
+
         private void button10_Click(object sender, EventArgs e)
         {
-            //Parallel.For(0, 5, i => { Console.WriteLine("i=" + i); TaskInfos(); });
-            //Parallel.ForEach(new string[] { "0", "1", "2", "3", "4" }, j => { Console.WriteLine("j=" + j); TaskInfos(); });
+            //fromInclusive：起始索引，包括在内。
+            //toExclusive：结束索引，不包括在内。
+            //body：每个迭代的操作，使用当前迭代的索引作为参数。
+            Parallel.For(0, 5, i => { Console.WriteLine("i=" + i); TaskInfos(); });
+            //source：要迭代的集合。
+            //body：每个元素的操作，使用当前元素作为参数。
+            Parallel.ForEach(new string[] { "0", "1", "2", "3", "4" }, j => { Console.WriteLine("j=" + j); TaskInfos(); });
 
-            // 将 JArray 转换为 List<int>
+            // 将json转化为 JArray
             var jArray = JArray.Parse("[1, 2, 3]");
-            var list = jArray.ToObject<List<int>>();
+            Console.WriteLine(jArray[0]);// 输出：1
+            var list = jArray.ToObject<List<int>>();//父类JToken的方法
             Console.WriteLine(list[0]); // 输出：1
 
-
-            // 将 JToken 转换为 int 类型
-            var jobject = JToken.Parse(@"{""name"":""John Smith"",""age"":30}");
-            var age = jobject.Value<int>("age");
+            // 将json转化为JObject、JToken 
+            var jObject = JObject.Parse(@"{""name"":""John Smith"",""age"":30}");
+            var age = jObject.Value<int>("age");
             Console.WriteLine(age); // 输出：30
-
+            var jToken = JToken.Parse(@"{""name"":""John Smith"",""age"":30}");
+            var name = jToken["name"].Value<string>();
+            Console.WriteLine(name);
 
             string res = "{\"success\":\"0\",\"msg\":\"\",\"data\":[{\"id\":null,\"ah\":null,\"ahdm\":null,\"litigantId\":null,\"litigantXh\":null,\"name\":\"李四\",\"ssdw\":\"被告\",\"telephone\":\"\",\"licenceId\":\"\",\"address\":null,\"litigantType\":\"法人\",\"litigantTypeCode\":null},{\"id\":null,\"ah\":null,\"ahdm\":null,\"litigantId\":null,\"litigantXh\":null,\"name\":\"张三\",\"ssdw\":\"原告\",\"telephone\":\"13111111111\",\"licenceId\":\"1234\",\"address\":null,\"litigantType\":\"自然人\",\"litigantTypeCode\":null}]}";
-            //var obj3 = JToken.Parse(res2).ToObject<dynamic>();
             var obj = (dynamic)JObject.Parse(res);
+            //var obj = JObject.Parse(res).ToObject<dynamic>();//与上同理
+
+            var obj2 = JObject.Parse(res);
 
             List<string> list2 = new List<string>();
             foreach (var item in obj.data)
             {
-                string name = item.name;
-                list2.Add(name);
+                string name2 = item.name;
+                list2.Add(name2);
+            }
+            list2.Clear();
+            foreach (var item in JArray.Parse(obj.data.ToString()))
+            {
+                string name2 = item.name;
+                list2.Add(name2);
             }
 
+            list2.Clear();
+            foreach (var item in obj2["data"].Value<JArray>())
+            {
+                list2.Add(item.Value<string>("name"));
+            }
+            list2.Clear();
+            foreach (var item in (JArray)obj2["data"])
+            {
+                list2.Add(item.Value<string>("name"));
+            }
         }
-        #endregion
+
+        #endregion Parallel并行
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -342,8 +372,8 @@ namespace AsyncForm
             }
         }
 
-
         #region 系统崩溃
+
         private void 内存溢出_Click(object sender, EventArgs e)
         {
             List<string> list = new List<string>();
@@ -360,24 +390,106 @@ namespace AsyncForm
              {
                  while (true)
                  {
-
                  }
              });
         }
 
+        #endregion 系统崩溃
 
-        #endregion
+        private async void button6_Click(object sender, EventArgs e)
+        {
+            var cancelAbleleTask = new CancelableThreadTask(LongRunningWork);
+            using (CancellationTokenSource cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(3000)))
+            {
+                try
+                {
+                    await cancelAbleleTask.RunAsync(cancellationTokenSource.Token);
+                }
+                catch (ThreadInterruptedException ex)
+                {
+                    Console.WriteLine("长时间运行任务已被取消");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"发生异常：{ex}");
+                }
+            };
+        }
+
+        private void LongRunningWork()
+        {
+            Console.WriteLine("开始运行长时间任务");
+            Thread.Sleep(10000);
+            Console.WriteLine("结束运行长时间任务");
+        }
+    }
+
+    public class CancelableThreadTask
+    {
+        private Thread _thread;
+        private TaskCompletionSource<bool> taskCompletionSource;
+        private readonly Action action;
+        private int isRunnig = 0;
+
+        public CancelableThreadTask(Action action)
+        {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+        }
+
+        public Task RunAsync(CancellationToken cancellationToken)
+        {
+            if (Interlocked.CompareExchange(ref isRunnig, 1, 0) == 1)
+            {
+                throw new InvalidOperationException("Task is already running!");
+            }
+
+            taskCompletionSource = new TaskCompletionSource<bool>();
+            _thread = new Thread(() =>
+            {
+                try
+                {
+                    action?.Invoke();
+                    taskCompletionSource.SetResult(true);
+                }
+                catch (Exception ex)
+                {
+                    if (ex is ThreadInterruptedException)
+                    {
+                        taskCompletionSource.TrySetCanceled();
+                    }
+                    else
+                    {
+                        taskCompletionSource.TrySetException(ex);
+                    }
+                }
+                finally
+                {
+                    Interlocked.Exchange(ref isRunnig, 0);
+                }
+            });
+
+            cancellationToken.Register(() =>
+            {
+                if (Interlocked.CompareExchange(ref isRunnig, 0, 1) == 1)
+                {
+                    _thread.Interrupt();
+                    _thread.Join();
+                    taskCompletionSource.TrySetCanceled(cancellationToken);
+                }
+            });
+
+            _thread.Start();
+            return taskCompletionSource.Task;
+        }
     }
 
     /// <summary>
-    /// 自己的写的AutoResetEvent
+    /// AutoResetEvent
     /// </summary>
     public class AutoResetEventEx
     {
         /// <summary>
-        /// 内部的设置状态 
-        /// true  不等待信号
-        /// false 等待信号
+        /// 内部的设置状态 true 不等待信号 false 等待信号
         /// </summary>
         private bool _initialState = false;
 

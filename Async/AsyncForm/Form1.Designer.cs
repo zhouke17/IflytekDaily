@@ -47,6 +47,7 @@ namespace AsyncForm
             this.内存溢出 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -97,7 +98,7 @@ namespace AsyncForm
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(151, 450);
+            this.groupBox1.Size = new System.Drawing.Size(145, 450);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "异步同步执行";
@@ -112,9 +113,9 @@ namespace AsyncForm
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox2.Location = new System.Drawing.Point(151, 0);
+            this.groupBox2.Location = new System.Drawing.Point(145, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(189, 450);
+            this.groupBox2.Size = new System.Drawing.Size(194, 450);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
@@ -191,15 +192,16 @@ namespace AsyncForm
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.cpu爆炸);
             this.groupBox3.Controls.Add(this.内存溢出);
             this.groupBox3.Controls.Add(this.button11);
             this.groupBox3.Controls.Add(this.button10);
             this.groupBox3.Controls.Add(this.MonitorWait);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox3.Location = new System.Drawing.Point(340, 0);
+            this.groupBox3.Location = new System.Drawing.Point(339, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(154, 450);
+            this.groupBox3.Size = new System.Drawing.Size(145, 450);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "groupBox3";
@@ -208,7 +210,7 @@ namespace AsyncForm
             // 
             this.cpu爆炸.Location = new System.Drawing.Point(24, 239);
             this.cpu爆炸.Name = "cpu爆炸";
-            this.cpu爆炸.Size = new System.Drawing.Size(75, 23);
+            this.cpu爆炸.Size = new System.Drawing.Size(104, 23);
             this.cpu爆炸.TabIndex = 10;
             this.cpu爆炸.Text = "Cpu爆炸";
             this.cpu爆炸.UseVisualStyleBackColor = true;
@@ -218,7 +220,7 @@ namespace AsyncForm
             // 
             this.内存溢出.Location = new System.Drawing.Point(24, 193);
             this.内存溢出.Name = "内存溢出";
-            this.内存溢出.Size = new System.Drawing.Size(75, 23);
+            this.内存溢出.Size = new System.Drawing.Size(104, 23);
             this.内存溢出.TabIndex = 9;
             this.内存溢出.Text = "内存溢出";
             this.内存溢出.UseVisualStyleBackColor = true;
@@ -228,7 +230,7 @@ namespace AsyncForm
             // 
             this.button11.Location = new System.Drawing.Point(27, 136);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.Size = new System.Drawing.Size(101, 23);
             this.button11.TabIndex = 8;
             this.button11.Text = "线程间同步";
             this.button11.UseVisualStyleBackColor = true;
@@ -238,17 +240,27 @@ namespace AsyncForm
             // 
             this.button10.Location = new System.Drawing.Point(27, 84);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.Size = new System.Drawing.Size(101, 23);
             this.button10.TabIndex = 7;
             this.button10.Text = "Parallel";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(6, 290);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(139, 23);
+            this.button6.TabIndex = 11;
+            this.button6.Text = "取消异步中的同步方法";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1001, 450);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -282,6 +294,7 @@ namespace AsyncForm
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button 内存溢出;
         private System.Windows.Forms.Button cpu爆炸;
+        private System.Windows.Forms.Button button6;
     }
 }
 

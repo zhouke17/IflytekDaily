@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\source\\repos\\IflytekDaily\\DependencyProDemo\\DependencyProDemo.csproj": {}
+    "D:\\IflytekDaily\\DependencyProDemo\\DependencyProDemo.csproj": {}
   },
   "projects": {
-    "D:\\source\\repos\\IflytekDaily\\DependencyProDemo\\DependencyProDemo.csproj": {
+    "D:\\IflytekDaily\\DependencyProDemo\\DependencyProDemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\source\\repos\\IflytekDaily\\DependencyProDemo\\DependencyProDemo.csproj",
+        "projectUniqueName": "D:\\IflytekDaily\\DependencyProDemo\\DependencyProDemo.csproj",
         "projectName": "DependencyProDemo",
-        "projectPath": "D:\\source\\repos\\IflytekDaily\\DependencyProDemo\\DependencyProDemo.csproj",
+        "projectPath": "D:\\IflytekDaily\\DependencyProDemo\\DependencyProDemo.csproj",
         "packagesPath": "C:\\Users\\kezhou3\\.nuget\\packages\\",
-        "outputPath": "D:\\source\\repos\\IflytekDaily\\DependencyProDemo\\obj\\",
+        "outputPath": "D:\\IflytekDaily\\DependencyProDemo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kezhou3\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows7.0"
+          "net6.0-windows"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {},
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -58,7 +63,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
         }
       }
     }

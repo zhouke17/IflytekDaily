@@ -6,11 +6,12 @@
     xmlns:MyDependency="clr-namespace:WpfTestDemo.MyDependencyProperty"
     xmlns:MyRouteEvent="clr-namespace:WpfTestDemo.MyRouteEvent"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfTestDemo.ImageMemoryOptimization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:usercontrols="clr-namespace:CustomControls;assembly=CustomControls"
     Title="MainWindow"
     Width="800"
-    Height="450"
+    Height="800"
     Loaded="Window_Loaded"
     Unloaded="Window_unLoaded"
     WindowStartupLocation="CenterScreen"
@@ -123,6 +124,8 @@
             </Style.Triggers>
         </Style>
 
+
+
         <!--  原生PasswordBox样式  -->
         <SolidColorBrush x:Key="TextBox.Static.Border1" Color="#FFABAdB3" />
         <SolidColorBrush x:Key="TextBox.MouseOver.Border1" Color="#FF7EB4EA" />
@@ -178,6 +181,7 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
+
 
 
         <!--  原生ScrollViewerStyle  -->
@@ -244,6 +248,7 @@
         </Style>
 
 
+
         <!--  自定义PasswordBoxStyle  -->
         <Style
             x:Key="PasswordBoxStyle"
@@ -260,6 +265,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="MinWidth" Value="350" />
         </Style>
+
 
 
         <!--  原生ButtonStyle  -->
@@ -337,6 +343,7 @@
         </Style>
 
 
+
         <!--  自定义Button样式1  -->
         <Style x:Key="CustomButtonStyle1" TargetType="{x:Type usercontrols:CornerButton}">
             <Setter Property="BorderThickness" Value="1" />
@@ -408,6 +415,45 @@
         </Style>
 
 
+
+        <!--  自定义Button样式3  -->
+        <Style x:Key="CustomButtonStyle3" TargetType="{x:Type Button}">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(usercontrols:CornerButton3.CornerButton3), RelativeSource={RelativeSource TemplatedParent}}"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter
+                                x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="Red" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
         <!--  动画  -->
         <Storyboard
             x:Key="Cartoon1"
@@ -428,6 +474,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:5" Value="0" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+
 
 
         <!--  tabControl 自定义样式  -->
@@ -745,6 +792,8 @@
             </Setter>
         </Style>
 
+
+
         <!--  原生TabItem样式  -->
         <Style x:Key="FocusVisual1">
             <Setter Property="Control.Template">
@@ -978,6 +1027,8 @@
             </Setter>
         </Style>
 
+
+
         <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Focusable" Value="False" />
@@ -1006,6 +1057,7 @@
                             <Trigger Property="IsChecked" Value="False">
                                 <Setter TargetName="border" Property="Background" Value="#2578DF" />
                                 <Setter TargetName="text" Property="Text" Value="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton, Mode=FindAncestor}, Path=Content}" />
+                                <!--<Setter TargetName="text" Property="Text" Value="{TemplateBinding Content}" />-->
                                 <!--  第二种写法  -->
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -1039,15 +1091,25 @@
                             <usercontrols:CornerButton
                                 x:Name="CornerButton"
                                 Height="50"
-                                Content="自定义依赖属性"
+                                Content="依赖属性"
                                 MyCornerRadius="5"
-                                Style="{StaticResource CustomButtonStyle1}" />
+                                Style="{DynamicResource CornerButtonStyle}" />
                             <Button
                                 x:Name="CornerButton2"
                                 Height="50"
                                 usercontrols:CornerButton2.CornerRadius2="5"
-                                Content="自定义附加属性"
+                                Content="附加属性1"
                                 Style="{StaticResource CustomButtonStyle2}" />
+
+                            <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                                <Button
+                                    x:Name="CornerButton3"
+                                    Height="50"
+                                    usercontrols:CornerButton3.CornerButton3="{Binding MyCorner, Mode=TwoWay}"
+                                    Content="附加属性2"
+                                    Style="{StaticResource CustomButtonStyle3}" />
+                                <TextBox Text="{Binding MyCorner}" />
+                            </StackPanel>
 
                             <MyRouteEvent:TimeButtonUserControl x:Name="myTimeButton" Margin="10" />
                         </StackPanel>
@@ -1140,8 +1202,20 @@
                             Grid.Column="1"
                             Width="100"
                             Height="30"
-                            Background="Red">
-                            <Button.Style>
+                            Background="yellow"
+                            Content="椭圆">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <Ellipse>
+                                            <Ellipse.Fill>
+                                                <SolidColorBrush Color="{Binding Path=Background.Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <!--<Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="Green" />
                                     <Setter Property="Template">
@@ -1158,9 +1232,36 @@
                                         </Setter.Value>
                                     </Setter>
                                 </Style>
-                            </Button.Style>
+                            </Button.Style>-->
                         </Button>
                     </Grid>
+                    <!--  低性能，高cpu占用  -->
+                    <!--<ListBox Height="300" ItemsSource="{Binding ImageList}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image
+                                    Width="200"
+                                    Height="200"
+                                    Source="{Binding}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>-->
+                    <!--  高性能，低cpu占用  -->
+                    <ListBox Height="400" ItemsSource="{Binding ImagePathList}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <local:DisposableVirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <local:ImageDrawingVisual
+                                    Width="700"
+                                    Height="300"
+                                    Source="{Binding}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

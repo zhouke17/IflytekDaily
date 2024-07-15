@@ -99,7 +99,6 @@ D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\WordDemo.exe.config
 D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\WordDemo.exe
 D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\WordDemo.pdb
 D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\iflytek.Court.Office.Core.dll
-D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\Microsoft.Office.Interop.Word.dll
 D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\Newtonsoft.Json.dll
 D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\iflytek.Court.Office.Core.pdb
 D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\Newtonsoft.Json.xml
@@ -109,8 +108,9 @@ D:\IflytekDaily\word嵌入demo\WordDemo\obj\Debug\WordDemo.Properties.Resources.
 D:\IflytekDaily\word嵌入demo\WordDemo\obj\Debug\WPFApp.WordMainView.resources
 D:\IflytekDaily\word嵌入demo\WordDemo\obj\Debug\WordDemo.csproj.GenerateResource.cache
 D:\IflytekDaily\word嵌入demo\WordDemo\obj\Debug\WordDemo.csproj.CoreCompileInputs.cache
-D:\IflytekDaily\word嵌入demo\WordDemo\obj\Debug\WordDemo.csproj.CopyComplete
 D:\IflytekDaily\word嵌入demo\WordDemo\obj\Debug\WordDemo.exe
 D:\IflytekDaily\word嵌入demo\WordDemo\obj\Debug\WordDemo.pdb
 D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\Spire.Doc.dll
 D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\Spire.Doc.xml
+D:\IflytekDaily\word嵌入demo\WordDemo\obj\Debug\WordDemo.csproj.Up2Date
+D:\IflytekDaily\word嵌入demo\WordDemo\bin\Debug\Microsoft.Office.Interop.Word.dll

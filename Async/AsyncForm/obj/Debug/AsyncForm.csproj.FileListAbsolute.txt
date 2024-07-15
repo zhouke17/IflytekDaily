@@ -32,3 +32,16 @@ D:\source\repos\IflytekDaily\Async\AsyncForm\bin\Debug\Newtonsoft.Json.dll
 D:\source\repos\IflytekDaily\Async\AsyncForm\bin\Debug\Newtonsoft.Json.xml
 D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.CopyComplete
 D:\source\repos\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csprojAssemblyReference.cache
+D:\IflytekDaily\Async\AsyncForm\bin\Debug\AsyncForm.exe.config
+D:\IflytekDaily\Async\AsyncForm\bin\Debug\AsyncForm.exe
+D:\IflytekDaily\Async\AsyncForm\bin\Debug\AsyncForm.pdb
+D:\IflytekDaily\Async\AsyncForm\bin\Debug\Newtonsoft.Json.dll
+D:\IflytekDaily\Async\AsyncForm\bin\Debug\Newtonsoft.Json.xml
+D:\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.AssemblyReference.cache
+D:\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.Form1.resources
+D:\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.Properties.Resources.resources
+D:\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.GenerateResource.cache
+D:\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.CoreCompileInputs.cache
+D:\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.csproj.Up2Date
+D:\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.exe
+D:\IflytekDaily\Async\AsyncForm\obj\Debug\AsyncForm.pdb
