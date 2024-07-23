@@ -43,11 +43,13 @@ namespace AsyncForm
             this.button3 = new System.Windows.Forms.Button();
             this.MonitorWait = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Lock死锁_2_button = new System.Windows.Forms.Button();
+            this.Lock死锁_1_button = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.cpu爆炸 = new System.Windows.Forms.Button();
             this.内存溢出 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -192,6 +194,8 @@ namespace AsyncForm
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.Lock死锁_2_button);
+            this.groupBox3.Controls.Add(this.Lock死锁_1_button);
             this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.cpu爆炸);
             this.groupBox3.Controls.Add(this.内存溢出);
@@ -205,6 +209,36 @@ namespace AsyncForm
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "groupBox3";
+            // 
+            // Lock死锁_2_button
+            // 
+            this.Lock死锁_2_button.Location = new System.Drawing.Point(27, 394);
+            this.Lock死锁_2_button.Name = "Lock死锁_2_button";
+            this.Lock死锁_2_button.Size = new System.Drawing.Size(75, 23);
+            this.Lock死锁_2_button.TabIndex = 13;
+            this.Lock死锁_2_button.Text = "Lock2";
+            this.Lock死锁_2_button.UseVisualStyleBackColor = true;
+            this.Lock死锁_2_button.Click += new System.EventHandler(this.Lock死锁_2_button_Click);
+            // 
+            // Lock死锁_1_button
+            // 
+            this.Lock死锁_1_button.Location = new System.Drawing.Point(26, 347);
+            this.Lock死锁_1_button.Name = "Lock死锁_1_button";
+            this.Lock死锁_1_button.Size = new System.Drawing.Size(76, 23);
+            this.Lock死锁_1_button.TabIndex = 12;
+            this.Lock死锁_1_button.Text = "Lock1";
+            this.Lock死锁_1_button.UseVisualStyleBackColor = true;
+            this.Lock死锁_1_button.Click += new System.EventHandler(this.Lock死锁_1_button_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(6, 290);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(139, 23);
+            this.button6.TabIndex = 11;
+            this.button6.Text = "取消异步中的同步方法";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // cpu爆炸
             // 
@@ -246,16 +280,6 @@ namespace AsyncForm
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(6, 290);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(139, 23);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "取消异步中的同步方法";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -295,6 +319,8 @@ namespace AsyncForm
         private System.Windows.Forms.Button 内存溢出;
         private System.Windows.Forms.Button cpu爆炸;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button Lock死锁_1_button;
+        private System.Windows.Forms.Button Lock死锁_2_button;
     }
 }
 

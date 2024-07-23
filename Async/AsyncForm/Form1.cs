@@ -422,6 +422,26 @@ namespace AsyncForm
             Thread.Sleep(10000);
             Console.WriteLine("结束运行长时间任务");
         }
+
+        private object lockObj = new object();
+        private void Lock死锁_1_button_Click(object sender, EventArgs e)
+        {
+            lock (lockObj)
+            {
+                MessageBox.Show("已获取到锁");
+            }
+        }
+
+        private void Lock死锁_2_button_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => 
+            {
+                lock (lockobj)
+                {
+                    Thread.Sleep(TimeSpan.FromSeconds(10));
+                }
+            });
+        }
     }
 
     public class CancelableThreadTask
