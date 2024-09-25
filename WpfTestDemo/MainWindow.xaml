@@ -1202,14 +1202,19 @@
                             Grid.Column="1"
                             Width="100"
                             Height="30"
-                            Background="yellow"
+                            Background="Green"
                             Content="椭圆">
                             <Button.Template>
                                 <ControlTemplate>
-                                    <Grid>
+                                    <Grid Background="Red">
                                         <Ellipse>
                                             <Ellipse.Fill>
+                                                <!--  关联应用模板的数据源属性  -->
                                                 <SolidColorBrush Color="{Binding Path=Background.Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                                <!--  关联父级属性  -->
+                                                <!--<SolidColorBrush Color="{Binding Path=Background.Color, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" />-->
+                                                <!--  仅关联自身属性  -->
+                                                <!--<SolidColorBrush Color="{Binding Path=Background.Color, RelativeSource={RelativeSource Mode=Self}}" />-->
                                             </Ellipse.Fill>
                                         </Ellipse>
                                     </Grid>
@@ -1262,6 +1267,53 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+
+                    <!--  VisualBrush视觉同步  -->
+                    <Grid Width="700" Height="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Canvas x:Name="Grid1" Background="BlueViolet">
+                            <TextBlock
+                                x:Name="TestTextBlock"
+                                Width="100"
+                                Height="30"
+                                Padding="0,6,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="Red"
+                                LineHeight="30"
+                                MouseDown="TestTextBlock_OnMouseDown"
+                                MouseMove="TestTextBlock_OnMouseMove"
+                                MouseUp="TestTextBlock_OnMouseUp"
+                                Text="截图测试"
+                                TextAlignment="Center" />
+                        </Canvas>
+                        <Grid x:Name="Grid2" Grid.Column="2">
+                            <Grid.Background>
+                                <VisualBrush
+                                    AlignmentX="Center"
+                                    AlignmentY="Center"
+                                    Stretch="UniformToFill"
+                                    Visual="{Binding ElementName=Grid1}" />
+                            </Grid.Background>
+                        </Grid>
+                    </Grid>
+
+                    <!--  RenderTargetBitmap 用于将任何 Visual 元素内容渲染为位图的主要工具  -->
+                    <Grid Width="700" Height="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            x:Name="screenShot"
+                            Click="screenShot_Click"
+                            Content="截图" />
+                        <Image x:Name="CaptureImage" Grid.Column="1" />
+                    </Grid>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

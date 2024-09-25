@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2023-12-28T17:21:34
+# Project created by QtCreator 2024-09-12T09:21:39
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = CustomWidget
+TARGET = QTreeWidget
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,31 +25,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        form.cpp \
+        DragTreeItemWidget.cpp \
+        DragTreeWidget.cpp \
+        TreeItemMimeData.cpp \
+        UpandDownTreeWidget.cpp \
         main.cpp \
-        mainwindow.cpp \
-        sub_widget.cpp
+        mainwindow.cpp
 
 HEADERS += \
-        form.h \
-        mainwindow.h \
-        sub_widget.h
+        DragEventFilter.h \
+        DragTreeItemWidget.h \
+        DragTreeWidget.h \
+        TreeItemMimeData.h \
+        UpandDownTreeWidget.h \
+        customdragindicator.h \
+        mainwindow.h
 
 FORMS += \
-        form.ui \
         mainwindow.ui
-
-include($$PWD/Components/Components.pri)
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-greaterThan(QT_MAJOR_VERSION, 4): {
-  QMAKE_CXXFLAGS += -execution-charset:utf-8
-}
-
-DISTFILES += \
-    Components.pri \
-    Componets/Componnets.pri
+RESOURCES += \
+    resource.qrc

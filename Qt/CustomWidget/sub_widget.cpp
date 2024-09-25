@@ -1,4 +1,4 @@
-#include "sub_widget.h"
+﻿#include "sub_widget.h"
 
 Sub_Widget::Sub_Widget(QWidget *parent) : QWidget(parent)
 {

@@ -2,12 +2,16 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using WpfTestDemo.MyRouteEvent;
+using Size = System.Windows.Size;
 
 namespace WpfTestDemo
 {
@@ -207,10 +211,123 @@ namespace WpfTestDemo
             MessageBox.Show($"PassWord绑定源值：{MyPassWord}");
         }
 
-        private void stackPanel_ReportTime(object sender, RoutedEventArgs e)
+        #region 视觉同步
+        private bool _isDown;
+        private System.Windows.Point _relativeToBlockPosition;
+        private void TestTextBlock_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            _isDown = true;
+            _relativeToBlockPosition = e.MouseDevice.GetPosition(TestTextBlock);
+            TestTextBlock.CaptureMouse();
         }
+
+        private void TestTextBlock_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (_isDown)
+            {
+                var position = e.MouseDevice.GetPosition(Grid1);
+                Canvas.SetTop(TestTextBlock, position.Y - _relativeToBlockPosition.Y);
+                Canvas.SetLeft(TestTextBlock, position.X - _relativeToBlockPosition.X);
+            }
+        }
+
+        private void TestTextBlock_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            TestTextBlock.ReleaseMouseCapture();
+            _isDown = false;
+        }
+        #endregion
+
+        #region 控件截图 https://mp.weixin.qq.com/s/K0Hav3xRnqapNE7gfBKbgA
+        private void screenShot_Click(object sender, RoutedEventArgs e)
+        {
+            using (var dpi = System.Drawing.Graphics.FromHwnd(IntPtr.Zero))
+            {
+                var bitmapSource = ToImageSource(screenShot);
+                CaptureImage.Source = bitmapSource;
+            }
+        }
+        /// <summary>
+        /// Visual转图片
+        /// </summary>
+        public static BitmapSource ToImageSource(Visual visual, Size size, double dpiX, double dpiY)
+        {
+            var validSize = size.Width > 0 && size.Height > 0;
+            if (!validSize) throw new ArgumentException($"{nameof(size)}值无效:${size.Width},${size.Height}");
+            if (Math.Abs(size.Width) > 0.0001 && Math.Abs(size.Height) > 0.0001)
+            {
+                RenderTargetBitmap bitmap = new RenderTargetBitmap((int)(size.Width * dpiX), (int)(size.Height * dpiY), dpiX * 96, dpiY * 96, PixelFormats.Pbgra32);
+                bitmap.Render(visual);
+                return bitmap;
+            }
+            return new BitmapImage();
+        }
+        /// <summary>
+        /// 兼容控件未加载情况
+        /// </summary>
+        /// <param name="visual"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public BitmapSource ToImageSource(Visual visual, Size size = default)
+        {
+            if (!(visual is FrameworkElement element))
+            {
+                return null;
+            }
+            if (!element.IsLoaded)
+            {
+                if (size == default)
+                {
+                    //计算元素的渲染尺寸
+                    element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                    element.Arrange(new Rect(new System.Windows.Point(), element.DesiredSize));
+                    size = element.DesiredSize;
+                }
+                else
+                {
+                    //未加载到视觉树的，按指定大小布局
+                    //按size显示，如果设计宽高大于size则按sie裁剪，如果设计宽度小于size则按size放大显示。
+                    element.Measure(size);
+                    element.Arrange(new Rect(size));
+                }
+            }
+            else if (size == default)
+            {
+                Rect rect = VisualTreeHelper.GetDescendantBounds(visual);
+                if (rect.Equals(Rect.Empty))
+                {
+                    return null;
+                }
+                size = rect.Size;
+            }
+
+            using (var dpi = Graphics.FromHwnd(IntPtr.Zero))
+                return ToImageSource(visual, size, dpi.DpiX, dpi.DpiY);
+        }
+        /// <summary>
+        /// WPF位图转换
+        /// </summary>
+        private static BitmapImage ToBitmapImage(BitmapSource bitmap, Size size, double dpiX, double dpiY)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            encoder.Save(memoryStream);
+            //可以保存至本地文件
+            //using Stream stream = File.Create(imagePath);
+            //encoder.Save(stream);
+            memoryStream.Seek(0L, SeekOrigin.Begin);
+
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.DecodePixelWidth = (int)(size.Width * dpiX);
+            bitmapImage.DecodePixelHeight = (int)(size.Height * dpiY);
+            bitmapImage.StreamSource = memoryStream;
+            bitmapImage.EndInit();
+            bitmapImage.Freeze();
+            return bitmapImage;
+        }
+        #endregion
     }
 
     public class TipsMassageBody
