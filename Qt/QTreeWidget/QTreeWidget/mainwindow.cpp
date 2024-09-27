@@ -73,7 +73,7 @@ void MainWindow::on_OverrideTreeWidget_pushButton_clicked()
     widget->setDragEnabled(true);
     widget->setDragDropMode(QAbstractItemView::InternalMove);
     widget->setDefaultDropAction(Qt::MoveAction);
-
+    widget->setDropIndicatorShown(true);
     // 添加顶级项
     QTreeWidgetItem *item1 = new QTreeWidgetItem(widget, QStringList() << "Item 1");
     QTreeWidgetItem *item2 = new QTreeWidgetItem(widget, QStringList() << "Item 2");
@@ -87,6 +87,27 @@ void MainWindow::on_OverrideTreeWidget_pushButton_clicked()
     QTreeWidgetItem *subItem5 = new QTreeWidgetItem(item1, {"SubItem 5"});
 
     widget->setFixedSize(400,300);
+    // 设置样式表
+//    widget->setStyleSheet(
+//        "QTreeWidget::item {"
+//        "   background-color: white;"  // 普通项的背景色
+//        "}"
+//        "QTreeWidget::item:selected {"
+//        "   background-color: lightblue;"  // 选中项的背景色
+//        "}"
+//        "QTreeWidget::indicator:open {"
+//        "   image: url(:/images/open.png);"  // 自定义展开图标
+//        "}"
+//        "QTreeWidget::indicator:closed {"
+//        "   image: url(:/images/closed.png);"  // 自定义闭合图标
+//        "}"
+//        "QTreeWidget::item:hover {"
+//        "   background-color: lightgray;"  // 鼠标悬停项的背景色
+//        "}"
+//        "QTreeWidget::dropIndicator {"
+//        "   background-color: red;"  // 拖拽指示器的背景色
+//        "}"
+//        );
     widget->show();
 }
 

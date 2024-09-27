@@ -25,9 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        DragTreeItemWidget.cpp \
         DragTreeWidget.cpp \
-        TreeItemMimeData.cpp \
         UpandDownTreeWidget.cpp \
         main.cpp \
         mainwindow.cpp
@@ -36,7 +34,6 @@ HEADERS += \
         DragEventFilter.h \
         DragTreeItemWidget.h \
         DragTreeWidget.h \
-        TreeItemMimeData.h \
         UpandDownTreeWidget.h \
         customdragindicator.h \
         mainwindow.h
