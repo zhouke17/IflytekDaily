@@ -32,6 +32,7 @@ private:
     CustomDragIndicator *dragIndicator;
     QRect m_dropRect;// 用于存储矩形框的位置
     DropIndicatorPosition m_position;
+    int m_dragIndex;
 signals:
 
 public slots:
@@ -40,7 +41,7 @@ protected:
     void startDrag(Qt::DropActions supportedActions)  override{
         item = currentItem();
         if (!item) return;
-
+        m_dragIndex = currentIndex().row();
         QDrag *drag = new QDrag(this);
         QMimeData *mimeData = new QMimeData;
 
@@ -59,13 +60,13 @@ protected:
             painter.drawRect(m_dropRect); // 绘制矩形框
             qDebug() << "paintEvent normal";
         }
-        else
-        {
-            QPainter painter(viewport());
-            painter.setPen(QPen(Qt::red, 2, Qt::DashLine));
-            painter.drawRect(m_dropRect); // 绘制矩形框
-            qDebug() << "paintEvent unnormal";
-        }
+//        else
+//        {
+//            QPainter painter(viewport());
+//            painter.setPen(QPen(Qt::red, 2, Qt::DashLine));
+//            painter.drawRect(m_dropRect); // 绘制矩形框
+//            qDebug() << "paintEvent unnormal";
+//        }
     }
     void dragEnterEvent(QDragEnterEvent *event) override {
         if (event->mimeData()->hasText()) {
@@ -80,7 +81,11 @@ protected:
         if (event->mimeData()->hasText()) {
 
             event->acceptProposedAction();
-            QRect rect = visualRect(indexAt(event->pos()));
+
+            QModelIndex model = indexAt(event->pos());
+            QString item = model.data(0).toString();
+
+            QRect rect = visualRect(model);
 
             qDebug() << "current rect:" << "x:" << rect.x() << "y:" << rect.y() << "width:" << rect.width() << "height:" << rect.height();
 
@@ -99,25 +104,25 @@ protected:
 //            dragIndicator->setGeometry(QRect(0, event->pos().y() + 20, 300, 1));
             switch (m_position) {
             case OnItem:
-//                qDebug() << "position : onItem";
+                qDebug() << "position : onItem" << item;
 //                dragIndicator->show();
 
                 m_dropRect = rect;
                 break;
             case AboveItem:
-//                qDebug() << "position : AboveItem";
+                qDebug() << "position : AboveItem" << item;
 //                dragIndicator->show();
 
                 m_dropRect = QRect(rect.left(),rect.top(),rect.width(),0);
                 break;
             case BelowItem:
-//                qDebug() << "position : BelowItem";
+                qDebug() << "position : BelowItem" << item;
 //                dragIndicator->show();
 
                 m_dropRect = QRect(rect.left(),rect.bottom(),rect.width(),0);
                 break;
             default:
-//                qDebug() << "position : other";
+                qDebug() << "position : other" << item;
 //                dragIndicator->show();
 
                 m_dropRect = QRect();
@@ -132,29 +137,47 @@ protected:
     }
 
     void dropEvent(QDropEvent *event) override {
-        QString text = event->mimeData()->text();
+
         QTreeWidgetItem *targetItem = itemAt(event->pos());
 
-        if (targetItem) {
-            qDebug() << "targetItem item:" << targetItem->text(0);
+        QModelIndex model = indexAt(event->pos());
+
+        bool isForward = m_dragIndex > model.row();
+
+        if (model.isValid()) {
+            qDebug() << "targetItem item:" << model.data(0).toString();
 
             QTreeWidgetItem *draggedItem = item;
-
-            if (draggedItem) {
-                // 移动项目到目标项下
-                QTreeWidgetItem *parent = targetItem->parent();
-                if (parent) {
-                     int index = parent->indexOfChild(targetItem);
-                    parent->removeChild(draggedItem);
-                    parent->insertChild(index, draggedItem);
-                } else {
-                    // 项目为顶级
-                    takeTopLevelItem(indexOfTopLevelItem(draggedItem));
-                    addTopLevelItem(draggedItem);
+            // 移动项目到目标项下
+            QModelIndex parentModel = model.parent();
+            QTreeWidgetItem *parent = targetItem->parent();
+            if (parentModel.isValid() && parent) {
+                int targetIndex = 0;
+                if(m_position == DropIndicatorPosition::OnItem)
+                {
+                    targetIndex = model.row() + 1;//默认放到当前项下方
                 }
-                setCurrentItem(draggedItem);
-//                dragIndicator->hide();
+                else if(m_position == DropIndicatorPosition::AboveItem)
+                {
+                    if(isForward)
+                        targetIndex = model.row() - 1 ? -1 : 0;
+                    else {
+                        targetIndex = model.row() - 1;
+                    }
+                }
+                else {
+                    if(isForward)
+                        targetIndex = model.row() + 1;
+                    else {
+                        targetIndex = model.row();
+                    }
+                }
+
+                parent->removeChild(draggedItem);
+                parent->insertChild(targetIndex,draggedItem);
             }
+            setCurrentItem(draggedItem);
+            // dragIndicator->hide();
         }
         m_dropRect = QRect(); // 清空矩形框
         viewport()->update();//重绘

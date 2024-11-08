@@ -16,3 +16,7 @@ ConsoleApp/obj/
 Async/.vs/
 Qt/QTreeWidget/build-QTreeWidget-Desktop_Qt_5_12_4_MSVC2017_32bit-Release/
 Qt/QTreeWidget/build-QTreeWidget-Desktop_Qt_5_12_4_MSVC2017_32bit-Debug/
+Qt/build-IrregularWidget-Desktop_Qt_5_12_4_MSVC2017_32bit-Debug/
+Qt/build-QComboBox-Desktop_Qt_5_12_4_MSVC2017_32bit-Debug/
+Qt/IrregularWidget/
+Qt/QComboBox/
