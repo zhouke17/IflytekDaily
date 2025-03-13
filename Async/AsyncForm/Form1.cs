@@ -205,6 +205,7 @@ namespace AsyncForm
         {
             Task.Run(() =>
             {
+                Console.WriteLine($"当前线程id：{Thread.CurrentThread.ManagedThreadId}");
                 if (System.Threading.Monitor.TryEnter(monitorObj, 5000))
                 {
                     if (System.Threading.Monitor.Wait(monitorObj, 5000))
@@ -215,7 +216,6 @@ namespace AsyncForm
                     {
                         Console.WriteLine("5秒内未获取到锁");
                     }
-                    Thread.Sleep(5000);
                     System.Threading.Monitor.Exit(monitorObj);
                 }
             });
@@ -235,9 +235,10 @@ namespace AsyncForm
         {
             Task.Run(() =>
             {
+                Console.WriteLine($"当前线程id：{Thread.CurrentThread.ManagedThreadId}");
                 System.Threading.Monitor.Enter(monitorObj);
                 System.Threading.Monitor.Wait(monitorObj);
-                Console.WriteLine("获取到monitorObj锁");
+                Console.WriteLine("获取到monitorObj锁,当前线程结束阻塞");
                 System.Threading.Monitor.Exit(monitorObj);
             });
         }
@@ -441,6 +442,43 @@ namespace AsyncForm
                     Thread.Sleep(TimeSpan.FromSeconds(10));
                 }
             });
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Mutex mutex = new Mutex();
+            Task.Run(() =>
+            {
+                for (int count = 0; count < 100; count++)
+                {
+                    lock (this)
+                    {
+                        mutex.WaitOne();
+                        TestFunc("Thread1 have run " + count.ToString() + " times");
+                        Thread.Sleep(30);
+                        mutex.ReleaseMutex();
+                    }
+                }
+            });
+            Task.Run(() =>
+            {
+                for (int count = 0; count < 100; count++)
+                {
+                    lock (this)
+                    {
+                        mutex.WaitOne();
+                        TestFunc("Thread2 have run " + count.ToString() + " times");
+                        Thread.Sleep(100);
+                        mutex.ReleaseMutex();
+                    }
+                }
+            });
+        }
+        private void TestFunc(string str)
+        {
+            Console.WriteLine("{0} {1}", str, System.DateTime.Now.Millisecond.ToString());
+            Thread.Sleep(50);
+
         }
     }
 

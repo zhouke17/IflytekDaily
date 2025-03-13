@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "D:\\IflytekDaily\\Async\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5830B63B-C64D-48A2-B169-5C0DC7A3ECED}|AsyncForm\\AsyncForm.csproj|D:\\IflytekDaily\\Async\\asyncform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5830B63B-C64D-48A2-B169-5C0DC7A3ECED}|AsyncForm\\AsyncForm.csproj|d:\\iflytekdaily\\async\\asyncform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5830B63B-C64D-48A2-B169-5C0DC7A3ECED}|AsyncForm\\AsyncForm.csproj|solutionrelative:asyncform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -58,10 +58,6 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
@@ -74,7 +70,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "Name": "ST:129:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
             },
             {
               "$type": "Document",
@@ -134,7 +134,7 @@
               "RelativeDocumentMoniker": "AsyncForm\\Form1.cs",
               "ToolTip": "D:\\IflytekDaily\\Async\\AsyncForm\\Form1.cs",
               "RelativeToolTip": "AsyncForm\\Form1.cs",
-              "ViewState": "AQIAAJ4BAAAAAAAAAAAjwLYBAAAQAAAA",
+              "ViewState": "AQIAAMYBAAAAAAAAAAAuwM8BAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-24T07:04:10.608Z",
               "EditorCaption": ""
