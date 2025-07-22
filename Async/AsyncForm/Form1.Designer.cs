@@ -51,6 +51,7 @@ namespace AsyncForm
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -285,6 +286,7 @@ namespace AsyncForm
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.button8);
             this.groupBox4.Controls.Add(this.button7);
             this.groupBox4.Location = new System.Drawing.Point(490, 7);
             this.groupBox4.Name = "groupBox4";
@@ -292,6 +294,16 @@ namespace AsyncForm
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "groupBox4";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(21, 95);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(142, 23);
+            this.button8.TabIndex = 1;
+            this.button8.Text = "Task_KeepRunningInOneThread";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button7
             // 
@@ -348,6 +360,7 @@ namespace AsyncForm
         private System.Windows.Forms.Button Lock死锁_2_button;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }
 

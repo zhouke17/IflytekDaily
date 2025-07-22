@@ -1,0 +1,5 @@
+E:\CSharp\WebSocketChatDemo\WebSocketChatDemo.Web\bin\WebSocketChatDemo.Web.dll
+E:\CSharp\WebSocketChatDemo\WebSocketChatDemo.Web\bin\WebSocketChatDemo.Web.pdb
+E:\CSharp\WebSocketChatDemo\WebSocketChatDemo.Web\obj\Debug\WebSocketChatDemo.Web.csprojResolveAssemblyReference.cache
+E:\CSharp\WebSocketChatDemo\WebSocketChatDemo.Web\obj\Debug\WebSocketChatDemo.Web.dll
+E:\CSharp\WebSocketChatDemo\WebSocketChatDemo.Web\obj\Debug\WebSocketChatDemo.Web.pdb

@@ -11,7 +11,7 @@
     xmlns:usercontrols="clr-namespace:CustomControls;assembly=CustomControls"
     Title="MainWindow"
     Width="800"
-    Height="800"
+    MinHeight="800"
     Loaded="Window_Loaded"
     Unloaded="Window_unLoaded"
     WindowStartupLocation="CenterScreen"
@@ -1313,6 +1313,56 @@
                             Click="screenShot_Click"
                             Content="截图" />
                         <Image x:Name="CaptureImage" Grid.Column="1" />
+                    </Grid>
+
+
+                    <!--  危险提醒效果  -->
+                    <Grid
+                        Height="100"
+                        CacheMode="BitmapCache"
+                        ClipToBounds="True">
+                        <Border
+                            Margin="-10"
+                            BorderBrush="#FFFFFF"
+                            BorderThickness="10"
+                            CacheMode="BitmapCache">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="40"
+                                    Direction="275"
+                                    RenderingBias="Performance"
+                                    ShadowDepth="0"
+                                    Color="Red" />
+                            </Border.Effect>
+                        </Border>
+                        <Border
+                            Margin="-10"
+                            BorderBrush="#FFFF"
+                            BorderThickness="10"
+                            CacheMode="BitmapCache">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="40"
+                                    Direction="275"
+                                    RenderingBias="Performance"
+                                    ShadowDepth="0"
+                                    Color="Red" />
+                            </Border.Effect>
+                        </Border>
+                        <Border
+                            Margin="-10"
+                            BorderBrush="#FFFF"
+                            BorderThickness="10"
+                            CacheMode="BitmapCache">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="40"
+                                    Direction="275"
+                                    RenderingBias="Performance"
+                                    ShadowDepth="0"
+                                    Color="Red" />
+                            </Border.Effect>
+                        </Border>
                     </Grid>
                 </StackPanel>
             </ScrollViewer>

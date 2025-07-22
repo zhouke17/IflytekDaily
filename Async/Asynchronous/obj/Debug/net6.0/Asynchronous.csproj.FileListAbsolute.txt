@@ -43,3 +43,17 @@ D:\source\repos\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\refint\AsynChro
 D:\source\repos\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\AsynChronous.pdb
 D:\source\repos\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\AsynChronous.genruntimeconfig.cache
 D:\source\repos\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\ref\AsynChronous.dll
+D:\IflytekDaily\Async\Asynchronous\bin\Debug\net6.0\AsynChronous.exe
+D:\IflytekDaily\Async\Asynchronous\bin\Debug\net6.0\AsynChronous.deps.json
+D:\IflytekDaily\Async\Asynchronous\bin\Debug\net6.0\AsynChronous.runtimeconfig.json
+D:\IflytekDaily\Async\Asynchronous\bin\Debug\net6.0\AsynChronous.dll
+D:\IflytekDaily\Async\Asynchronous\bin\Debug\net6.0\AsynChronous.pdb
+D:\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\AsynChronous.GeneratedMSBuildEditorConfig.editorconfig
+D:\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\AsynChronous.AssemblyInfoInputs.cache
+D:\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\AsynChronous.AssemblyInfo.cs
+D:\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\AsynChronous.csproj.CoreCompileInputs.cache
+D:\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\AsynChronous.dll
+D:\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\refint\AsynChronous.dll
+D:\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\AsynChronous.pdb
+D:\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\AsynChronous.genruntimeconfig.cache
+D:\IflytekDaily\Async\Asynchronous\obj\Debug\net6.0\ref\AsynChronous.dll

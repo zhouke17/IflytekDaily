@@ -199,7 +199,7 @@ namespace AsyncForm
 
         #region Monitor用户态锁实现超时检测
 
-        private object monitorObj = new object();
+        private static readonly object monitorObj = new object();
 
         private void Monitor_Click(object sender, EventArgs e)
         {
@@ -219,6 +219,11 @@ namespace AsyncForm
                     System.Threading.Monitor.Exit(monitorObj);
                 }
             });
+
+            //lock (monitorObj)//阻塞调用线程，直到获取到锁
+            //{
+            //    Console.WriteLine("获取到锁");
+            //}
         }
 
         private void MonitorPulseAll_Click(object sender, EventArgs e)
@@ -237,6 +242,7 @@ namespace AsyncForm
             {
                 Console.WriteLine($"当前线程id：{Thread.CurrentThread.ManagedThreadId}");
                 System.Threading.Monitor.Enter(monitorObj);
+                Thread.Sleep(50000);
                 System.Threading.Monitor.Wait(monitorObj);
                 Console.WriteLine("获取到monitorObj锁,当前线程结束阻塞");
                 System.Threading.Monitor.Exit(monitorObj);
@@ -479,6 +485,44 @@ namespace AsyncForm
             Console.WriteLine("{0} {1}", str, System.DateTime.Now.Millisecond.ToString());
             Thread.Sleep(50);
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // 添加取消令牌支持
+            var cancellationTokenSource = new CancellationTokenSource();
+
+            // 使用 Task.Run 而不是 Task.Factory.StartNew，并确保在同一个线程上执行
+            var task = Task.Run(() =>
+            {
+                Console.WriteLine($"long running task starting. Thread id: {Thread.CurrentThread.ManagedThreadId}");
+                var loopCount = 1;
+
+                while (!cancellationTokenSource.Token.IsCancellationRequested)
+                {
+                    Console.WriteLine($"\r\nStart: loop count: {loopCount}, Thread id: {Thread.CurrentThread.ManagedThreadId}");
+
+                    try
+                    {
+                        // 保持调用线程不变
+                        LongRunningJob().Wait();
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        break;
+                    }
+
+                    Console.WriteLine($"End: loop count: {loopCount}, Thread id: {Thread.CurrentThread.ManagedThreadId} \r\n ");
+                    loopCount++;
+                }
+
+            }, cancellationTokenSource.Token);
+        }
+        private async Task LongRunningJob()
+        {
+            Console.WriteLine($"task doing 1. Thread id: {Thread.CurrentThread.ManagedThreadId}");
+            await Task.Delay(1000);
+            Console.WriteLine($"task doing 2. Thread id: {Thread.CurrentThread.ManagedThreadId}");
         }
     }
 
